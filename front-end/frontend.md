@@ -1,0 +1,1 @@
+Keep front end files here in this folder only
