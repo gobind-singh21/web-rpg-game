@@ -14,16 +14,18 @@ public class Effect {
 
   private String name;
 
-  private Integer healthPercent;
+  private Integer healthPercent = 0;
 
-  private Integer attackPercent;
+  private Integer attackPercent = 0;
 
-  private Integer defensePercent;
+  private Integer defensePercent = 0;
 
-  private Integer speedPercent;
+  private Integer speedPercent = 0;
+
+  public Effect() {}
 
   @Transient
-  private Integer turns;
+  private Integer turns = 0;
 
   @Transient
   public Integer getTurns() {
@@ -45,7 +47,7 @@ public class Effect {
     this.turns = turns;
   }
 
-  private boolean isBuff;
+  private boolean isBuff = true;
 
   public Integer getId() {
     return id;
