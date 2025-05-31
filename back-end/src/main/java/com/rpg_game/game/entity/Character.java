@@ -3,10 +3,12 @@ package com.rpg_game.game.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 
 @Entity
@@ -15,19 +17,22 @@ public class Character {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  private String name;
+  private String name = "";
 
-  private Integer baseHealth;
+  private Integer baseHealth = 1000;
 
-  private Integer baseAttack;
+  private Integer baseAttack = 100;
   
-  private Integer baseDefense;
+  private Integer baseDefense = 100;
   
-  private Integer baseSpeed;
+  private Integer baseSpeed = 100;
   
-  private String characterClass;
+  private String characterClass = "";
   
-  private Ability ability;
+  @OneToOne(cascade = CascadeType.ALL)
+  private Ability ability = new Ability();
+
+  public Character() {}
 
   public Integer getId() {
     return id;
@@ -95,6 +100,14 @@ public class Character {
 
   @Transient
   private Integer currentHealth;
+
+  public Integer getCurrentHealth() {
+    return currentHealth;
+  }
+
+  public void setCurrentHealth(Integer currentHealth) {
+    this.currentHealth = currentHealth;
+  }
 
   @Transient
   private List<Effect> effects;

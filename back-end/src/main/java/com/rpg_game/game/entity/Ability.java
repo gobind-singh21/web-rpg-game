@@ -1,15 +1,16 @@
 package com.rpg_game.game.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.rpg_game.game.types.Stat;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-enum Stat {
-  HP, ATK, DEF, MAX_HP
-};
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Ability {
@@ -17,17 +18,20 @@ public class Ability {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  private String name;
+  private String name = "";
 
-  private Integer scale;
+  private Integer scale = 100;
 
-  private Stat stat;
+  private Stat stat = Stat.ATK;
 
-  private Integer shield;
+  private Integer shield = 0;
 
-  private Integer heal;
+  private Integer heal = 0;
 
-  private List<Effect> effects;
+  @ManyToMany(cascade = CascadeType.ALL)
+  private List<Effect> effects = new ArrayList<Effect>();
+
+  public Ability() {}
 
   public Integer getId() {
     return id;
@@ -83,5 +87,13 @@ public class Ability {
 
   public void setEffects(List<Effect> effects) {
     this.effects = effects;
+  }
+
+  public void addEffect(Effect effect) {
+    this.effects.add(effect);
+  }
+
+  public void removeEffect(Effect effect) {
+    this.effects.remove(effect);
   }
 }
