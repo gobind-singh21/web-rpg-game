@@ -25,7 +25,7 @@ public class Effect {
   public Effect() {}
 
   @Transient
-  private Integer turns = 0;
+  private Integer turns = 3;
 
   @Transient
   public Integer getTurns() {

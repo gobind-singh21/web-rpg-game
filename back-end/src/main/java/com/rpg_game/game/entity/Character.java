@@ -1,7 +1,8 @@
 package com.rpg_game.game.entity;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.rpg_game.game.types.CharacterClass;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,7 +13,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 
 @Entity
-public class Character {
+public class Character implements Comparable<Character> {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -27,7 +28,7 @@ public class Character {
   
   private Integer baseSpeed = 100;
   
-  private String characterClass = "";
+  private CharacterClass characterClass = CharacterClass.Ranger;
   
   @OneToOne(cascade = CascadeType.ALL)
   private Ability ability = new Ability();
@@ -55,6 +56,7 @@ public class Character {
   }
 
   public void setBaseHealth(Integer baseHealth) {
+    this.currentHealth = baseHealth;
     this.baseHealth = baseHealth;
   }
 
@@ -82,11 +84,11 @@ public class Character {
     this.baseSpeed = baseSpeed;
   }
 
-  public String getCharacterClass() {
+  public CharacterClass getCharacterClass() {
     return characterClass;
   }
 
-  public void setCharacterClass(String characterClass) {
+  public void setCharacterClass(CharacterClass characterClass) {
     this.characterClass = characterClass;
   }
 
@@ -99,15 +101,10 @@ public class Character {
   }
 
   @Transient
-  private Integer currentHealth;
+  private Integer shield = 0;
 
-  public Integer getCurrentHealth() {
-    return currentHealth;
-  }
-
-  public void setCurrentHealth(Integer currentHealth) {
-    this.currentHealth = currentHealth;
-  }
+  @Transient
+  private Integer currentHealth = baseHealth;
 
   @Transient
   private List<Effect> effects;
@@ -129,13 +126,80 @@ public class Character {
 
   @Transient
   public void processTurn() {
-    List<Effect> newEffects = new ArrayList<Effect>();
-    int n = effects.size();
-    for(int i = 0; i < n; i++) {
-      effects.get(i).decreaseTurn();
-      if(effects.get(i).getTurns() >= 0)
-        newEffects.add(effects.get(i));
+    this.effects = effects.stream()
+                          .filter(effect -> effect.getTurns() > 0)
+                          .toList();
+    effects.forEach(effect -> effect.decreaseTurn());
+  }
+
+  @Transient
+  public int getMaxHealth() {
+    int maxHealth = 0;
+    int totalEffects = effects.size();
+    for(int i = 0; i < totalEffects; i++) {
+      maxHealth += (effects.get(i).isBuff() ? +1 : -1) * (baseHealth * effects.get(i).getHealthPercent()) / 100;
     }
-    this.effects = newEffects;
+    return maxHealth;
+  }
+
+  @Transient
+  public int getMaxAttack() {
+    int maxAttack = 0;
+    int totalEffects = effects.size();
+    for(int i = 0; i < totalEffects; i++) {
+      maxAttack += (effects.get(i).isBuff() ? +1 : -1) * (baseAttack * effects.get(i).getAttackPercent()) / 100;
+    }
+    return maxAttack;
+  }
+
+  @Transient
+  public int getMaxDefense() {
+    int maxDefense = 0;
+    int totalEffects = effects.size();
+    for(int i = 0; i < totalEffects; i++) {
+      maxDefense += (effects.get(i).isBuff() ? +1 : -1) * (baseDefense * effects.get(i).getDefensePercent()) / 100;
+    }
+    return maxDefense;
+  }
+
+  @Transient
+  public int getMaxSpeed() {
+    int maxSpeed = 0;
+    int totalEffects = effects.size();
+    for(int i = 0; i < totalEffects; i++) {
+      maxSpeed += (effects.get(i).isBuff() ? +1 : -1) * (baseSpeed * effects.get(i).getSpeedPercent()) / 100;
+    }
+    return maxSpeed;
+  }
+
+  @Transient
+  public void reduceHealth(int reduction) {
+    currentHealth = Math.max(1, currentHealth - reduction);
+  }
+
+  @Transient
+  public void receiveDamage(int incomingDamage) {
+    int maxDefense = this.getMaxDefense();
+    double scaling = (double) incomingDamage / (incomingDamage + maxDefense * 3.0);
+    int receivedDamage = (int) Math.round(incomingDamage * scaling);
+    this.currentHealth += Math.min(0, this.shield - receivedDamage);
+    this.shield = Math.max(0, this.shield - receivedDamage);
+    this.currentHealth = Math.max(this.currentHealth, 0);
+  }
+
+  @Transient
+  public void receivehealing(int healing) {
+    int maxhealth = this.getMaxHealth();
+    currentHealth = Math.min(maxhealth, currentHealth + healing);
+  }
+
+  @Transient
+  public void receiveShield(int shield)  {
+    this.shield = shield;
+  }
+
+  @Override
+  public int compareTo(Character o) {
+    return Integer.compare(o.getMaxSpeed(), this.getMaxSpeed());
   }
 }
