@@ -116,7 +116,18 @@ public class Character implements Comparable<Character> {
 
   @Transient
   public void addEffect(Effect effect) {
-    effects.add(effect);
+    boolean alreadyApplied = false;
+    for(Effect currEffect : this.effects) {
+      if(currEffect.getName().equals(effect.getName())) {
+        int refreshedTurns = effect.getTurns();
+        currEffect.refreshTurn(refreshedTurns);
+        alreadyApplied = true;
+        break;
+      }
+    }
+    if(!alreadyApplied) {
+      this.effects.add(effect);
+    }
   }
 
   @Transient
@@ -196,6 +207,11 @@ public class Character implements Comparable<Character> {
   @Transient
   public void receiveShield(int shield)  {
     this.shield = shield;
+  }
+
+  @Transient
+  public boolean isDead() {
+    return currentHealth == 0;
   }
 
   @Override
