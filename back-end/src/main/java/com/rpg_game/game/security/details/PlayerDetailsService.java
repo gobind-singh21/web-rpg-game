@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.rpg_game.game.entity.Player;
-import com.rpg_game.game.service.PlayerService;
+import com.rpg_game.game.services.PlayerService;
 
 @Service
 public class PlayerDetailsService implements UserDetailsService {

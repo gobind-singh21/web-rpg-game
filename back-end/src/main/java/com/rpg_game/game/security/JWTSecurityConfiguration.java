@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
-import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder; 
 import org.springframework.security.oauth2.jwt.JwtEncoder; 
@@ -45,11 +44,6 @@ public class JWTSecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authentificationConfiguration) throws Exception {
         return authentificationConfiguration.getAuthenticationManager();
     }
-
-    // @Bean
-    // OAuth2Token<JwtEncodingContext> jwtCustomizer() {
-    //     return context -> context.getHeaders().algorithm(KeyGeneratorUtils.ESAlgorythm.ES256K);
-    // }
 
     @Bean
     public JwtEncoder jwtEncoder() {

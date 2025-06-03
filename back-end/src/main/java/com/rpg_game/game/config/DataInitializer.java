@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.rpg_game.game.payload.SignupRequest;
-import com.rpg_game.game.service.PlayerService;
+import com.rpg_game.game.model.SignupRequest;
+import com.rpg_game.game.services.PlayerService;
 
 @Configuration
 public class DataInitializer {

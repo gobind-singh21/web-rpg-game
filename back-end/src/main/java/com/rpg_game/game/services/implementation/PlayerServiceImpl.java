@@ -1,9 +1,9 @@
-package com.rpg_game.game.service.implementation;
+package com.rpg_game.game.services.implementation;
 
 import com.rpg_game.game.entity.Player;
-import com.rpg_game.game.payload.SignupRequest;
+import com.rpg_game.game.model.SignupRequest;
 import com.rpg_game.game.repositories.PlayerRepository;
-import com.rpg_game.game.service.PlayerService;
+import com.rpg_game.game.services.PlayerService;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;

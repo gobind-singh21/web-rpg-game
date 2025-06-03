@@ -1,4 +1,4 @@
-package com.rpg_game.game.payload;
+package com.rpg_game.game.model;
 
 import jakarta.validation.constraints.NotBlank;
 

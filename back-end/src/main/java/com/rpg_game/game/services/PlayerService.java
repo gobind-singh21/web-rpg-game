@@ -1,9 +1,9 @@
-package com.rpg_game.game.service;
+package com.rpg_game.game.services;
 
 import java.util.Optional;
 
 import com.rpg_game.game.entity.Player;
-import com.rpg_game.game.payload.SignupRequest;
+import com.rpg_game.game.model.SignupRequest;
 
 public interface PlayerService {
     /**
