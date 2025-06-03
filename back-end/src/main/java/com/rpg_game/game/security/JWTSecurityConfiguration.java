@@ -78,7 +78,8 @@ public class JWTSecurityConfiguration {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) 
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()
-                .requestMatchers("/api/test/public").permitAll()
+                .requestMatchers("/api/test").permitAll()
+                .requestMatchers("/api/test/public/action/basic", "/api/test/public/action/skill").permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2

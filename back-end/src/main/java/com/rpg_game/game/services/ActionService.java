@@ -12,7 +12,7 @@ import com.rpg_game.game.types.Stat;
 public class ActionService {
   
   public ActionServiceResponse basicAttack(Character currentCharacter, int target, List<Character> enemies) {
-    if(target >= 0 && target < enemies.size())
+    if(target < 0 || target >= enemies.size())
       return new ActionServiceResponse(false, true, false, false, false, "Invalid target");
     
     if(currentCharacter.isDead())

@@ -49,7 +49,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
         try {
-            Player registeredPlayer = playerService.signupPlayer(signupRequest);
+            playerService.signupPlayer(signupRequest);
             return new ResponseEntity<>("User registered successfully!!", HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

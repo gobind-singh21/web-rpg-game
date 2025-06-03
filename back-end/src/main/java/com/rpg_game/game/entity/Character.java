@@ -2,6 +2,7 @@ package com.rpg_game.game.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rpg_game.game.types.CharacterClass;
 
 import jakarta.persistence.CascadeType;
@@ -144,6 +145,7 @@ public class Character implements Comparable<Character> {
   }
 
   @Transient
+  @JsonIgnore
   public int getMaxHealth() {
     int maxHealth = 0;
     int totalEffects = effects.size();
@@ -154,6 +156,7 @@ public class Character implements Comparable<Character> {
   }
 
   @Transient
+  @JsonIgnore
   public int getMaxAttack() {
     int maxAttack = 0;
     int totalEffects = effects.size();
@@ -164,6 +167,7 @@ public class Character implements Comparable<Character> {
   }
 
   @Transient
+  @JsonIgnore
   public int getMaxDefense() {
     int maxDefense = 0;
     int totalEffects = effects.size();
@@ -174,6 +178,7 @@ public class Character implements Comparable<Character> {
   }
 
   @Transient
+  @JsonIgnore
   public int getMaxSpeed() {
     int maxSpeed = 0;
     int totalEffects = effects.size();
@@ -210,6 +215,7 @@ public class Character implements Comparable<Character> {
   }
 
   @Transient
+  @JsonIgnore
   public boolean isDead() {
     return currentHealth == 0;
   }

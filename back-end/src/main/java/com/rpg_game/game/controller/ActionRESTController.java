@@ -16,7 +16,7 @@ import com.rpg_game.game.model.ActionResponse;
 import com.rpg_game.game.services.ActionService;
 
 @RestController
-@RequestMapping("/api/test/public/action")
+@RequestMapping("/api/combat/action")
 public class ActionRESTController {
   
   @Autowired
@@ -29,6 +29,7 @@ public class ActionRESTController {
     if(basicActionRequest.currentCharacterIndex() < 0 || basicActionRequest.currentCharacterIndex() >= basicActionRequest.currentLineup().size()) {
       return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Invalid current character", currentLineup), HttpStatus.BAD_REQUEST);
     }
+    System.out.println(basicActionRequest.targetIndex());
 
     var currentCharacter = basicActionRequest.currentLineup().get(basicActionRequest.currentCharacterIndex());
     var basicResponse = actionService.basicAttack(currentCharacter, basicActionRequest.targetIndex(), basicActionRequest.enemies());
