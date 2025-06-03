@@ -58,7 +58,7 @@ public class JWTSecurityConfiguration {
         System.out.println("DEBUG: jwtSecret bytes length: " + secretBytes.length);
         
         SecretKeySpec secretKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), "HmacSha256");
-        return new NimbusJwtEncoder(secretKey);
+        return new NimbusJwtEncoder(new ImmutableSecret<>(secretKey));
     }
 
     @Bean
