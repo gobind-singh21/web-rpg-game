@@ -17,14 +17,6 @@ public class Player {
 
   private String email;
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   private String username;
 
   private String passwordDigest;
@@ -36,6 +28,14 @@ public class Player {
 
   public Integer getId() {
     return id;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public void setId(Integer id) {

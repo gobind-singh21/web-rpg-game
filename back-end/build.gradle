@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.5.0'
+	id 'org.springframework.boot' version '3.4.5'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -21,20 +21,21 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	// implementation 'org.springframework.boot:spring-boot-starter-security'
-	// implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-
-	// implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
-  //   runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
-  //   runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	runtimeOnly 'org.postgresql:postgresql'
+
+	implementation 'jakarta.validation:jakarta.validation-api'
+	implementation 'org.hibernate.validator:hibernate-validator'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.rest-assured:rest-assured:5.5.2'
 	testImplementation 'io.rest-assured:json-schema-validator:5.5.2'
 	testImplementation 'io.rest-assured:spring-mock-mvc:5.5.2'
+	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
