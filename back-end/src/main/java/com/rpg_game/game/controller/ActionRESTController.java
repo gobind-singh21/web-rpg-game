@@ -16,7 +16,7 @@ import com.rpg_game.game.model.ActionResponse;
 import com.rpg_game.game.services.ActionService;
 
 @RestController
-@RequestMapping("/action")
+@RequestMapping("/api/test/public/action")
 public class ActionRESTController {
   
   @Autowired
