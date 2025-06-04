@@ -1,7 +1,12 @@
 package com.rpg_game.game.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rpg_game.game.types.CharacterClass;
 
 import jakarta.persistence.CascadeType;
@@ -101,40 +106,91 @@ public class Character implements Comparable<Character> {
   }
 
   @Transient
+  private String team = "";
+
+  @JsonProperty("team")
+  public String getTeam() {
+    return team;
+  }
+
+  @JsonProperty("team")
+  public void setTeam(String team) {
+    this.team = team;
+  }
+
+  @Transient
   private Integer shield = 0;
+
+  @JsonProperty("shield")
+  public Integer getShield() {
+    return shield;
+  }
+
+  @JsonProperty("shield")
+  public void setShield(Integer shield) {
+    this.shield = shield;
+  }
 
   @Transient
   private Integer currentHealth = baseHealth;
 
-  @Transient
-  private List<Effect> effects;
+  @JsonProperty("currentHealth")
+  public int getCurrentHealth() {
+    return currentHealth;
+  }
+
+  @JsonProperty("currentHealth")
+  public void setCurrentHealth(int currentHealth) {
+    this.currentHealth = currentHealth;
+  }
 
   @Transient
+  private List<Effect> effects = new ArrayList<Effect>();
+
+  @JsonProperty("effects")
   public List<Effect> getEffects() {
     return effects;
   }
 
-  @Transient
   public void addEffect(Effect effect) {
-    effects.add(effect);
+    boolean alreadyApplied = false;
+    for(Effect currEffect : this.effects) {
+      if(currEffect.getName().equals(effect.getName())) {
+        int refreshedTurns = effect.getTurns();
+        currEffect.refreshTurn(refreshedTurns);
+        alreadyApplied = true;
+        break;
+      }
+    }
+    if(!alreadyApplied) {
+      Effect newEffect = new Effect();
+      newEffect.setName(effect.getName());
+      newEffect.setId(effect.getId());
+      newEffect.setTurns(effect.getTurns());
+      newEffect.setBuff(effect.isBuff());
+      newEffect.setAttackPercent(effect.getAttackPercent());
+      newEffect.setDefensePercent(effect.getDefensePercent());
+      newEffect.setHealthPercent(effect.getHealthPercent());
+      newEffect.setSpeedPercent(effect.getSpeedPercent());
+      this.effects.add(newEffect);
+    }
   }
 
-  @Transient
+  @JsonProperty("effects")
   public void setEffects(List<Effect> effects) {
     this.effects = effects;
   }
 
-  @Transient
   public void processTurn() {
     this.effects = effects.stream()
                           .filter(effect -> effect.getTurns() > 0)
-                          .toList();
+                          .collect(Collectors.toCollection(ArrayList::new));
     effects.forEach(effect -> effect.decreaseTurn());
   }
 
-  @Transient
+  @JsonIgnore
   public int getMaxHealth() {
-    int maxHealth = 0;
+    int maxHealth = baseHealth;
     int totalEffects = effects.size();
     for(int i = 0; i < totalEffects; i++) {
       maxHealth += (effects.get(i).isBuff() ? +1 : -1) * (baseHealth * effects.get(i).getHealthPercent()) / 100;
@@ -142,9 +198,9 @@ public class Character implements Comparable<Character> {
     return maxHealth;
   }
 
-  @Transient
+  @JsonIgnore
   public int getMaxAttack() {
-    int maxAttack = 0;
+    int maxAttack = baseAttack;
     int totalEffects = effects.size();
     for(int i = 0; i < totalEffects; i++) {
       maxAttack += (effects.get(i).isBuff() ? +1 : -1) * (baseAttack * effects.get(i).getAttackPercent()) / 100;
@@ -152,9 +208,9 @@ public class Character implements Comparable<Character> {
     return maxAttack;
   }
 
-  @Transient
+  @JsonIgnore
   public int getMaxDefense() {
-    int maxDefense = 0;
+    int maxDefense = baseDefense;
     int totalEffects = effects.size();
     for(int i = 0; i < totalEffects; i++) {
       maxDefense += (effects.get(i).isBuff() ? +1 : -1) * (baseDefense * effects.get(i).getDefensePercent()) / 100;
@@ -162,9 +218,9 @@ public class Character implements Comparable<Character> {
     return maxDefense;
   }
 
-  @Transient
+  @JsonIgnore
   public int getMaxSpeed() {
-    int maxSpeed = 0;
+    int maxSpeed = baseSpeed;
     int totalEffects = effects.size();
     for(int i = 0; i < totalEffects; i++) {
       maxSpeed += (effects.get(i).isBuff() ? +1 : -1) * (baseSpeed * effects.get(i).getSpeedPercent()) / 100;
@@ -172,12 +228,10 @@ public class Character implements Comparable<Character> {
     return maxSpeed;
   }
 
-  @Transient
   public void reduceHealth(int reduction) {
     currentHealth = Math.max(1, currentHealth - reduction);
   }
 
-  @Transient
   public void receiveDamage(int incomingDamage) {
     int maxDefense = this.getMaxDefense();
     double scaling = (double) incomingDamage / (incomingDamage + maxDefense * 3.0);
@@ -187,19 +241,40 @@ public class Character implements Comparable<Character> {
     this.currentHealth = Math.max(this.currentHealth, 0);
   }
 
-  @Transient
   public void receivehealing(int healing) {
     int maxhealth = this.getMaxHealth();
     currentHealth = Math.min(maxhealth, currentHealth + healing);
   }
 
-  @Transient
   public void receiveShield(int shield)  {
     this.shield = shield;
+  }
+
+  @JsonIgnore
+  public boolean isDead() {
+    return currentHealth == 0;
   }
 
   @Override
   public int compareTo(Character o) {
     return Integer.compare(o.getMaxSpeed(), this.getMaxSpeed());
+  }
+
+  @Override
+  @JsonIgnore
+  public boolean equals(Object o) {
+    if(this == o)
+      return true;
+    if(o == null || o.getClass() != Character.class) {
+      return false;
+    }
+    Character other = (Character) o;
+    return Objects.equals(this.id, other.id);
+  }
+
+  @Override
+  @JsonIgnore
+  public int hashCode() {
+    return Objects.hash(id);
   }
 }
