@@ -13,6 +13,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.config.Customizer;
+
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
@@ -46,6 +50,22 @@ public class JWTSecurityConfiguration {
     }
 
     @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("*") // This part is only for testing purposes remove it before pushing and merging into the main branch.
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("Authorization", "Content-Type")
+                        .allowCredentials(true)
+                        .maxAge(3600); // How long pre-flight requests can be cached
+            }
+        };
+    }
+
+    @Bean
     public JwtEncoder jwtEncoder() {
         System.out.println("DEBUG: jwtSecret loaded: " + jwtSecret);
         byte[] secretBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
@@ -75,6 +95,7 @@ public class JWTSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(AbstractHttpConfigurer::disable) 
+            .cors(Customizer.withDefaults())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) 
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()
