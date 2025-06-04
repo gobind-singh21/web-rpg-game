@@ -1,7 +1,5 @@
 package com.rpg_game.game.model;
 
-import java.util.List;
+import java.util.HashMap;
 
-import com.rpg_game.game.entity.Character;
-
-public record ActionResponse(boolean validMove, String message, List<Character> newLineup) {}
+public record ActionResponse(boolean validMove, String message, HashMap<Integer, CharacterSnapshot> lineup) {}

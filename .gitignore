@@ -2,6 +2,7 @@
 build/
 .gradle/
 db_test/
+bin/
 
 # Compiled output
 /dist
