@@ -1,0 +1,1532 @@
+[
+    {
+      "id": 1,
+      "name": "Aric the Swiftblade",
+      "baseHealth": 950,
+      "baseAttack": 160,
+      "baseDefense": 90,
+      "baseSpeed": 170,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 1,
+        "name": "Arcane Volley",
+        "scale": 140,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 101,
+            "name": "Crippling Blow",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 20,
+            "turns": 2,
+            "isBuff": false
+          },
+          {
+            "id": 102,
+            "name": "Armor Shred",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 15,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "name": "Lyra the Sunshield",
+      "baseHealth": 1400,
+      "baseAttack": 100,
+      "baseDefense": 160,
+      "baseSpeed": 90,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 2,
+        "name": "Holy Bulwark",
+        "scale": 0,
+        "stat": "DEF",
+        "shield": 400,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 103,
+            "name": "Divine Fortitude",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 25,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "name": "Kael the Soulbinder",
+      "baseHealth": 1150,
+      "baseAttack": 120,
+      "baseDefense": 105,
+      "baseSpeed": 120,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 3,
+        "name": "Shadow Drain",
+        "scale": 110,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 50,
+        "effects": [
+          {
+            "id": 104,
+            "name": "Spirit Siphon",
+            "healthPercent": 7,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          },
+          {
+            "id": 105,
+            "name": "Life Link",
+            "healthPercent": 5,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "name": "Seraphina the Healer",
+      "baseHealth": 1000,
+      "baseAttack": 90,
+      "baseDefense": 110,
+      "baseSpeed": 150,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 4,
+        "name": "Radiant Blessing",
+        "scale": 0,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 200,
+        "effects": [
+          {
+            "id": 106,
+            "name": "Healing Aura",
+            "healthPercent": 10,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": true
+          },
+          {
+            "id": 107,
+            "name": "Cleansing Light",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 0,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "name": "Mordecai the Loremaster",
+      "baseHealth": 1250,
+      "baseAttack": 140,
+      "baseDefense": 140,
+      "baseSpeed": 110,
+      "characterClass": "Saint",
+      "ability": {
+        "id": 5,
+        "name": "Temporal Shroud",
+        "scale": 100,
+        "stat": "ATK",
+        "shield": 100,
+        "heal": 50,
+        "effects": [
+          {
+            "id": 108,
+            "name": "Haste",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 15,
+            "turns": 2,
+            "isBuff": true
+          },
+          {
+            "id": 109,
+            "name": "Time Dilation",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 10,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "name": "Elara the Whisperwind",
+      "baseHealth": 880,
+      "baseAttack": 170,
+      "baseDefense": 85,
+      "baseSpeed": 180,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 6,
+        "name": "Wind's Edge",
+        "scale": 130,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 110,
+            "name": "Gale Force",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 20,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "name": "Finn the Undaunted",
+      "baseHealth": 1450,
+      "baseAttack": 110,
+      "baseDefense": 170,
+      "baseSpeed": 80,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 7,
+        "name": "Shield of Aegis",
+        "scale": 0,
+        "stat": "DEF",
+        "shield": 500,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 111,
+            "name": "Immovable Stance",
+            "healthPercent": 0,
+            "attackPercent": 10,
+            "defensePercent": 30,
+            "speedPercent": 10,
+            "turns": 3,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "name": "Isolde the Crimson",
+      "baseHealth": 1100,
+      "baseAttack": 130,
+      "baseDefense": 95,
+      "baseSpeed": 110,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 8,
+        "name": "Blood Ritual",
+        "scale": 100,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 75,
+        "effects": [
+          {
+            "id": 112,
+            "name": "Sanguine Mark",
+            "healthPercent": 8,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 4,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "name": "Zephyr the Devout",
+      "baseHealth": 980,
+      "baseAttack": 85,
+      "baseDefense": 115,
+      "baseSpeed": 160,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 9,
+        "name": "Divine Intervention",
+        "scale": 0,
+        "stat": "MAX_HP",
+        "shield": 0,
+        "heal": 250,
+        "effects": [
+          {
+            "id": 113,
+            "name": "Aura of Protection",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 15,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": true
+          },
+          {
+            "id": 114,
+            "name": "Spirit Bond",
+            "healthPercent": 12,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "name": "Theron the Just",
+      "baseHealth": 1300,
+      "baseAttack": 130,
+      "baseDefense": 130,
+      "baseSpeed": 100,
+      "characterClass": "Saint",
+      "ability": {
+        "id": 10,
+        "name": "Hammer of Consecration",
+        "scale": 150,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 115,
+            "name": "Blinding Radiance",
+            "healthPercent": 0,
+            "attackPercent": 20,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "name": "Astra the Celestial",
+      "baseHealth": 920,
+      "baseAttack": 155,
+      "baseDefense": 95,
+      "baseSpeed": 165,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 11,
+        "name": "Starlight Arrow",
+        "scale": 125,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 116,
+            "name": "Dazzle",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 10,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "name": "Orion the Steadfast",
+      "baseHealth": 1380,
+      "baseAttack": 105,
+      "baseDefense": 165,
+      "baseSpeed": 85,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 12,
+        "name": "Fortress Guard",
+        "scale": 0,
+        "stat": "DEF",
+        "shield": 450,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 117,
+            "name": "Stone Skin",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 20,
+            "speedPercent": 5,
+            "turns": 3,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "name": "Cinder the Blight",
+      "baseHealth": 1080,
+      "baseAttack": 125,
+      "baseDefense": 100,
+      "baseSpeed": 115,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 13,
+        "name": "Contagion",
+        "scale": 90,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 40,
+        "effects": [
+          {
+            "id": 118,
+            "name": "Plague Touch",
+            "healthPercent": 6,
+            "attackPercent": 5,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 4,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "name": "Rune the Seer",
+      "baseHealth": 960,
+      "baseAttack": 95,
+      "baseDefense": 105,
+      "baseSpeed": 155,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 14,
+        "name": "Foreseeing Heal",
+        "scale": 0,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 180,
+        "effects": [
+          {
+            "id": 119,
+            "name": "Insight",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 10,
+            "turns": 3,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "name": "Talon the Arbiter",
+      "baseHealth": 1200,
+      "baseAttack": 135,
+      "baseDefense": 135,
+      "baseSpeed": 105,
+      "characterClass": "Saint",
+      "ability": {
+        "id": 15,
+        "name": "Judgement Blade",
+        "scale": 160,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 120,
+            "name": "Mark of Justice",
+            "healthPercent": 0,
+            "attackPercent": 10,
+            "defensePercent": 10,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "name": "Willow the Botanist",
+      "baseHealth": 900,
+      "baseAttack": 165,
+      "baseDefense": 90,
+      "baseSpeed": 175,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 16,
+        "name": "Thorn Volley",
+        "scale": 135,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 121,
+            "name": "Entangle",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 25,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "name": "Bram the Earthshaker",
+      "baseHealth": 1420,
+      "baseAttack": 115,
+      "baseDefense": 175,
+      "baseSpeed": 95,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 17,
+        "name": "Earthen Embrace",
+        "scale": 0,
+        "stat": "DEF",
+        "shield": 480,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 122,
+            "name": "Grounding Aura",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 22,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "name": "Echo the Phantom",
+      "baseHealth": 1050,
+      "baseAttack": 110,
+      "baseDefense": 110,
+      "baseSpeed": 130,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 18,
+        "name": "Soul Rend",
+        "scale": 115,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 60,
+        "effects": [
+          {
+            "id": 123,
+            "name": "Spectral Weakness",
+            "healthPercent": 0,
+            "attackPercent": 10,
+            "defensePercent": 5,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "name": "Garen the Steadfast",
+      "baseHealth": 1280,
+      "baseAttack": 120,
+      "baseDefense": 150,
+      "baseSpeed": 100,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 19,
+        "name": "Demacian Justice",
+        "scale": 140,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 124,
+            "name": "Courage",
+            "healthPercent": 0,
+            "attackPercent": 10,
+            "defensePercent": 10,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "name": "Freya the Frostborn",
+      "baseHealth": 1180,
+      "baseAttack": 145,
+      "baseDefense": 120,
+      "baseSpeed": 125,
+      "characterClass": "Saint",
+      "ability": {
+        "id": 20,
+        "name": "Blizzard Orb",
+        "scale": 120,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 125,
+            "name": "Frostbite",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 15,
+            "speedPercent": 15,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "name": "Cyrus the Marksman",
+      "baseHealth": 850,
+      "baseAttack": 180,
+      "baseDefense": 80,
+      "baseSpeed": 170,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 21,
+        "name": "Pinpoint Shot",
+        "scale": 150,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 126,
+            "name": "Precision Mark",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 20,
+            "speedPercent": 0,
+            "turns": 1,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "name": "Vesper the Dawn",
+      "baseHealth": 1350,
+      "baseAttack": 125,
+      "baseDefense": 155,
+      "baseSpeed": 105,
+      "characterClass": "Saint",
+      "ability": {
+        "id": 22,
+        "name": "Dawn's Embrace",
+        "scale": 0,
+        "stat": "HP",
+        "shield": 150,
+        "heal": 100,
+        "effects": [
+          {
+            "id": 127,
+            "name": "Hopeful Aura",
+            "healthPercent": 10,
+            "attackPercent": 10,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "name": "Solara the Lifeweaver",
+      "baseHealth": 1000,
+      "baseAttack": 80,
+      "baseDefense": 120,
+      "baseSpeed": 140,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 23,
+        "name": "Verdant Growth",
+        "scale": 0,
+        "stat": "MAX_HP",
+        "shield": 0,
+        "heal": 220,
+        "effects": [
+          {
+            "id": 128,
+            "name": "Nature's Embrace",
+            "healthPercent": 15,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "name": "Draven the Corruptor",
+      "baseHealth": 1180,
+      "baseAttack": 140,
+      "baseDefense": 90,
+      "baseSpeed": 100,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 24,
+        "name": "Unholy Pact",
+        "scale": 130,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 30,
+        "effects": [
+          {
+            "id": 129,
+            "name": "Soul Corrosion",
+            "healthPercent": 10,
+            "attackPercent": 10,
+            "defensePercent": 10,
+            "speedPercent": 10,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "name": "Lux the Radiant",
+      "baseHealth": 1050,
+      "baseAttack": 95,
+      "baseDefense": 115,
+      "baseSpeed": 160,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 25,
+        "name": "Prismatic Barrier",
+        "scale": 0,
+        "stat": "DEF",
+        "shield": 200,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 130,
+            "name": "Light Infusion",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 10,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "name": "Jinx the Loose Cannon",
+      "baseHealth": 890,
+      "baseAttack": 175,
+      "baseDefense": 88,
+      "baseSpeed": 168,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 26,
+        "name": "PowPow Barrage",
+        "scale": 160,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 131,
+            "name": "Concussion",
+            "healthPercent": 0,
+            "attackPercent": 10,
+            "defensePercent": 5,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "name": "Gragas the Brewmaster",
+      "baseHealth": 1480,
+      "baseAttack": 95,
+      "baseDefense": 178,
+      "baseSpeed": 82,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 27,
+        "name": "Drunken Rage",
+        "scale": 100,
+        "stat": "DEF",
+        "shield": 0,
+        "heal": 80,
+        "effects": [
+          {
+            "id": 132,
+            "name": "Grogfueled Stamina",
+            "healthPercent": 10,
+            "attackPercent": 5,
+            "defensePercent": 5,
+            "speedPercent": 5,
+            "turns": 3,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "name": "Irelia the Bladesinger",
+      "baseHealth": 1120,
+      "baseAttack": 135,
+      "baseDefense": 105,
+      "baseSpeed": 135,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 28,
+        "name": "Blade Surge",
+        "scale": 120,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 70,
+        "effects": [
+          {
+            "id": 133,
+            "name": "Flowing Momentum",
+            "healthPercent": 0,
+            "attackPercent": 10,
+            "defensePercent": 0,
+            "speedPercent": 10,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "name": "Karthus the Deathsinger",
+      "baseHealth": 1100,
+      "baseAttack": 130,
+      "baseDefense": 100,
+      "baseSpeed": 110,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 29,
+        "name": "Defile",
+        "scale": 90,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 134,
+            "name": "Desecration",
+            "healthPercent": 7,
+            "attackPercent": 7,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          },
+          {
+            "id": 135,
+            "name": "Soul Drain",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 0,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "name": "Leona the Shield of Daybreak",
+      "baseHealth": 1390,
+      "baseAttack": 100,
+      "baseDefense": 170,
+      "baseSpeed": 90,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 30,
+        "name": "Solar Flare",
+        "scale": 120,
+        "stat": "DEF",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 136,
+            "name": "Sunfire Aura",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 15,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": true
+          },
+          {
+            "id": 137,
+            "name": "Stun",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 100,
+            "turns": 1,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "name": "Malphite the Shard of the Monolith",
+      "baseHealth": 1500,
+      "baseAttack": 90,
+      "baseDefense": 180,
+      "baseSpeed": 80,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 31,
+        "name": "Unstoppable Force",
+        "scale": 180,
+        "stat": "DEF",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 138,
+            "name": "Seismic Shock",
+            "healthPercent": 0,
+            "attackPercent": 15,
+            "defensePercent": 15,
+            "speedPercent": 15,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "name": "Nami the Tidecaller",
+      "baseHealth": 980,
+      "baseAttack": 85,
+      "baseDefense": 110,
+      "baseSpeed": 165,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 32,
+        "name": "Tidal Wave",
+        "scale": 100,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 200,
+        "effects": [
+          {
+            "id": 139,
+            "name": "Aqua Prison",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 50,
+            "turns": 1,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "name": "Ornn the Fire Beneath the Mountain",
+      "baseHealth": 1300,
+      "baseAttack": 120,
+      "baseDefense": 160,
+      "baseSpeed": 100,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 33,
+        "name": "Volcanic Forging",
+        "scale": 0,
+        "stat": "DEF",
+        "shield": 300,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 140,
+            "name": "Melted Armor",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 20,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "name": "Poppy the Keeper of the Hammer",
+      "baseHealth": 1350,
+      "baseAttack": 100,
+      "baseDefense": 170,
+      "baseSpeed": 90,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 34,
+        "name": "Heroic Charge",
+        "scale": 130,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 141,
+            "name": "Valor",
+            "healthPercent": 0,
+            "attackPercent": 15,
+            "defensePercent": 15,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "name": "Qiyana the Empress of the Elements",
+      "baseHealth": 900,
+      "baseAttack": 170,
+      "baseDefense": 90,
+      "baseSpeed": 170,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 35,
+        "name": "Elemental Wrath",
+        "scale": 145,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 142,
+            "name": "Shockwave",
+            "healthPercent": 0,
+            "attackPercent": 10,
+            "defensePercent": 0,
+            "speedPercent": 10,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "name": "Riven the Exile",
+      "baseHealth": 1200,
+      "baseAttack": 160,
+      "baseDefense": 110,
+      "baseSpeed": 130,
+      "characterClass": "Saint",
+      "ability": {
+        "id": 36,
+        "name": "Blade of the Exile",
+        "scale": 170,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 143,
+            "name": "Momentum",
+            "healthPercent": 0,
+            "attackPercent": 20,
+            "defensePercent": 0,
+            "speedPercent": 10,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "name": "Sett the Boss",
+      "baseHealth": 1400,
+      "baseAttack": 150,
+      "baseDefense": 140,
+      "baseSpeed": 90,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 37,
+        "name": "Facebreaker",
+        "scale": 160,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 144,
+            "name": "Grit",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 20,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "name": "Taric the Shield of Valoran",
+      "baseHealth": 1200,
+      "baseAttack": 90,
+      "baseDefense": 160,
+      "baseSpeed": 110,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 38,
+        "name": "Cosmic Radiance",
+        "scale": 0,
+        "stat": "HP",
+        "shield": 250,
+        "heal": 150,
+        "effects": [
+          {
+            "id": 145,
+            "name": "Starlight's Touch",
+            "healthPercent": 10,
+            "attackPercent": 0,
+            "defensePercent": 10,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "name": "Urgot the Dreadnought",
+      "baseHealth": 1450,
+      "baseAttack": 150,
+      "baseDefense": 120,
+      "baseSpeed": 90,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 39,
+        "name": "Purge",
+        "scale": 110,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 60,
+        "effects": [
+          {
+            "id": 146,
+            "name": "Corrosive Charge",
+            "healthPercent": 8,
+            "attackPercent": 0,
+            "defensePercent": 8,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "name": "Vayne the Night Hunter",
+      "baseHealth": 880,
+      "baseAttack": 180,
+      "baseDefense": 85,
+      "baseSpeed": 175,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 40,
+        "name": "Silver Bolts",
+        "scale": 140,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 147,
+            "name": "True Damage Proc",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 30,
+            "speedPercent": 0,
+            "turns": 1,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "name": "Warwick the Uncaged Wrath of Zaun",
+      "baseHealth": 1200,
+      "baseAttack": 130,
+      "baseDefense": 100,
+      "baseSpeed": 130,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 41,
+        "name": "Jaws of the Beast",
+        "scale": 120,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 90,
+        "effects": [
+          {
+            "id": 148,
+            "name": "Frenzy",
+            "healthPercent": 0,
+            "attackPercent": 15,
+            "defensePercent": 0,
+            "speedPercent": 15,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "name": "Xayah the Rebel",
+      "baseHealth": 900,
+      "baseAttack": 170,
+      "baseDefense": 90,
+      "baseSpeed": 170,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 42,
+        "name": "Featherstorm",
+        "scale": 130,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 149,
+            "name": "Plumage Pierce",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 10,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 43,
+      "name": "Yasuo the Unforgiven",
+      "baseHealth": 1150,
+      "baseAttack": 160,
+      "baseDefense": 100,
+      "baseSpeed": 140,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 43,
+        "name": "Last Breath",
+        "scale": 180,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 150,
+            "name": "Steel Tempest",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 10,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "name": "Zilean the Chronokeeper",
+      "baseHealth": 950,
+      "baseAttack": 80,
+      "baseDefense": 120,
+      "baseSpeed": 180,
+      "characterClass": "Priest",
+      "ability": {
+        "id": 44,
+        "name": "Rewind Time",
+        "scale": 0,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 250,
+        "effects": [
+          {
+            "id": 151,
+            "name": "Temporal Warp",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 30,
+            "turns": 1,
+            "isBuff": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "name": "Alistair the Minotaur",
+      "baseHealth": 1500,
+      "baseAttack": 100,
+      "baseDefense": 180,
+      "baseSpeed": 80,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 45,
+        "name": "Pulverize",
+        "scale": 120,
+        "stat": "DEF",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 152,
+            "name": "Knock Up",
+            "healthPercent": 0,
+            "attackPercent": 0,
+            "defensePercent": 10,
+            "speedPercent": 100,
+            "turns": 1,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 46,
+      "name": "Brand the Burning Vengeance",
+      "baseHealth": 1000,
+      "baseAttack": 150,
+      "baseDefense": 90,
+      "baseSpeed": 110,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 46,
+        "name": "Pillar of Flame",
+        "scale": 130,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 153,
+            "name": "Conflagration",
+            "healthPercent": 10,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 3,
+            "isBuff": false
+          },
+          {
+            "id": 154,
+            "name": "Blaze",
+            "healthPercent": 0,
+            "attackPercent": 5,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "name": "Cassiopeia the Serpent's Embrace",
+      "baseHealth": 1050,
+      "baseAttack": 140,
+      "baseDefense": 95,
+      "baseSpeed": 120,
+      "characterClass": "Leech",
+      "ability": {
+        "id": 47,
+        "name": "Miasma",
+        "scale": 80,
+        "stat": "HP",
+        "shield": 0,
+        "heal": 40,
+        "effects": [
+          {
+            "id": 155,
+            "name": "Toxic Sludge",
+            "healthPercent": 6,
+            "attackPercent": 5,
+            "defensePercent": 0,
+            "speedPercent": 5,
+            "turns": 4,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "name": "Darius the Hand of Noxus",
+      "baseHealth": 1400,
+      "baseAttack": 160,
+      "baseDefense": 120,
+      "baseSpeed": 90,
+      "characterClass": "Crusader",
+      "ability": {
+        "id": 48,
+        "name": "Noxian Guillotine",
+        "scale": 170,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 156,
+            "name": "Hemorrhage",
+            "healthPercent": 12,
+            "attackPercent": 0,
+            "defensePercent": 0,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 49,
+      "name": "Evelynn the Agony's Embrace",
+      "baseHealth": 950,
+      "baseAttack": 165,
+      "baseDefense": 85,
+      "baseSpeed": 160,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 49,
+        "name": "Lash of Shadow",
+        "scale": 130,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 157,
+            "name": "Agony",
+            "healthPercent": 5,
+            "attackPercent": 5,
+            "defensePercent": 5,
+            "speedPercent": 5,
+            "turns": 3,
+            "isBuff": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "name": "Fiora the Grand Duelist",
+      "baseHealth": 1100,
+      "baseAttack": 170,
+      "baseDefense": 100,
+      "baseSpeed": 150,
+      "characterClass": "Ranger",
+      "ability": {
+        "id": 50,
+        "name": "Grand Challenge",
+        "scale": 150,
+        "stat": "ATK",
+        "shield": 0,
+        "heal": 0,
+        "effects": [
+          {
+            "id": 158,
+            "name": "Duelist's Mark",
+            "healthPercent": 0,
+            "attackPercent": 15,
+            "defensePercent": 15,
+            "speedPercent": 0,
+            "turns": 2,
+            "isBuff": true
+          }
+        ]
+      }
+    }
+  ]
