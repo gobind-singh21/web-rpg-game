@@ -1,1 +1,1 @@
-sudo -u postgres psql -c 'create database test;'
+sudo -u postgres psql -c 'create database webgame;'
