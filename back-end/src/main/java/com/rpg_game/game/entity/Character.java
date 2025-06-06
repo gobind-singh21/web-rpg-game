@@ -186,6 +186,10 @@ public class Character implements Comparable<Character> {
                           .filter(effect -> effect.getTurns() > 0)
                           .collect(Collectors.toCollection(ArrayList::new));
     effects.forEach(effect -> effect.decreaseTurn());
+    int maxHealth = this.getMaxHealth();
+    if(this.currentHealth > maxHealth) {
+      this.currentHealth = maxHealth;
+    }
   }
 
   @JsonIgnore
@@ -194,6 +198,9 @@ public class Character implements Comparable<Character> {
     int totalEffects = effects.size();
     for(int i = 0; i < totalEffects; i++) {
       maxHealth += (effects.get(i).isBuff() ? +1 : -1) * (baseHealth * effects.get(i).getHealthPercent()) / 100;
+    }
+    if (this.currentHealth > Integer.valueOf(maxHealth)) {
+      this.currentHealth = maxHealth;
     }
     return maxHealth;
   }
