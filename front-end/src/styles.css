@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css or src/styles.scss */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Gasoek One', sans-serif;
+    font-weight: 100;
+}
+
+p{
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+

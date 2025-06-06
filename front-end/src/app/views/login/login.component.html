@@ -1,0 +1,40 @@
+<div class="register-container">
+    <div class="register-background"></div>
+    <div class="register-overlay"></div>
+    <div class="register-form-wrapper">
+      <div class="register-card">
+        <h1 class="register-title">Login</h1>
+        <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+          <!-- Email -->
+          <app-input
+            id="email"
+            type="email"
+            label="Email"
+            [control]="emailControl"
+          ></app-input>
+  
+          <!-- Password -->
+          <app-input
+            id="password"
+            type="password"
+            label="Password"
+            [control]="passwordControl"
+          ></app-input>
+  
+          <!-- Submit -->
+          <button type="submit" class="register-button">OK</button>
+        </form>
+
+        <!-- register -->
+        <div class="secondary-text"  id="leftButton" (click)="NavigateToRegister()">
+            Register Warrior ?
+        </div>
+  
+        <!-- Login Link -->
+        <div class="secondary-text" id="rightButton"  (click)="ForgotPassword()">
+          Forgot Password ?
+        </div>
+      </div>
+    </div>
+  </div>
+  
