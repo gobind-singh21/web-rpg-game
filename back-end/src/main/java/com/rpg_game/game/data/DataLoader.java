@@ -57,7 +57,7 @@ public class DataLoader implements CommandLineRunner {
 
         logger.info("Loading character data from JSON...");
 
-        try (InputStream inputStream = new ClassPathResource("/home/saurabhpr/web app/capstone Proje t/web-rpg-game/back-end/src/main/java/com/rpg_game/game/data/player.json").getInputStream()) {
+        try (InputStream inputStream = new ClassPathResource("./player.json").getInputStream()) {
             System.out.println("Got the data --------------------------------------->>>>>>>>>");
             List<Character> charactersFromJson = objectMapper.readValue(inputStream, new TypeReference<List<Character>>() {});
 
