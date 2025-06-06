@@ -30,7 +30,7 @@
         ></app-input>
 
         <!-- Submit -->
-        <button type="submit" class="register-button">OK</button>
+        <button type="submit" class="register-button" [disabled]="formData.invalid">Register</button>
       </form>
 
       <!-- Login Link -->
