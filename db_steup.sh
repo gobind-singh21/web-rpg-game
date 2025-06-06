@@ -1,0 +1,1 @@
+sudo -u postgres psql -c 'create database test;'

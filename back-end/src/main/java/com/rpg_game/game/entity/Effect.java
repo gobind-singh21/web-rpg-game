@@ -24,8 +24,18 @@ public class Effect {
 
   public Effect() {}
 
+  public Effect(String name, Integer healthPercent, Integer attackPercent,
+                Integer defensePercent, Integer speedPercent, boolean isBuff) {
+    this.name = name;
+    this.healthPercent = healthPercent;
+    this.attackPercent = attackPercent;
+    this.defensePercent = defensePercent;
+    this.speedPercent = speedPercent;
+    this.isBuff = isBuff;
+  }
+
   @Transient
-  private Integer turns = 0;
+  private Integer turns = 3;
 
   @Transient
   public Integer getTurns() {

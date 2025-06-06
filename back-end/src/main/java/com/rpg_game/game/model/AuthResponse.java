@@ -4,9 +4,9 @@ public class AuthResponse {
     private String username;
     private String token;
     private String type = "Bearer"; 
+    private Long playerId;
 
-    
-    private Integer playerId;
+    public AuthResponse() {}
 
     /**
      * All-argument constructor
@@ -15,7 +15,7 @@ public class AuthResponse {
      * @param token
      * @param playerId
      */
-    public AuthResponse(String username, String token, Integer playerId) {
+    public AuthResponse(String username, String token, Long playerId) {
         this.username = username;
         this.token = token;
         this.playerId = playerId;
@@ -29,7 +29,7 @@ public class AuthResponse {
      * @param type
      * @param playerId
      */
-    public AuthResponse(String username, String token, String type, Integer playerId) {
+    public AuthResponse(String username, String token, String type, Long playerId) {
         this.username = username;
         this.token = token;
         this.type = type;
@@ -49,7 +49,7 @@ public class AuthResponse {
         return type;
     }
 
-    public Integer getPlayerId() {
+    public Long getPlayerId() {
         return playerId;
     }
 
@@ -65,7 +65,7 @@ public class AuthResponse {
         this.type = type;
     }
 
-    public void setPlayerId(Integer playerId) {
+    public void setPlayerId(Long playerId) {
         this.playerId = playerId;
     }
     

@@ -7,6 +7,8 @@ import com.rpg_game.game.types.Stat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,24 +24,33 @@ public class Ability {
 
   private Integer scale = 100;
 
+  @Enumerated(EnumType.STRING)
   private Stat stat = Stat.ATK;
 
   private Integer shield = 0;
 
   private Integer heal = 0;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
   private List<Effect> effects = new ArrayList<Effect>();
 
   public Ability() {}
+
+  public Ability(String name, Integer scale, Stat stat, Integer shield, Integer heal) {
+    this.name = name;
+    this.scale = scale;
+    this.stat = stat;
+    this.shield = shield;
+    this.heal = heal;
+}
 
   public Integer getId() {
     return id;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+  // public void setId(Integer id) {
+  //   this.id = id;
+  // }
 
   public String getName() {
     return name;

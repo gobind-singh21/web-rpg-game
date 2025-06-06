@@ -91,7 +91,7 @@ public class AuthController {
             
             String token = jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue();
 
-            Integer playerId = playerService.findByUsername(authentication.getName())
+            Long playerId = playerService.findByUsername(authentication.getName())
                                                 .map(Player::getId)
                                                 .orElse(null);
 

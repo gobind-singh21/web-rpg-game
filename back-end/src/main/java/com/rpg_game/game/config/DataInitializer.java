@@ -6,13 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.rpg_game.game.model.SignupRequest;
+import com.rpg_game.game.repositories.AbilityRepository;
+import com.rpg_game.game.repositories.CharacterRepository;
+import com.rpg_game.game.repositories.EffectRepository;
 import com.rpg_game.game.services.PlayerService;
 
 @Configuration
 public class DataInitializer {
 
     @Bean
-    CommandLineRunner initDatabase(PlayerService playerService, PasswordEncoder passwordEncoder) {
+    CommandLineRunner initDatabase(PlayerService playerService, PasswordEncoder passwordEncoder, AbilityRepository abilityRepository, CharacterRepository characterRepository, EffectRepository effectRepository) {
         return args -> {
             if (!playerService.existsByUsername("testuser")) {
                 SignupRequest signupRequest = new SignupRequest();
