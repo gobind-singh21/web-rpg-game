@@ -2,6 +2,8 @@ package com.rpg_game.game.controller;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -47,14 +49,22 @@ public class AuthController {
      * Handles new player registrations.
      */
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
+    public ResponseEntity<Map<String, String>> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
         try {
             playerService.signupPlayer(signupRequest);
-            return new ResponseEntity<>("User registered successfully!!", HttpStatus.CREATED);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "User registered successfully!!");
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
         } catch (Exception e) {
-            return new ResponseEntity<>("Error during registration: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Error during registration: " + e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

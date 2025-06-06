@@ -26,19 +26,29 @@ export class RegisterComponent {
   get passwordControl() { return this.formData.get('password') as FormControl; }
 
   onSubmit(): void {
-    if (this.formData.valid) {
-      this.registerService.registerUser(this.formData.value).subscribe({
-        next: (response) => {
-          console.log('Registration successful', response);
-          this.navigateToLogin();
-        },
-        error: (error) => {
-          console.error('Registration failed', error);
-        }
-      });
-    } else {
+    if (this.formData.invalid) {
       console.log('Form is invalid');
+      return;
     }
+
+    const userData = {
+      username: this.formData.get('name')?.value, // Map 'name' to 'username'
+      email: this.formData.get('email')?.value,
+      password: this.formData.get('password')?.value
+    };
+
+    this.registerService.registerUser(userData).subscribe({
+      next: (response: any) => {
+        console.log('Registration successful:', response);
+        alert(response.message); // Display the success message from the backend
+        this.router.navigate(['/login']);
+      },
+      error: (error: any) => {
+        console.error('Registration failed:', error);
+        const errorMessage = error.error?.error || 'Unknown error';
+        alert(`Registration failed: ${errorMessage}`);
+      }
+    });
   }
 
   navigateToLogin(): void {
