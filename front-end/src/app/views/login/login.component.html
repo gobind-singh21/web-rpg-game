@@ -9,7 +9,7 @@
           <app-input
             id="email"
             type="email"
-            label="Email"
+            label="Email or Name"
             [control]="emailControl"
           ></app-input>
   
@@ -22,7 +22,7 @@
           ></app-input>
   
           <!-- Submit -->
-          <button type="submit" class="register-button">OK</button>
+          <button type="submit" class="register-button" (click)="onSubmit()">OK</button>
         </form>
 
         <!-- register -->
