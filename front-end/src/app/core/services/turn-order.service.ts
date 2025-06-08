@@ -5,16 +5,19 @@ import { Injectable, signal } from '@angular/core';
 })
 export class TurnOrderService {
 
-  turnOrder = signal<number[]>([]);
-  currentCharacter = signal<number>(0);
+  private _turnOrder = signal<number[]>([]);
+  private _currentCharacter = signal<number>(0);
+
+  public readonly turnOrder = this._turnOrder.asReadonly();
+  public readonly currentCharacter = this._currentCharacter.asReadonly();
 
   updateTurnOrder(newTurnOrder: number[]): void {
-    this.turnOrder.update(() => newTurnOrder);
+    this._turnOrder.update(() => newTurnOrder);
   }
 
   nextCharacter(): void {
-    this.currentCharacter.update(
-      (current) => current >= this.turnOrder().length ? 0 : current + 1
+    this._currentCharacter.update(
+      (current) => current >= this._turnOrder().length ? 0 : current + 1
     );
   }
 
