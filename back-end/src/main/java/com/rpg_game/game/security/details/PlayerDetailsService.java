@@ -29,7 +29,7 @@ public class PlayerDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
             player.getUsername(),
             player.getPasswordDigest(),
-            Collections.singletonList(new SimpleGrantedAuthority("USER_ROLE"))
+            Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
         );
     }
 }

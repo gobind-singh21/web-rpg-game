@@ -1,15 +1,24 @@
 package com.rpg_game.game.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Player {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +30,13 @@ public class Player {
 
   private String passwordDigest;
 
-  @ManyToMany
-  private List<Character> characters = new ArrayList<Character>();
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+    @JoinTable(
+        name = "player_characters", 
+        joinColumns = @JoinColumn(name = "player_id"), 
+        inverseJoinColumns = @JoinColumn(name = "character_id") 
+    )
+  private Set<Character> characters = new HashSet<Character>();
 
   public Player() {}
 
@@ -58,11 +72,21 @@ public class Player {
     this.passwordDigest = passwordDigest;
   }
 
-  public List<Character> getCharacters() {
+  public Set<Character> getCharacters() {
     return characters;
   }
 
-  public void setCharacters(List<Character> characters) {
+  public void setCharacters(Set<Character> characters) {
     this.characters = characters;
+  }
+
+  public void addCharacter(Character character) {
+    this.characters.add(character);
+    character.getPlayers().add(this);
+  }
+
+  public void removeCharacter(Character character) {
+    this.characters.remove(character);
+    character.getPlayers().remove(this);
   }
 }

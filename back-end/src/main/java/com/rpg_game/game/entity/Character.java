@@ -1,12 +1,18 @@
 package com.rpg_game.game.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rpg_game.game.types.CharacterClass;
 
 import jakarta.persistence.CascadeType;
@@ -14,10 +20,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Character implements Comparable<Character> {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +45,11 @@ public class Character implements Comparable<Character> {
   
   @OneToOne(cascade = CascadeType.ALL)
   private Ability ability = new Ability();
+
+  @ManyToMany(mappedBy = "characters") 
+  private Set<Player> players = new HashSet<>();
+
+  private Double characterCost = 0.0;
 
   public Character() {}
 
@@ -103,6 +116,22 @@ public class Character implements Comparable<Character> {
 
   public void setAbility(Ability ability) {
     this.ability = ability;
+  }
+
+  public Set<Player> getPlayers() {
+    return players;
+  }
+
+  public void setPlayers(Set<Player> players) {
+    this.players = players;
+  }
+
+  public Double getCharacterCost() {
+    return characterCost;
+  }
+
+  public void setCharacterCost(Double characterCost) {
+    this.characterCost = characterCost;
   }
 
   @Transient
