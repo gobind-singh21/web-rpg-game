@@ -6,7 +6,7 @@ import { CreatePasswordComponent } from "./views/create-password/create-password
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RegisterComponent, CreatePasswordComponent,],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

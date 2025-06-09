@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputComponent } from '../../shared/input/input.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-password',
-  imports: [ReactiveFormsModule, InputComponent],
+  imports: [ReactiveFormsModule, InputComponent, CommonModule],
   templateUrl: './create-password.component.html',
   styleUrl: './create-password.component.css'
 })

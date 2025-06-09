@@ -1,6 +1,6 @@
 Layout .register-container {
   position: relative;
-  min-height: 100vh;
+  min-height: 110vh;
   overflow: hidden;
   -webkit-text-stroke: 1px #000;
 }
