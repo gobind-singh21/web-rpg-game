@@ -1,27 +1,29 @@
 import { Injectable, signal } from '@angular/core';
-import { CharacterSnapshot } from '../../../types/characterSnapshot';
+import { CharacterSnapshot } from '../../shared/types/characterSnapshot';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharacterSnapService {
 
-  characterMap = signal<Map<number, CharacterSnapshot>>(new Map());
+  private _characterMap = signal<Map<number, CharacterSnapshot>>(new Map());
+
+  public readonly characterMap = this._characterMap.asReadonly();
 
   updateCharacterStat(characterId: number, characeterSnapshot: CharacterSnapshot): void {
-    this.characterMap.update((oldCharacterMap) => {
+    this._characterMap.update((oldCharacterMap) => {
       oldCharacterMap.set(characterId, characeterSnapshot);
       return oldCharacterMap;
     });
   }
 
   isCharacterDead(characterId: number): boolean {
-    return this.characterMap().get(characterId) != null
-    && this.characterMap().get(characterId)?.currentHealth == 0;
+    return this._characterMap().get(characterId) != null
+    && this._characterMap().get(characterId)?.currentHealth == 0;
   }
 
   addCharacter(characterId: number, characterSnapshot: CharacterSnapshot): void {
-    this.characterMap.update((oldCharacterMap) => oldCharacterMap.set(characterId, characterSnapshot));
+    this._characterMap.update((oldCharacterMap) => oldCharacterMap.set(characterId, characterSnapshot));
   }
 
   constructor() { }

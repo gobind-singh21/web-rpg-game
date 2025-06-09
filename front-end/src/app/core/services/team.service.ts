@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Team } from '../../../types/team';
+import { Team } from '../../shared/types/team';
 import { CharacterSnapService } from './character-stat.service';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { CharacterSnapService } from './character-stat.service';
 })
 export class TeamService {
 
-  characterSnaps = inject(CharacterSnapService);
+  private characterSnaps = inject(CharacterSnapService);
 
   team1 = signal<Team>({
     name: "",
