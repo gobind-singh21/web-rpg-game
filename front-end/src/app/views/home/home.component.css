@@ -9,9 +9,9 @@
     position: fixed;
     top: 0;    
     right: 0;
-    border: 2px solid black;
+    /* border: 2px solid black;
     height: 30px;
-    width: 30px;
+    width: 30px; */
 }
 .image{
     height: 100vh;

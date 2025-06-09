@@ -1,0 +1,30 @@
+<section class="wrapper">
+    <section class="material-design-hamburger">
+        <button class="material-design-hamburger__icon settingIcon" (click)="toggleMenu()"[ngClass]="{'rotated': isRotated}">
+          <!-- <span class="material-design-hamburger__layer settingIcon"></span> -->
+          <img class="settingIcon" src="../../../assets/images/setting.svg" alt="">
+        </button>
+      </section>
+  
+    <section class="menu" [class.menu--on]="menuOpen" [class.menu--off]="!menuOpen">
+        <div class="menubutton">
+            <div class="music">
+                <div class="text">Music</div>
+                <button>
+                    <div class="image12">
+                        <img src="../../../assets/images/music.svg" alt="">
+                    </div>
+                </button>
+            </div>
+            <div class="sound">
+                <div class="text">Sound</div>
+                <button>
+                    <div class="image12">
+                        <img src="../../../assets/images/sound.svg" alt="">
+                    </div>
+                </button>
+            </div>
+            <div class="logout">Logout</div>
+        </div>
+    </section>
+</section>
