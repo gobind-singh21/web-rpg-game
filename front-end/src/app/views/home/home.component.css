@@ -1,0 +1,139 @@
+
+.bodyclass{
+    min-height: 50vh;
+    background: url("../../../assets/images/homepageBackground.svg") no-repeat center center;
+    background-size: cover;
+    /* z-index: 0; */
+}
+.setting{
+    position: fixed;
+    top: 0;    
+    right: 0;
+    border: 2px solid black;
+    height: 30px;
+    width: 30px;
+}
+.image{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imageCenter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.runewarImg{
+    height: 20vh;
+}
+.runewarImg1{
+    height: 35vh;
+}
+
+.leftchar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    width: 27%;
+    margin-top: 20vh;
+}
+
+/* The container for the "left up" image */
+.leftUp {
+    width: auto; 
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0vh;
+}
+
+/* The container for the "left down" images */
+.leftDown {
+    display: flex;
+    flex-direction: row; /* Arranges the two images side-by-side */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Ensures z-index applies and allows it to be on top */
+    z-index: 1; /* Places this element on top of elements with a lower z-index (like .leftUp) */
+}
+
+/* Specific height for the image within .leftUp (characters_main 3.svg) */
+.leftUp .runewarImg {
+    height: 15vh;
+}
+
+/* Specific heights for the images within .leftDown (characters 2.svg and characters_main 2.svg) */
+.leftDown .runewarImg:nth-child(1) { /* Targets the first image in leftDown */
+    height: 30vh;
+}
+
+.leftDown .runewarImg:nth-child(2) { /* Targets the second image in leftDown */
+    height: 26vh;
+}
+.rightchar{
+    width: 27%;
+}
+.rightchar {
+    display: flex;
+    flex-direction: column; /* Stacks rightUp and rightDown initially */
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    top: 5vh;
+}
+
+/* The container for the "right up" image */
+.rightUp {
+    /* border: 2px solid black; /* Removing border for cleaner underlap */
+    width: auto; /* Let the content (image) define the width */
+    display: flex;
+    justify-content: center; /* Centers the image horizontally within .rightUp */
+
+    /* Positioning for "in between" and "underlap" */
+    position: absolute; /* Takes .rightUp out of the normal document flow */
+    z-index: 0; /* Places this element behind elements with a higher z-index (like .rightDown) */
+
+    /* Center horizontally */
+    left: 50%;
+    transform: translateX(-60%);
+
+    /* Position vertically for underlap */
+    top: -7vh; /* Adjust this value to fine-tune vertical placement and level of underlap */
+}
+
+/* The container for the "right down" images */
+.rightDown {
+    display: flex;
+    flex-direction: row; /* Arranges the two images side-by-side */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Ensures z-index applies and allows it to be on top */
+    z-index: 1; /* Places this element on top of elements with a lower z-index (like .rightUp) */
+}
+
+/* Specific heights for images within rightUp and rightDown */
+/* You'll need to set the desired heights for your right side images here.
+   I'm using example heights based on your HTML structure. */
+.rightUp .runewarImg {
+    height: 20vh; /* Example height for characters_main_right 2.svg */
+}
+
+.rightDown .runewarImg:nth-child(1) { /* Targets characters_main_right 3.svg */
+    height: 25vh; /* Example height */
+}
+
+.rightDown .runewarImg:nth-child(2) { /* Targets characters_main_right 4.svg */
+    height: 25vh; /* Example height */
+}
+
+/* The `.runewarImg1` class was provided but not used in your HTML, keeping it for completeness */
+.runewarImg1 {
+    height: 35vh;
+}

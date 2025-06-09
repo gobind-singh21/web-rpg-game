@@ -10,8 +10,8 @@ Layout .register-container {
   position: absolute;
   inset: 0;
   background: url("../../../assets/images/background.jpg") no-repeat center
-    center;
-  background-size: cover;
+    ;
+  /* background-size: cover; */
   z-index: 0;
 }
 

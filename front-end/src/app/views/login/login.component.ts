@@ -25,7 +25,7 @@ export class LoginComponent {
     private loginService: LoginService
   ) {
     this.formData = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       password: ['', Validators.required],
     });
   }
@@ -53,7 +53,7 @@ export class LoginComponent {
       this.loginService.loginUser(userData).subscribe({
         next: (response: any) => {
           console.log('Login successful:', response);
-          alert(response.message);
+          alert("You Have successfully Login");
           this.router.navigate(['/home']);
         },
         error: (error: any) => {
