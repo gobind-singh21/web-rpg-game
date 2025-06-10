@@ -39,13 +39,8 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final PlayerService playerService; 
     private final PasswordEncoder encoder; 
-    private final JwtTokenService jwtTokenService; 
     private final EmailService emailService; 
     private final JwtEncoder jwtEncoder; 
-
-    // From application.properties
-    // @Value("${rpg_game.app.frontendResetPasswordUrl}")
-    // private String frontendResetPasswordUrl;
 
     @Value("${rpg_game.app.jwtExpirationMs}") 
     private long jwtLoginExpirationMs;
@@ -56,13 +51,11 @@ public class AuthService {
     public AuthService(AuthenticationManager authenticationManager,
                        PlayerService playerService, 
                        PasswordEncoder encoder,
-                       JwtTokenService jwtTokenService,
                        EmailService emailService,
                        JwtEncoder jwtEncoder) { 
         this.authenticationManager = authenticationManager;
         this.playerService = playerService;
         this.encoder = encoder;
-        this.jwtTokenService = jwtTokenService;
         this.emailService = emailService;
         this.jwtEncoder = jwtEncoder;
     }
