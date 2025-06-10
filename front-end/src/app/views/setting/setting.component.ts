@@ -34,4 +34,8 @@ export class setting implements OnInit {
 
     
   }
+
+  onLogout() {
+    
+  }
 }

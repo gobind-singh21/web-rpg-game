@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+/* @import url(https://fonts.googleapis.com/css?family=Roboto); */
 
 .wrapper {
   height: 10vh;
@@ -259,12 +259,12 @@
 
 .logout {
     background-color: #8B4513;
-    border: 3px solid #FF8C00;
+    /* border: 3px solid #FF8C00; */
     color: #FF8C00;
     text-align: center;
-    padding: 15px 30px;
+    padding: 10px 30px;
     font-size: 20px;
-    font-weight: bold;
+    /* font-weight: bold; */
     border-radius: 10px;
     cursor: pointer;
     margin-top: 30px;
@@ -273,4 +273,20 @@
 
 .logout:hover {
     filter: brightness(1.2);
+}
+
+.image12{
+  background-color: #FF8C00;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+
+.music{
+  margin-bottom: 10px;
+}
+
+.icons{
+  /* margin: 10px;
+  padding: 10px; */
 }
