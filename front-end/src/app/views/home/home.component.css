@@ -1,180 +1,245 @@
+/* Main Layout */
+.bodyclass {
+  min-height: 50vh;
+  background: url("../../../assets/images/homepageBackground.svg") no-repeat
+    center center;
+  background-size: cover;
+}
 
-.bodyclass{
-    min-height: 50vh;
-    background: url("../../../assets/images/homepageBackground.svg") no-repeat center center;
-    background-size: cover;
-    /* z-index: 0; */
+/* Header Settings */
+.setting {
+  position: fixed;
+  top: 0;
+  right: 0;
 }
-.setting{
-    position: fixed;
-    top: 0;    
-    right: 0;
-    /* border: 2px solid black;
-    height: 30px;
-    width: 30px; */
+
+/* Main Image Container */
+.image {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.image{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.imageCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.imageCenter{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+/* Rune Wars Title Styling */
+
+
+.runewarImg1 {
+  margin: 0px 50px !important;
+  padding: 0px !important;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text !important;
+  -webkit-text-stroke: 3px #000;
+  display: inline-block;
 }
-.runeimg{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+.Runes1 {
+  height: 18vh;
+  background: linear-gradient(181.34deg, #1585b8 72.44%, #093b52 98.85%);
+  font-size: 15vh;
 }
-.runewarImg{
-    /* height: 20vh; */
+
+.Wars {
+  background: linear-gradient(180deg, #e50404 50.33%, #7f0202 100%);
+  font-size: 5vh;
+  height: 6vh;
 }
-.runewarImg1{
-    /* font-size: 13vh; */
-    margin: 0px 50px !important;
-    padding: 0px !important;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    background-clip: text !important;
-    -webkit-text-stroke: 3px #000;
-    display: inline-block;
-}
-.Runes1{
-    height: 18vh;
-    background: linear-gradient(181.34deg, #1585B8 72.44%, #093B52 98.85%);
+
+h1{
     font-size: 15vh;
+    color: transparent;
+    background: linear-gradient(181.34deg, #1585b8 72.44%, #093b52 98.85%);
+    background-clip: text;
+    -webkit-text-stroke: 3px #000;
+    margin: 0;
 }
-.Wars{
-    background: linear-gradient(180deg, #E50404 50.33%, #7F0202 100%);
-    font-size: 5vh;
-    height: 6vh;
+
+h2{
+    font-size: 12vh;
+    color: transparent;
+    background: linear-gradient(180deg, #e50404 50.33%, #7f0202 100%);
+    background-clip: text;
+    -webkit-text-stroke: 3px #000;
+    margin: 0;
 }
+
+/* Register Button Styling */
 .register-button {
-    min-width: 270px;
-    width: 100%;
-    height: 80px;
-    background: #57db2a;
-    border: 4px solid #2c6c31;
-    border-radius: 16px;
-    color: white;
-    /* font-size: 1.25rem; */
-    font-weight: bold;
-    -webkit-text-stroke: #000 0.2px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    margin: 1rem auto;
-    display: block;
-    opacity: 0.6;
-  }
-  
-  .register-button:hover {
-    transform: scale(1.05);
-    background: #57db2a;
-  }
+  width: 200%;
+  height: 56px;
+  background: #57db2a;
+  border: 4px solid #2c6c31;
+  border-radius: 16px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  -webkit-text-stroke: #000 0.2px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 1rem auto;
+  display: block;
+}
 
+.register-button:hover {
+  transform: scale(1.05);
+  background: #57db2a;
+}
+
+/* Character Images Base Styles */
+.runewarImg {
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Left Character Section */
 .leftchar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative; 
-    width: 27%;
-    margin-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 25%;
+  margin-top: 15vh;
 }
 
-/* The container for the "left up" image */
 .leftUp {
-    width: auto; 
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    z-index: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0vh;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0vh;
 }
 
-/* The container for the "left down" images */
 .leftDown {
-    display: flex;
-    flex-direction: row; /* Arranges the two images side-by-side */
-    justify-content: center;
-    align-items: center;
-    position: relative; /* Ensures z-index applies and allows it to be on top */
-    z-index: 1; /* Places this element on top of elements with a lower z-index (like .leftUp) */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* Specific height for the image within .leftUp (characters_main 3.svg) */
-.leftUp .runewarImg {
-    height: 15vh;
-}
-
-/* Specific heights for the images within .leftDown (characters 2.svg and characters_main 2.svg) */
-.leftDown .runewarImg:nth-child(1) { /* Targets the first image in leftDown */
-    height: 30vh;
-}
-
-.leftDown .runewarImg:nth-child(2) { /* Targets the second image in leftDown */
-    height: 26vh;
-}
-.rightchar{
-    width: 27%;
-}
+/* Right Character Section */
 .rightchar {
-    display: flex;
-    flex-direction: column; /* Stacks rightUp and rightDown initially */
-    justify-content: center;
-    align-items: center;
-    position: relative; 
-    top: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 25%;
+  margin-top : 15vh;
 }
 
-/* The container for the "right up" image */
 .rightUp {
-    /* border: 2px solid black; /* Removing border for cleaner underlap */
-    width: auto; /* Let the content (image) define the width */
-    display: flex;
-    justify-content: center; /* Centers the image horizontally within .rightUp */
-
-    /* Positioning for "in between" and "underlap" */
-    position: absolute; /* Takes .rightUp out of the normal document flow */
-    z-index: 0; /* Places this element behind elements with a higher z-index (like .rightDown) */
-
-    /* Center horizontally */
-    left: 50%;
-    transform: translateX(-60%);
-
-    /* Position vertically for underlap */
-    top: -7vh; /* Adjust this value to fine-tune vertical placement and level of underlap */
+  width: auto;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  transform: translateX(-60%);
+  top: -5vh;
 }
 
-/* The container for the "right down" images */
 .rightDown {
-    display: flex;
-    flex-direction: row; /* Arranges the two images side-by-side */
-    justify-content: center;
-    align-items: center;
-    position: relative; /* Ensures z-index applies and allows it to be on top */
-    z-index: 1; /* Places this element on top of elements with a lower z-index (like .rightUp) */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* Specific heights for images within rightUp and rightDown */
-/* You'll need to set the desired heights for your right side images here.
-   I'm using example heights based on your HTML structure. */
+/* Character Image Sizing */
+.leftUp .runewarImg {
+  height: 12vh;
+  width: auto;
+}
+
+.leftDown .runewarImg:nth-child(1) {
+  height: 16vh;
+  width: auto;
+}
+
+.leftDown .runewarImg:nth-child(2) {
+  height: 16vh;
+  width: auto;
+}
+
 .rightUp .runewarImg {
-    height: 20vh; /* Example height for characters_main_right 2.svg */
+  height: 12vh;
+  width: auto;
 }
 
-.rightDown .runewarImg:nth-child(1) { /* Targets characters_main_right 3.svg */
-    height: 25vh; /* Example height */
+.rightDown .runewarImg:nth-child(1),
+.rightDown .runewarImg:nth-child(2) {
+  height: 16vh;
+  width: auto;
 }
 
-.rightDown .runewarImg:nth-child(2) { /* Targets characters_main_right 4.svg */
-    height: 25vh; /* Example height */
+/* Mirror Effect for Right Side Characters */
+.rightchar img {
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
 }
 
+/* Responsive Design */
+@media (max-height: 768px) {
+  .leftUp .runewarImg {
+    height: 10vh;
+  }
+  .leftDown .runewarImg:nth-child(1) {
+    height: 20vh;
+  }
+  .leftDown .runewarImg:nth-child(2) {
+    height: 18vh;
+  }
+  .rightUp .runewarImg {
+    height: 14vh;
+  }
+  .rightDown .runewarImg {
+    height: 18vh;
+  }
+}
+
+@media (max-height: 576px) {
+  .leftUp .runewarImg {
+    height: 8vh;
+  }
+  .leftDown .runewarImg:nth-child(1) {
+    height: 16vh;
+  }
+  .leftDown .runewarImg:nth-child(2) {
+    height: 14vh;
+  }
+  .rightUp .runewarImg {
+    height: 12vh;
+  }
+  .rightDown .runewarImg {
+    height: 14vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftchar,
+  .rightchar {
+    width: 30%;
+  }
+  .register-button {
+    width: 80%;
+  }
+}
