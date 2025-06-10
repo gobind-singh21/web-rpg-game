@@ -1,0 +1,69 @@
+<div class="character-card-container">
+  <div
+    class="character-card"
+    [style.background-color]="getBackgroundColor() || '#d3d3d3'"
+    [style.width.px]="cardWidth"
+    [style.height.px]="cardHeight"
+  >
+    <!-- Character Image -->
+    <div class="character-image">
+      <img [src]="getImageUrl()" [alt]="character.base.name" />
+    </div>
+
+    <!-- Info Button -->
+    <button
+      class="info-button"
+      [class.active]="showInfo"
+      (click)="toggleInfo()"
+    >
+      <span><p class="info-button-p">i</p></span>
+      <!-- <span class="button-text">Info</span>
+      <mat-icon class="close-icon" *ngIf="showInfo">close</mat-icon>
+      <mat-icon class="open-icon" *ngIf="!showInfo">info</mat-icon> -->
+    </button>
+
+    <!-- Info Panel -->
+    <div class="character-info" [class.show]="showInfo">
+      <div class="info-header">
+        <span class="character-name">{{ getCharacterName() }}</span>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <!-- <span class="stat-icon health-icon">❤️</span> -->
+          <span class="stat-icon health-icon">
+            <mat-icon>favorite</mat-icon>
+          </span>
+          <span class="stat-value">{{ character.base.baseHealth }}</span>
+        </div>
+        <div class="stat-item">
+          <!-- <span class="stat-icon attack-icon">⚔️</span> -->
+          <span class="stat-icon attack-icon">
+            <mat-icon>gavel</mat-icon>
+          </span>
+          <span class="stat-value">{{ character.base.baseAttack }}</span>
+        </div>
+        <div class="stat-item">
+          <!-- <span class="stat-icon defense-icon">🛡️</span> -->
+          <span class="stat-icon defense-icon">
+            <mat-icon>shield</mat-icon>
+          </span>
+          <span class="stat-value">{{ character.base.baseDefense }}</span>
+        </div>
+        <div class="stat-item">
+          <!-- <span class="stat-icon speed-icon">⚡</span> -->
+          <span class="stat-icon speed-icon">
+            <mat-icon>bolt</mat-icon>
+          </span>
+          <span class="stat-value">{{ character.base.baseSpeed }}</span>
+        </div>
+      </div>
+
+      <!-- <div class="class-icon">☀️</div> -->
+      <div class="class-icon">
+        <mat-icon>stars</mat-icon>
+      </div>
+      <div class="character-class">{{ character.base.characterClass }}</div>
+    </div>
+  </div>
+</div>

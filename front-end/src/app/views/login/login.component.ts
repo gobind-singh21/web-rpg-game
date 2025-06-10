@@ -52,14 +52,13 @@ export class LoginComponent {
     if (this.formData.valid) {
       this.loginService.loginUser(userData).subscribe({
         next: (response: any) => {
+          localStorage.setItem('token', response.token);
           console.log('Login successful:', response);
-          alert("You Have successfully Login");
           this.router.navigate(['/home']);
         },
         error: (error: any) => {
           console.error('Login failed:', error);
           const errorMessage = error.error?.error || 'Unknown error';
-          alert(`Login failed: ${errorMessage}`);
         },
       });
     } else {

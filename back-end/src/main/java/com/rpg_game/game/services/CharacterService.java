@@ -11,8 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.rpg_game.game.entity.Player;
 import com.rpg_game.game.entity.Character;
+import com.rpg_game.game.entity.Player;
 import com.rpg_game.game.repositories.CharacterRepository;
 import com.rpg_game.game.repositories.PlayerRepository;
 

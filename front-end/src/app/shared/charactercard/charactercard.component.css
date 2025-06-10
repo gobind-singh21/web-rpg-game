@@ -1,0 +1,216 @@
+.character-card-container {
+  position: relative;
+  display: inline-block;
+  margin: 1vh;
+}
+
+.character-card {
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 3px solid #8b4513;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  width: 80px;
+  height: 500px;
+}
+
+.stat-icon mat-icon {
+  font-size: 1.6vw;
+  width: 2vw;
+  height: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.health-icon mat-icon {
+  color: #e50404;
+}
+
+.attack-icon mat-icon {
+  color: #f3bd1d;
+}
+
+.defense-icon mat-icon {
+  color: #2196f3;
+}
+
+.speed-icon mat-icon {
+  color: #e59710;
+}
+
+.class-icon mat-icon {
+  color: #ffd979;
+  font-size: 1.8vw;
+}
+
+.character-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  height: 100%;
+  image-rendering: auto;
+}
+
+.character-image img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.info-button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  border: 2px solid #333;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.info-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.1);
+}
+
+.info-button.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.character-info {
+  position: absolute;
+  top: -20px;
+  left: 100%;
+  margin-left: 15px;
+  background-color: #2c2c2c;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  min-width: 250px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  z-index: 20;
+}
+
+.character-info.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.character-info::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 30px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #2c2c2c;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.character-name {
+  font-size: 1.125rem;
+  font-weight: normal;
+  -webkit-text-stroke: #000 0.2px;
+  color: #ff6b35;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2vw;
+  margin-bottom: 12px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-icon {
+  font-size: 16px;
+}
+
+.health-icon {
+  color: #ff4444;
+}
+.attack-icon {
+  color: #ffaa00;
+}
+.defense-icon {
+  color: #4488ff;
+}
+.speed-icon {
+  color: #ffdd00;
+}
+
+.stat-value {
+  font-weight: normal;
+  font-size: 1.125rem;
+  -webkit-text-stroke: #000 0.2px;
+  color: white;
+}
+
+.info-button-p {
+
+  font-weight: bold;
+
+}
+
+.class-icon {
+  text-align: center;
+  font-size: 20px;
+  margin: 0px 0;
+}
+
+.character-class {
+  text-align: center;
+  font-size: 1.5rem;
+  -webkit-text-stroke: #000 0.2px;
+  font-weight: normal;
+  color: #ff6b35;
+}
+
+@media (max-width: 768px) {
+  .character-info {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 15px;
+  }
+
+  .character-info::before {
+    left: auto;
+    right: -8px;
+    border-left: 8px solid #2c2c2c;
+    border-right: none;
+  }
+}
