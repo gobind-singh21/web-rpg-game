@@ -3,9 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html, body {
     font-family: 'Gasoek One', sans-serif;
     font-weight: 100;
+    height: 100%;
 }
 
 p{
@@ -13,4 +14,5 @@ p{
     font-weight: 300;
     font-style: normal;
 }
+
 
