@@ -100,7 +100,10 @@ public class JWTSecurityConfiguration {
                 .requestMatchers(
                     "/api/auth/signup", 
                     "/api/auth/login", 
-                    "/api/test/public",  
+                    "/api/test/public", 
+                    "api/auth/forgot-password/request",
+                    "api/auth/reset-password-with-code",
+                    "api/characters/all",
                     "/api/test/public/action/basic", 
                     "/api/test/public/action/skill")
                 .permitAll()

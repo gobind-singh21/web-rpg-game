@@ -2,10 +2,9 @@ package com.rpg_game.game.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -37,6 +36,12 @@ public class Player {
         inverseJoinColumns = @JoinColumn(name = "character_id") 
     )
   private Set<Character> characters = new HashSet<Character>();
+
+  private Long passwordResetVersion = 0L;
+
+  private String resetCode;
+
+  private LocalDateTime resetCodeExpiry;
 
   public Player() {}
 
@@ -88,5 +93,29 @@ public class Player {
   public void removeCharacter(Character character) {
     this.characters.remove(character);
     character.getPlayers().remove(this);
+  }
+
+  public void setPasswordResetVersion(Long passwordResetVersion) {
+    this.passwordResetVersion = passwordResetVersion;
+  }
+
+  public Long getPasswordResetVersion() {
+    return passwordResetVersion;
+  }
+
+  public String getResetCode() {
+    return resetCode;
+  }
+
+  public void setResetCode(String resetCode) {
+      this.resetCode = resetCode;
+  }
+
+  public LocalDateTime getResetCodeExpiry() {
+      return resetCodeExpiry;
+  }
+
+  public void setResetCodeExpiry(LocalDateTime resetCodeExpiry) {
+      this.resetCodeExpiry = resetCodeExpiry;
   }
 }

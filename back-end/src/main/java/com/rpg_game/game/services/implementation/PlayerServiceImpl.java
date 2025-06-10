@@ -79,4 +79,9 @@ public class PlayerServiceImpl implements PlayerService {
     public boolean existsByEmail(String email) {
         return playerRepository.existsByEmail(email);
     }
+
+    @Override
+    public Player savePlayer(Player player) {
+        return playerRepository.save(player);
+    }
 }

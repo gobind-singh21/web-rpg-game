@@ -1,48 +1,40 @@
 package com.rpg_game.game.controller;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.JwsHeader;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rpg_game.game.entity.Player;
 import com.rpg_game.game.model.AuthResponse;
+import com.rpg_game.game.model.ForgotPasswordRequest;
+import com.rpg_game.game.model.ResetPasswordRequest;
 import com.rpg_game.game.model.LoginRequest;
 import com.rpg_game.game.model.SignupRequest;
+import com.rpg_game.game.services.AuthService;
 import com.rpg_game.game.services.PlayerService;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     
     private final PlayerService playerService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtEncoder jwtEncoder;
+    private final AuthService authService;
 
-    public AuthController(PlayerService playerService, AuthenticationManager authenticationManager, JwtEncoder jwtEncoder) {
+    public AuthController(PlayerService playerService, AuthService authService) {
         this.playerService = playerService;
-        this.authenticationManager = authenticationManager;
-        this.jwtEncoder = jwtEncoder;
+        this.authService = authService;
     }
 
     /**
@@ -74,42 +66,50 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                    loginRequest.getUsernameOrEmail(), 
-                    loginRequest.getPassword())
-            );
+            AuthResponse authResponse = authService.authenticatePlayer(loginRequest);
+            return ResponseEntity.ok(authResponse);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            Instant now = Instant.now();
-            long expiry = 3600L; // token expiry in one hour
-
-            JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();
-
-            String scope = authentication.getAuthorities().stream()
-                .map(a -> a.getAuthority())
-                .collect(Collectors.joining(" "));
-
-            JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("self")
-                .issuedAt(now)
-                .expiresAt(now.plus(expiry, ChronoUnit.SECONDS))
-                .subject(authentication.getName())
-                .claim("roles", scope)
-                .build();
-            
-            String token = jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue();
-
-            Integer playerId = playerService.findByUsername(authentication.getName())
-                                                .map(Player::getId)
-                                                .orElse(null);
-
-            return ResponseEntity.ok(new AuthResponse(authentication.getName(), token, playerId));
-                                            
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(new AuthResponse("Login Failed", "Invalid Credentials", null), HttpStatus.UNAUTHORIZED);
+        } catch (RuntimeException e) { 
+            return new ResponseEntity<>(new AuthResponse("Login Failed", e.getMessage(), null), HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @PostMapping("/forgot-password/request")
+    public ResponseEntity<Map<String, String>> requestPasswordReset(@Valid @RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+        try {
+            authService.initiatePasswordReset(forgotPasswordRequest.getEmail());
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "If an account with that email exists, a password reset link has been sent.");
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            logger.error("Error processing password reset request for email {}: {}", forgotPasswordRequest.getEmail(), e.getMessage());
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Error processing password reset request. Please try again later.");
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
+    /**
+     * Endpoint to reset the player's password using a 6-digit code.
+     */
+    @PostMapping("/reset-password-with-code")
+    public ResponseEntity<Map<String, String>> resetPasswordWithCode(@Valid @RequestBody ResetPasswordRequest resetPasswordRequest) {
+        try {
+            authService.resetPasswordWithCode(resetPasswordRequest);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Password has been successfully reset!");
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            logger.warn("Password reset failed for email {}: {}", resetPasswordRequest.getEmail(), e.getMessage());
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage()); 
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error("Error resetting password for email {}: {}", resetPasswordRequest.getEmail(), e.getMessage(), e);
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "An unexpected error occurred during password reset. Please try again later.");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

@@ -47,4 +47,12 @@ public interface PlayerService {
      * @return true if the email exists, else false.
      */
     boolean existsByEmail(String email);
+
+    /**
+     * To save the changes in the player entity.
+     * 
+     * @param player The player that needs to be updated.
+     * @return Save and return new details in the already existing player.
+     */
+    Player savePlayer(Player player);
 }
