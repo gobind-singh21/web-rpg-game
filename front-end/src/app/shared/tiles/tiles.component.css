@@ -1,0 +1,56 @@
+.tilesbody{
+    display: block;
+    border-bottom: 2px solid whitesmoke;
+    margin: 10px 0px;
+    padding: 0;
+    width: 100%;
+    height: 30%;
+    min-width: 80px;
+    min-height: 80px;
+    border-radius: 0%;
+}
+.innertiles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.tilescontainer{
+    height: 100%;
+    /* border: 2px solid rebeccapurple; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    /* height: 150px; */
+}
+.imagecontainer{
+    width: 30%;
+    height: 90%;
+    background-color: aliceblue;
+    border: 3px solid #81460F;
+    border-radius: 20%;
+}
+
+.textcontainer{
+    width: 50%;
+    padding: 10px;
+    color: white;
+}
+.tilestitle{
+    width: 100%;
+    color:  #E59710;
+}
+.desc{
+    font-size: 13px;
+    font-weight: lighter !important;
+}
+.deletecontainer{
+    width: 15%;
+}
+.deletecontainer img{
+    bottom: 0;
+    height: 50px;
+    width: 50px;
+}

@@ -1,0 +1,90 @@
+.bodyclass, :root{
+    margin: 0px;
+    padding: 0px;
+    min-height: 100vh;
+    background: url("../../../assets/images/homepageBackground.svg")no-repeat center;
+    background-size: cover;
+    display: flex;
+}
+.innerbox12{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70vh;
+    margin-top: 20vh;
+}
+.commonInner{
+    /* width: 30%; */
+    height: 100%;
+    margin: 1rem;
+}
+.team{
+    background-color: rgba(0, 0, 0, 0.5);
+    /* opacity: 0.5; */
+    height: 100%;
+    border: 1px solid white;
+    width: 30%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.middle{
+    width: 20%;
+    /* border: 3px solid red; */
+}
+.startButton{
+    min-width: 270px;
+    width: 100%;
+    height: 80px;
+    background: #57db2a;
+    border: 4px solid #2c6c31;
+    border-radius: 16px;
+    color: white;
+    /* font-size: 1.25rem; */
+    font-weight: bold;
+    -webkit-text-stroke: #000 0.2px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin: 1rem auto;
+    display: block;
+    opacity: 0.6;
+
+}
+.startButton:hover{
+    transform: scale(1.05);
+    background: #57db2a;
+}
+.teambox{
+    width: 50%;
+    font-size: 20px;
+    background: #5D3E2C;
+    border: 1px solid #EE680B;
+
+    /* font-family: Gasoek One; */
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 100%;
+    letter-spacing: 4%;
+    text-align: center;
+
+    color: #EE680B;
+
+    border-radius: 10px;
+    padding:10px;
+    opacity: 1.5;
+}
+.cardsContainer {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cardsInner{
+    width: 80%;
+    height: 100%;
+}

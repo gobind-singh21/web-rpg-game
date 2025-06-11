@@ -8,10 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { Character } from './shared/types/character';
 import { CharacterService } from './core/services/character.service';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatIconModule, CommonModule],
+  imports: [RouterOutlet, MatIconModule, CommonModule, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
