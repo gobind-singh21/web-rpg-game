@@ -41,13 +41,13 @@ export class CreatePasswordComponent implements OnInit {
         if (!this.userEmail) {
           console.warn('Email not found in route parameters. Cannot proceed with password reset.');
           this.error = 'Missing email for password reset. Please start the process again.';
-          // this.router.navigate(['/forgot-password']);
+          this.router.navigate(['/forgot-password']);
         }
       });
   }
 
-  passwordMatchValidator(group: FormGroup) {
-    const password = group.get('password')?.value;
+  passwordMatchValidator(group: AbstractControl): { [key: string]: boolean } | null {
+    const password = group.get('newPassword')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
@@ -57,14 +57,12 @@ export class CreatePasswordComponent implements OnInit {
   get confirmPasswordControl() { return this.formData.get('confirmPassword') as FormControl; }
   
   onSubmit(): void {
-
     this.message = null;
     this.error = null;
 
     if (this.formData.hasError('passwordMismatch')) {
       this.error = 'Passwords do not match';
       console.log('Frontend validation error: Passwords do not match');
-      return;
     }
 
     if (this.formData.valid && this.userEmail) {
