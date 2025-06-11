@@ -34,13 +34,47 @@
 .middle{
     width: 20%;
     /* border: 3px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+.versus{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.versus img{
+    height: 100px;
+    width: 100px;
+}
+.v-div{
+    font-size: 15vh;
+    color: transparent;
+    background: linear-gradient(180deg, #1585B8 52.4%, #093B52 99.52%);
+    background-clip: text;
+    -webkit-text-stroke: 3px #000;
+    margin: 0;
+}
+.s-div{
+    font-size: 15vh;
+    color: transparent;
+    background: linear-gradient(180deg, rgba(229, 4, 4, 0.8) 27.88%, #8A0D0D 96.15%);
+    
+    background-clip: text;
+    -webkit-text-stroke: 3px #000;
+    margin: 0;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    height: 50%;
 }
 .startButton{
-    min-width: 270px;
-    width: 100%;
+    /* min-width: 270px; */
+    width: 80%;
     height: 80px;
     background: #57db2a;
-    border: 4px solid #2c6c31;
+    border: 10px double #000000;
     border-radius: 16px;
     color: white;
     /* font-size: 1.25rem; */
@@ -51,11 +85,15 @@
     margin: 1rem auto;
     display: block;
     opacity: 0.6;
-
 }
 .startButton:hover{
     transform: scale(1.05);
     background: #57db2a;
+}
+.startButton h1{
+    margin: 0;
+    padding: 0;
+    font-size: 38px;
 }
 .teambox{
     width: 50%;
@@ -87,4 +125,14 @@
 .cardsInner{
     width: 80%;
     height: 100%;
+}
+.addButton{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.addButton button{
+    width: 40px;
+    margin: 10px;
 }
