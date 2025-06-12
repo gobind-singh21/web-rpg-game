@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { baseUrl, forgotPasswordRequest } from '../../shared/urls/urls';
 
 @Component({
   selector: 'app-forgot-password',
@@ -35,7 +36,7 @@ export class ForgotPasswordComponent {
       const email = this.formData.value.email;
       console.log('Requesting password reset for email:', email);
 
-      this.http.post('http://localhost:8080/api/auth/forgot-password/request', {email: email})
+      this.http.post(baseUrl+forgotPasswordRequest, {email: email})
         .subscribe({
           next: (response: any) => {
             if (response.message) {

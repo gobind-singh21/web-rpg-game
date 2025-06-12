@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { InputComponent } from '../../shared/input/input.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { baseUrl, resetPasswordWithCode } from '../../shared/urls/urls';
 
 @Component({
   selector: 'app-create-password',
@@ -74,7 +75,7 @@ export class CreatePasswordComponent implements OnInit {
         newPassword: this.formData.value.newPassword
       };
 
-      this.http.post('http://localhost:8080/api/auth/reset-password-with-code', requestBody)
+      this.http.post(baseUrl+resetPasswordWithCode, requestBody)
         .subscribe({
           next: (response: any) => {
             this.message = response.message;
