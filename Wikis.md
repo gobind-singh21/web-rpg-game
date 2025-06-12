@@ -4,20 +4,20 @@ Welcome to the RuneWars project Wiki\! This page provides in-depth information a
 
 ## Table of Contents
 
-1.  [Project Overview](https://www.google.com/search?q=%23project-overview)
-2.  [Architecture Deep Dive](https://www.google.com/search?q=%23architecture-deep-dive)
-      * [Backend Architecture](https://www.google.com/search?q=%23backend-architecture)
-      * [Frontend Architecture](https://www.google.com/search?q=%23frontend-architecture)
-      * [Communication Flow](https://www.google.com/search?q=%23communication-flow)
-3.  [Core Game Mechanics Explained](https://www.google.com/search?q=%23core-game-mechanics-explained)
-      * [Turn Order & Speed](https://www.google.com/search?q=%23turn-order--speed)
-      * [Skill Point Economy](https://www.google.com/search?q=%23skill-point-economy)
-      * [Character Attributes & Formulas](https://www.google.com/search?q=%23character-attributes--formulas)
-      * [Buffs & Debuffs](https://www.google.com/search?q=%23buffs--debuffs)
-4.  [API Endpoints Reference](https://www.google.com/search?q=%23api-endpoints-reference)
-5.  [Database Schema Overview](https://www.google.com/search?q=%23database-schema-overview)
-6.  [Development Workflow & Contribution](https://www.google.com/search?q=%23development-workflow--contribution)
-7.  [Common Issues & Troubleshooting](https://www.google.com/search?q=%23common-issues--troubleshooting)
+1.  [Project Overview](#1-project-overview)
+2.  [Architecture Deep Dive](#2-architecture-deep-dive)
+      * [Backend Architecture](#backend-architecture)
+      * [Frontend Architecture](#frontend-architecture)
+      * [Communication Flow](#communication-flow)
+3.  [Core Game Mechanics Explained](#3-core-game-mechanics-explained)
+      * [Turn Order & Speed](#turn-order--speed)
+      * [Skill Point Economy](#skill-point-economy)
+      * [Character Attributes & Formulas](#character-attributes--formulas)
+      * [Buffs & Debuffs](#buffs--debuffs)
+4.  [API Endpoints Reference](#4-api-endpoints-reference)
+5.  [Database Schema Overview](#5-database-schema-overview)
+6.  [Development Workflow & Contribution](#6-development-workflow--contribution)
+7.  [Common Issues & Troubleshooting](#7-common-issues--troubleshooting)
 
 -----
 
@@ -70,7 +70,7 @@ The frontend communicates with the backend primarily via **RESTful API calls ove
 
   * **Shared Pool:** All characters on a team draw from and contribute to a single "Skill Point" pool.
   * **Generation:** Performing a `Basic Attack` successfully grants the team 1 Skill Point.
-  * **Consumption:** Using a `Skill` consumes a specific amount of Skill Points from the shared pool.
+  * **Consumption:** Using a `Skill` consumes a specific amount of Skill Points from the shared pool (If skill points are zero characters can't use `Skill` and have to generate by using `Basic Attack`).
   * **Cap:** The Skill Point pool cannot exceed 5 points.
   * **Strategic Choice:** Teams must decide whether to save points for powerful skills or to generate points through basic attacks, weighing immediate damage/healing against future potential.
 
@@ -116,23 +116,23 @@ The backend exposes a comprehensive set of RESTful API endpoints. All endpoints 
 
 ### Game Sessions (`/api/game`)
 
-  * `POST /api/game/start`: Initiate a new game session.
-  * `GET /api/game/state`: Get the current game state for the active session.
-  * `POST /api/game/action`: Submit a character action (e.g., basic attack, use skill).
-      * **Request Body:** `{ "characterId": "UUID", "actionType": "BASIC_ATTACK" | "SKILL", "targetId": "UUID", "skillId": "UUID_if_skill_action" }`
-
-*(This is not an exhaustive list. Refer to the backend codebase for all available endpoints and their exact payload/response structures.)*
+  * `POST /api/game/start`: Gets the character in both the teams and makes initial turn order and returns which character plays first.
+    * **Request body:** `{"team1": (List of character IDs of team 1), "team2": (List of characterIds of team2)}`
+  * `POST /api/game/action/basic`: Submit a character's **BASIC ATTACK** i.e. a single target attack
+    * **Request body:** `{"currentCharacterId": (id of current character taking the turn), "targetId": (id of character being targeted), "currentLineup": (hashmap of lineup in order of which they appear in turn order, map of characterId to its snapshot)}`
+  * `POST /api/game/action/skill`: Submit a character's **SKILL** i.e. character specific ability
+    * **Request body:** `{"currentCharacterId": (id of current character taking the turn), "currentLineup": (hashmap of lineup in order of which they appear in turn order, map of characterId to its snapshot)}`
 
 ## 5\. Database Schema Overview
 
 The database (MySQL/PostgreSQL) stores all persistent game data. Key tables include:
 
-  * **`users`**: User authentication details (username, hashed password, email, roles).
-  * **`characters`**: Stores character templates or instances, including attributes (health, attack, speed, defense), class, and unique skills.
-  * **`game_sessions`**: Tracks active game instances, linking teams and current state.
-  * **`teams`**: Defines the teams within a game session, linking to characters.
-  * **`battle_log_entries`**: Records actions and events during a battle for the battle log feature.
-  * **`battle_pass_status`**: Tracks user participation and progress in the battle pass.
+  * **`player`**: User authentication details (username, hashed password, email, roles).
+  * **`character`**: Stores character templates or instances, including attributes (health, attack, speed, defense), class, and unique skills.
+  * **`ability`**: Stores abilities which are mapped to `character` using `One to One` relationship.
+  * **`effect`**: Stores buffs and debuffs given by `abilitiy` using a `Many to Many` relationship.
+  * **`ability_effects`**: Maps abilities with effects.
+  * **`player_characters`**: Maps the characters owned by the player.
 
 *(Detailed schema diagrams can be added as separate wiki pages if needed).*
 
