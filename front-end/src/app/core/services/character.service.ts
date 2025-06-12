@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Character } from '../../shared/types/character';
 import { map, Observable, tap } from 'rxjs';
+import { baseUrl, charactersAll } from '../../shared/urls/urls';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
-  private charactersURL = 'http://localhost:8080/api/characters/all';
+  private charactersURL = baseUrl+charactersAll;
 
   constructor(private http: HttpClient) {}
 
