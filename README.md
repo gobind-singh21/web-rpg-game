@@ -6,16 +6,16 @@ RuneWars is a strategic turn-based role-playing game where two opposing teams cl
 
 ## Table of Contents
 
-  * [Core Concept](https://www.google.com/search?q=%23core-concept)
-  * [Key Features](https://www.google.com/search?q=%23key-features)
-  * [What's New](https://www.google.com/search?q=%23whats-new)
-  * [Technologies Used](https://www.google.com/search?q=%23technologies-used)
-  * [Getting Started](https://www.google.com/search?q=%23getting-started)
-      * [Prerequisites](https://www.google.com/search?q=%23prerequisites)
-      * [Environment Variables for Secrets](https://www.google.com/search?q=%23environment-variables-for-secrets)
-      * [Running the Backend](https://www.google.com/search?q=%23running-the-backend)
-      * [Running the Frontend](https://www.google.com/search?q=%23running-the-frontend)
-  * [Future Plans](https://www.google.com/search?q=%23future-plans)
+  * [Core Concept](#core-concept)
+  * [Key Features](#key-features)
+  * [What's New](#whats-new)
+  * [Technologies Used](#technologies-used)
+  * [Getting Started](#getting-started)
+      * [Prerequisites](#prerequisites)
+      * [Environment Variables for Secrets](#environment-variables-for-secrets)
+      * [Running the Backend](#running-the-backend)
+      * [Running the Frontend](#running-the-frontend)
+  * [Future Plans](#future-plans)
 
 ## Core Concept
 
@@ -97,11 +97,13 @@ Before you begin, ensure you have the following installed:
     ```bash
     npm install -g @angular/cli
     ```
-  * **Database:** A running instance of MySQL or PostgreSQL. You'll need to configure your `application.properties` to connect to it.
+  * **Database:** A running instance of PostgreSQL. You'll need to configure your `application.properties` to connect to it.
   
-  To create the necessary database for the backend, you can use the following command in your db_setup.sh script (assuming you have PostgreSQL installed and configured):
+  To create the necessary database for the backend, you can use the following command in your db_setup.sh script or directly run the script (assuming you have PostgreSQL installed and configured):
   ```bash
     sudo -u postgres psql -c 'create database webgame;'
+    # OR if you want to run the script
+    bash db_setup.sh
   ```
 
 ### Environment Variables for Secrets
@@ -136,6 +138,8 @@ To run the application securely, you must set the following environment variable
 2.  Build and run the Spring Boot application using Gradle:
     ```bash
     ./gradlew bootRun
+    # OR
+    gradle bootRun
     ```
     The backend will typically start on `http://localhost:8080`.
 
