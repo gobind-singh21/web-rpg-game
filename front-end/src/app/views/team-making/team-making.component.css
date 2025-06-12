@@ -135,4 +135,5 @@
 .addButton button{
     width: 40px;
     margin: 10px;
+    cursor: pointer;
 }
