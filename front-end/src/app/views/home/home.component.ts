@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { setting } from '../setting/setting.component';
 import { Router } from '@angular/router';
+import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
 
 @Component({
   selector: 'home',
@@ -9,7 +10,11 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loggedInCheckService: LoggedInCheckService) {
+    if(!loggedInCheckService.isAlreadyLoggedIn()) {
+      router.navigate(["/login"]);
+    }
+  }
   startPlay(){
     // alert("Play Started")
     console.log("Play Begin");

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { InputComponent } from "../../shared/input/input.component";
 import { Router } from '@angular/router';
 import { RegisterService } from '../../core/services/register.service';
+import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
 
 @Component({
   selector: 'app-register',
@@ -13,12 +14,15 @@ import { RegisterService } from '../../core/services/register.service';
 export class RegisterComponent {
   formData: FormGroup;
 
-  constructor(private fb: FormBuilder, private  router: Router, private registerService: RegisterService) {
+  constructor(private fb: FormBuilder, private  router: Router, private registerService: RegisterService, private loggedInCheckService: LoggedInCheckService) {
     this.formData = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
       password: ['', Validators.required],
     });
+    if (loggedInCheckService.isAlreadyLoggedIn()) {
+      router.navigate(["/home"]);
+    }
   }
 
   get emailControl() { return this.formData.get('email') as FormControl; }
@@ -40,8 +44,8 @@ export class RegisterComponent {
     this.registerService.registerUser(userData).subscribe({
       next: (response: any) => {
         console.log('Registration successful:', response);
-        alert(response.message); // Display the success message from the backend
-        this.router.navigate(['/login']);
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/home']);
       },
       error: (error: any) => {
         console.error('Registration failed:', error);

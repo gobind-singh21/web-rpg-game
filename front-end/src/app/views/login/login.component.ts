@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../core/services/login.service';
+import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +23,16 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private loggedInCheckService: LoggedInCheckService
   ) {
     this.formData = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', Validators.required],
     });
+    if (loggedInCheckService.isAlreadyLoggedIn()) {
+      router.navigate(["/home"])
+    }
   }
 
   get emailControl() {

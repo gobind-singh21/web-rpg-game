@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'setting',
@@ -19,7 +20,7 @@ export class setting implements OnInit {
     return this.menuOpen;
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,10 +33,11 @@ export class setting implements OnInit {
 
     this.isRotated = !this.isRotated;
 
-    
+
   }
 
   onLogout() {
-    
+    localStorage.removeItem("token");
+    this.router.navigate(["/login"]);
   }
 }

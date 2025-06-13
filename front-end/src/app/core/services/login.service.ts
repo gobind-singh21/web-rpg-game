@@ -7,7 +7,7 @@ import { baseUrl, loginEndPoint } from '../../shared/urls/urls';
   providedIn: 'root'
 })
 export class LoginService {
-  
+
   private apiURl  = baseUrl+loginEndPoint;
 
   constructor(private http : HttpClient) { }
