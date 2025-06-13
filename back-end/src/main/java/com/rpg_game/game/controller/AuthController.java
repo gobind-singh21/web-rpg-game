@@ -7,12 +7,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
 
 import com.rpg_game.game.model.AuthResponse;
+import com.rpg_game.game.model.ChangePasswordRequest;
 import com.rpg_game.game.model.ForgotPasswordRequest;
 import com.rpg_game.game.model.ResetPasswordRequest;
 import com.rpg_game.game.model.LoginRequest;
@@ -112,4 +116,45 @@ public class AuthController {
         }
     }
 
+    @PutMapping("/change-password")
+    public ResponseEntity<Map<String, String>> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
+
+            playerService.changePassword(username, changePasswordRequest);
+
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Password changed successfully");
+            return ResponseEntity.ok(response);
+        } catch (org.springframework.security.authentication.BadCredentialsException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            logger.error("Error changing password for user: {}", SecurityContextHolder.getContext().getAuthentication().getName(), e);
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "An unexpected error occurred while changing password: " + e.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Handles logout requests. 
+     * For JWT-based authentication, this primarily informs the client to discard the token. 
+     * It also explicitly clears the SecurityContextHolder for the current request.
+     * This endpoint should be protected, requiring a valid JWT.
+     */
+    @PostMapping("/logout")
+    public ResponseEntity<Map<String, String>> logoutUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = (authentication != null && authentication.isAuthenticated()) ? authentication.getName() : "unauthenticated user";
+        logger.info("Logout endpoint hit by user: {}. Instructing client to discard JWT.", username);
+
+        SecurityContextHolder.clearContext();
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Logout request processed. Please discard your JWT on the client side.");
+        return ResponseEntity.ok(response);
+    }
 }

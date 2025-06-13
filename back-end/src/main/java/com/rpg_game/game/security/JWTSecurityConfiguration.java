@@ -101,9 +101,8 @@ public class JWTSecurityConfiguration {
                     "/api/auth/signup", 
                     "/api/auth/login", 
                     "/api/test/public", 
-                    "api/auth/forgot-password/request",
-                    "api/auth/reset-password-with-code",
-                    "api/characters/all",
+                    "/api/auth/forgot-password/request",
+                    "/api/auth/reset-password-with-code",
                     "/api/test/public/action/basic", 
                     "/api/test/public/action/skill")
                 .permitAll()

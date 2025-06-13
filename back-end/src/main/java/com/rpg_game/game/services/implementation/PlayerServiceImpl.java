@@ -2,6 +2,7 @@ package com.rpg_game.game.services.implementation;
 
 import com.rpg_game.game.entity.Player;
 import com.rpg_game.game.entity.Character;
+import com.rpg_game.game.model.ChangePasswordRequest;
 import com.rpg_game.game.model.SignupRequest;
 import com.rpg_game.game.model.SignupResponse;
 import com.rpg_game.game.repositories.PlayerRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import com.rpg_game.game.services.PlayerService;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -130,5 +132,20 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Player savePlayer(Player player) {
         return playerRepository.save(player);
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(String username, ChangePasswordRequest request) {
+        Player player = playerRepository.findByUsername(username)
+                            .orElseThrow(() -> new RuntimeException("Authenticated player not found. This should not happen."));
+        
+        if (!passwordEncoder.matches(request.getCurrentPassword(), player.getPasswordDigest())) {
+            throw new BadCredentialsException("Current password does not match.");
+        }
+
+        player.setPasswordDigest(passwordEncoder.encode(request.getNewPassword()));
+        
+        playerRepository.save(player);
     }
 }

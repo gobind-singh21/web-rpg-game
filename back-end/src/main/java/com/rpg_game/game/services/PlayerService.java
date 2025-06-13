@@ -3,6 +3,7 @@ package com.rpg_game.game.services;
 import java.util.Optional;
 
 import com.rpg_game.game.entity.Player;
+import com.rpg_game.game.model.ChangePasswordRequest;
 import com.rpg_game.game.model.SignupRequest;
 import com.rpg_game.game.model.SignupResponse;
 
@@ -56,4 +57,12 @@ public interface PlayerService {
      * @return Save and return new details in the already existing player.
      */
     Player savePlayer(Player player);
+
+    /**
+     * To change the password of the current user.
+     * 
+     * @param username The username who wants to change his password.
+     * @param request The changePasswordDTO 
+     */
+    void changePassword(String username, ChangePasswordRequest request);
 }
