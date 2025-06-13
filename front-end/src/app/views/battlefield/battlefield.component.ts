@@ -5,10 +5,11 @@ import { setting } from "../setting/setting.component";
 import { TeamStateService } from '../../core/services/team-state.service';
 import { Router } from '@angular/router';
 import { TeamMaking } from '../team-making/team-making.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-battlefield',
-  imports: [CharactercardComponent, setting],
+  imports: [CharactercardComponent, setting, CommonModule],
   templateUrl: './battlefield.component.html',
   styleUrl: './battlefield.component.css'
 })
@@ -22,6 +23,10 @@ export class BattlefieldComponent implements OnInit {
   team2Characters: Character[] = [];
 
   constructor(private router: Router, private TeamStateService : TeamStateService){}
+
+
+  //api call - battle-start 
+  //only characterid , snapshot is exchanged everytime 
 
 
   ngOnInit() {

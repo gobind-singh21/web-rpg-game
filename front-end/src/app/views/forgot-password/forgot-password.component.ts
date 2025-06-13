@@ -60,4 +60,9 @@ export class ForgotPasswordComponent {
       console.log('Form is invalid');
     }
   }
+
+  navigateToLogin(): void {
+    console.log('Navigate to login');
+    this.router.navigate(['/login']);
+  }
 }

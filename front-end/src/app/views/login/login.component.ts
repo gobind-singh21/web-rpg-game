@@ -73,6 +73,6 @@ export class LoginComponent {
 
   NavigateToRegister(): void {
     console.log('Navigate to Register');
-    this.router.navigate(['/team-making']);
+    this.router.navigate(['/register']);
   }
 }

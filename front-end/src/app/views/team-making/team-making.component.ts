@@ -86,9 +86,11 @@ navigateToBattle() {
 
     if (teamNumber === 1) {
       this.team1Characters.push(character);
+      console.log('Team 1 characters:', this.team1Characters);
       this.showCharacterListForTeam1 = false;
     } else {
       this.team2Characters.push(character);
+      console.log('Team 2 characters:', this.team2Characters);
       this.showCharacterListForTeam2 = false;
     }
 
