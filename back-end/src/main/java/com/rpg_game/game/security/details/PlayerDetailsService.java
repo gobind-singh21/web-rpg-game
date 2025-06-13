@@ -9,21 +9,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.rpg_game.game.entity.Player;
-import com.rpg_game.game.services.PlayerService;
+import com.rpg_game.game.repositories.PlayerRepository;
 
 @Service
 public class PlayerDetailsService implements UserDetailsService {
     
-    private final PlayerService playerService;
+    private final PlayerRepository playerRepository;
 
-    public PlayerDetailsService(PlayerService playerService) {
-        this.playerService = playerService;
+    public PlayerDetailsService(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Player player = playerService.findByUsername(username)
-            .orElseGet(() -> playerService.findByEmail(username)
+        Player player = playerRepository.findByUsername(username)
+            .orElseGet(() -> playerRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Player not found with username or email: " + username)));
         
         return new org.springframework.security.core.userdetails.User(

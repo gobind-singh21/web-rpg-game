@@ -3,17 +3,32 @@ package com.rpg_game.game.services.implementation;
 import com.rpg_game.game.entity.Player;
 import com.rpg_game.game.entity.Character;
 import com.rpg_game.game.model.SignupRequest;
+import com.rpg_game.game.model.SignupResponse;
 import com.rpg_game.game.repositories.PlayerRepository;
+import com.rpg_game.game.security.details.PlayerDetailsService;
 import com.rpg_game.game.repositories.CharacterRepository;
+import org.springframework.security.core.Authentication;
 import com.rpg_game.game.services.PlayerService;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwsHeader;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -21,16 +36,23 @@ public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
     private final PasswordEncoder passwordEncoder;
     private final CharacterRepository characterRepository;
+    private final JwtEncoder jwtEncoder;
+    private final PlayerDetailsService playerDetailsService;
 
-    public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, CharacterRepository characterRepository) {
+    @Value("${rpg_game.app.jwtExpirationMs}") 
+    private long jwtLoginExpirationMs;
+
+    public PlayerServiceImpl(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, CharacterRepository characterRepository, JwtEncoder jwtEncoder, PlayerDetailsService playerDetailsService) {
         this.playerRepository = playerRepository;
         this.passwordEncoder = passwordEncoder;
         this.characterRepository = characterRepository;
+        this.jwtEncoder = jwtEncoder;
+        this.playerDetailsService = playerDetailsService;
     }
 
     @Override
     @Transactional
-    public Player signupPlayer(SignupRequest signupRequest) {
+    public SignupResponse signupPlayer(SignupRequest signupRequest) {
         if (playerRepository.existsByUsername(signupRequest.getUsername())) {
             throw new IllegalArgumentException("Username is already taken!");
         }
@@ -49,7 +71,32 @@ public class PlayerServiceImpl implements PlayerService {
         // To assign free characters
         // assignFreeCharactersToPlayer(savedPlayer);
 
-        return savedPlayer;
+        UserDetails userDetails = playerDetailsService.loadUserByUsername(savedPlayer.getUsername());
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        Instant now = Instant.now();
+        long expiry = jwtLoginExpirationMs / 1000;
+
+        JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();
+
+        String scope = userDetails.getAuthorities().stream() 
+            .map(a -> a.getAuthority())
+            .collect(Collectors.joining(" "));
+
+        JwtClaimsSet claims = JwtClaimsSet.builder()
+            .issuer("self")
+            .issuedAt(now)
+            .expiresAt(now.plus(expiry, ChronoUnit.SECONDS))
+            .subject(userDetails.getUsername()) 
+            .claim("roles", scope)
+            .build();
+
+        String token = jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue();
+
+        return new SignupResponse(savedPlayer.getId(), savedPlayer.getUsername(), savedPlayer.getEmail(), token);
     }
 
     private void assignFreeCharactersToPlayer(Player player) {

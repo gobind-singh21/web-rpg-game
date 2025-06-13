@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.rpg_game.game.entity.Player;
 import com.rpg_game.game.model.SignupRequest;
+import com.rpg_game.game.model.SignupResponse;
 
 public interface PlayerService {
     /**
@@ -14,7 +15,7 @@ public interface PlayerService {
      * @return The newly created Player entity.
      * @throws RuntimeException if username or email already exists.
      */
-    Player signupPlayer(SignupRequest signupRequest);
+    SignupResponse signupPlayer(SignupRequest signupRequest);
 
     /**
      * Finds a player by their username.

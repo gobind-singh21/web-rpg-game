@@ -17,6 +17,7 @@ import com.rpg_game.game.model.ForgotPasswordRequest;
 import com.rpg_game.game.model.ResetPasswordRequest;
 import com.rpg_game.game.model.LoginRequest;
 import com.rpg_game.game.model.SignupRequest;
+import com.rpg_game.game.model.SignupResponse;
 import com.rpg_game.game.services.AuthService;
 import com.rpg_game.game.services.PlayerService;
 
@@ -37,15 +38,14 @@ public class AuthController {
     }
 
     /**
-     * Handles new player registrations.
+     * Handles new player registrations, automatically authenticates the user,
+     * and returns a JWT.
      */
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, String>> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
         try {
-            playerService.signupPlayer(signupRequest);
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "User registered successfully!!");
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
+            SignupResponse signupResponse = playerService.signupPlayer(signupRequest);
+            return new ResponseEntity<>(signupResponse, HttpStatus.CREATED);
 
         } catch (IllegalArgumentException e) {
             Map<String, String> response = new HashMap<>();
@@ -53,9 +53,10 @@ public class AuthController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Error during registration: " + e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.error("Error during registration for user {}: {}", signupRequest.getUsername(), e.getMessage(), e);
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Error during registration: " + e.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
