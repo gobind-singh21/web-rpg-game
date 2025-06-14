@@ -1,4 +1,4 @@
-<div class="character-card-container">
+<div class="character-card-container"(click)="onCardClick($event)" [class.disabled] = "disabled">
   <div
     class="character-card"
     [style.background-color]="getBackgroundColor() || '#d3d3d3'"
@@ -14,7 +14,7 @@
     <button
       class="info-button"
       [class.active]="showInfo"
-      (click)="toggleInfo()"
+      (click)="onInfoButtonClick($event)"
     >
       <span><p class="info-button-p">i</p></span>
       <!-- <span class="button-text">Info</span>

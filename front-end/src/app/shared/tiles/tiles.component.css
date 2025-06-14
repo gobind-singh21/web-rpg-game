@@ -1,4 +1,4 @@
-.tilesbody{
+/* .tilesbody{
     display: block;
     border-bottom: 2px solid whitesmoke;
     margin: 10px 0px;
@@ -19,12 +19,12 @@
 .tilescontainer{
     height: 100%;
     /* border: 2px solid rebeccapurple; */
-    display: flex;
+/* display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: center;
-    /* height: 150px; */
-}
+    align-items: center; */
+/* height: 150px; */
+/*}
 .imagecontainer{
     width: 30%;
     height: 90%;
@@ -54,4 +54,59 @@
     height: 50px;
     width: 50px;
     cursor: pointer;
+} */
+
+.tile-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: rgba(17, 17, 17, 0.807);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0.5rem 0;
+}
+
+.character-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.text-content h3 {
+  margin: 0;
+  font-size: .9rem;
+  color: #E59710;
+}
+
+.text-content p {
+  margin: 0;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.delete-btn:hover {
+  transform: scale(1.1);
+}
+
+.delete-btn img {
+  width: 24px;
+  height: 24px;
 }

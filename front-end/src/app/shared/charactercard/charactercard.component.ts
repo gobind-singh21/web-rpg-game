@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Character } from '../types/character';
 import { CharacterClass } from '../types/characterClass';
 import { CommonModule } from '@angular/common';
@@ -15,13 +15,15 @@ export class CharactercardComponent implements OnInit {
   constructor(private characterService: CharacterService) {}
 
   @Input() character!: Character;
+  @Output() characterSelect = new EventEmitter<Character>();
   showInfo: boolean = false;
   cardWidth: number = 100;
   cardHeight: number = 120;
   private infoTimeout: any;
+  @Input() disabled: boolean = false;
 
   ngOnInit(): void {
-    console.log('Character Card Component Initialized', this.character);
+    // console.log('Character Card Component Initialized', this.character);
     if (this.character?.base) {
       this.calculateCardDimensions();
     }
@@ -38,15 +40,28 @@ export class CharactercardComponent implements OnInit {
     img.onload = () => {
       this.cardWidth = img.width + 20;
       this.cardHeight = img.height + 20;
-      console.log('Card dimensions calculated:', {
-        width: this.cardWidth,
-        height: this.cardHeight,
-      });
+      // console.log('Card dimensions calculated:', {
+      //   width: this.cardWidth,
+      //   height: this.cardHeight,
+      // });
     };
     img.onerror = () => {
       console.error('Failed to load image:', imageUrl);
     };
     img.src = imageUrl;
+  }
+
+  onCardClick(event: MouseEvent): void {
+    if (this.disabled) return; 
+    const target = event.target as HTMLElement;
+    if (!target.closest('.info-button') && !target.closest('.character-info')) {
+      this.characterSelect.emit(this.character);
+    }
+  }
+
+  onInfoButtonClick(event: MouseEvent): void {
+    event.stopPropagation();
+    this.toggleInfo();
   }
 
   toggleInfo(): void {
@@ -67,7 +82,7 @@ export class CharactercardComponent implements OnInit {
 
   getImageUrl(): string {
     const imageUrl = this.character?.base?.imageUrl;
-    console.log('Fetching image URL for character:', imageUrl);
+    // console.log('Fetching image URL for character:', imageUrl);
     return imageUrl || 'assets/images/placeholder.png';
   }
 

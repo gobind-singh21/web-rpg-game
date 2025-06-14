@@ -1,52 +1,91 @@
-<div class="bodyclass">
-    <div class="innerbox12">
-        <div class="team1 commonInner team">
-            <div class="teambox">
-                Team 1
-            </div>
-            <div class="cardsContainer">
-                <div class="cardsInner">
-                    <tiles/>
-                    <tiles/>
-                </div>
-            </div>
-            <div class="addButton">
-                <button>
-                    <img src="../../../assets/images/add_circle.svg" alt="">
-                </button>
-            </div>
-        </div>
-        <div class="middle commonInner">
-            <div class="versus">
-                <!-- <img src="../../../assets/images/Group 25.svg" alt=""> -->
-                 <div class="v-div">
-                     <h1><span class="v-letter">V</span></h1>
-                </div>
-                <div class="s-div">
-                    <h1><span class="s-letter">S</span></h1>
-                </div>
-            </div>
-            <div class="start">
-                <button class="startButton">
-                    <h1>Start</h1>
-                </button>
-            </div>
-        </div>
-        <div class="team2 commonInner team">
-            <div class="teambox">
-                Team 2
-            </div>
-            <div class="cardsContainer">
-                <div class="cardsInner">
-                    <tiles/>
-                    <tiles/>
-                </div>
-            </div>
-            <div class="addButton">
-                <button>
-                    <img src="../../../assets/images/add_circle.svg" alt="">
-                </button>
-            </div>
-        </div>
+<div class="container">
+  <div class="team" id="team1">
+    <h2>Team 1</h2>
+    <!-- Team 1 Characters -->
+    <tiles
+      *ngFor="let character of team1Characters"
+      [character]="character"
+      [characterId]="character.id"
+      [name]="character.base.name"
+      [description]="character.base.description"
+      (characterSelect)="onCharacterSelected(character, 1)"
+      (deleteCharacter)="handleDelete($event, 1)"
+    >
+    </tiles>
+
+    <button
+      class="add-btn"
+      (click)="toggleCharacterList(1)"
+      [disabled]="
+        team1Characters.length >= MAX_TEAM_SIZE ||
+        (!isTeam1Turn && !isDeleteMode)
+      "
+      [class.disabled]="
+        team1Characters.length >= MAX_TEAM_SIZE ||
+        (!isTeam1Turn && !isDeleteMode)
+      "
+    >
+      +
+    </button>
+  </div>
+
+  <div class="vs">
+    <span class="v-letter">V</span>
+    <span class="s-letter">S</span>
+  </div>
+
+  <div class="team" id="team2">
+    <h2>Team 2</h2>
+    <!-- Team 2 Characters -->
+    <tiles
+      *ngFor="let character of team2Characters"
+      [character]="character"
+      [characterId]="character.id"
+      [name]="character.base.name"
+      [description]="character.base.description"
+      (characterSelect)="onCharacterSelected(character, 2)"
+      (deleteCharacter)="handleDelete($event, 2)"
+    >
+    </tiles>
+    <button
+      class="add-btn"
+      (click)="toggleCharacterList(2)"
+      [disabled]="
+        team2Characters.length >= MAX_TEAM_SIZE ||
+        (isTeam1Turn && !isDeleteMode)
+      "
+      [class.disabled]="
+        team2Characters.length >= MAX_TEAM_SIZE ||
+        (isTeam1Turn && !isDeleteMode)
+      "
+    >
+      +
+    </button>
+  </div>
+
+  <div class="start-button">
+    <button (click)="navigateToBattle()">Start</button>
+  </div>
+
+  <!-- Character Pool Modal (Floating Panel) -->
+  <div
+    class="character-pool"
+    *ngIf="showCharacterListForTeam1 || showCharacterListForTeam2"
+    [ngClass]="{
+      'team1-pool': showCharacterListForTeam1,
+      'team2-pool': showCharacterListForTeam2
+    }"
+  >
+    <h3>Select a Character</h3>
+    <div class="character-list">
+      <app-charactercard
+        *ngFor="let character of characters"
+        [character]="character"
+        [disabled]="isCharacterSelected(character)"
+        (characterSelect)="
+          onCharacterSelected($event, showCharacterListForTeam1 ? 1 : 2)
+        "
+      ></app-charactercard>
     </div>
-</div> 
+  </div>
+</div>

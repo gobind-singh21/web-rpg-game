@@ -1,0 +1,63 @@
+<div class="game-container">
+  <!-- Header Section -->
+  <div class="header">
+    <div class="rune-title-section">
+      <span class="rune-text">Rune</span>
+      <span class="wars-text">Wars</span>
+    </div>
+    <setting class="settings"></setting>
+  </div>
+
+  <!-- Characters Container -->
+  <div class="characters-container">
+    <!-- Team 2 Characters (Top) -->
+    <div class="team team-2">
+      <app-charactercard
+        *ngFor="let character of team2Characters"
+        [character]="character"
+        class="character-card-team2"
+      ></app-charactercard>
+    </div>
+
+    <!-- Battle Arena Center -->
+    <div class="battle-arena">
+      <div class="arena-decoration"></div>
+    </div>
+
+    <!-- Team 1 Characters (Bottom) -->
+    <div class="team team-1">
+      <app-charactercard
+        *ngFor="let character of team1Characters"
+        [character]="character"
+        class="character-card-team1"
+      ></app-charactercard>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="leave-btn">Leave</button>
+
+    <div class="team-toggle">
+      <button class="team-toggle-btn">Team 1</button>
+      <button class="team-toggle-btn active">Team 2</button>
+    </div>
+
+    <div class="action-buttons">
+      <div class="action-wrapper">
+        <div class="action-btn" id="attack-btn">
+          <img src="../../assets/images/icons/attack.png" alt="Attack Icon" />
+          <span class="action-count">1</span>
+        </div>
+        <span class="action-label">+ATK</span>
+      </div>
+
+      <div class="action-wrapper">
+        <div class="action-btn" id="skill-btn">
+          <img src="front-../../assets/images/icons/skill.png" alt="Skill Icon" />
+          <span class="action-count">1</span>
+        </div>
+        <span class="action-label">Skill</span>
+      </div>
+    </div>
+  </div>
+</div>

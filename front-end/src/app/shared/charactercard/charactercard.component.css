@@ -4,6 +4,13 @@
   margin: 1vh;
 }
 
+.character-card-container.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+
 .character-card {
   position: relative;
   border-radius: 12px;
@@ -80,6 +87,7 @@
   justify-content: center;
   transition: all 0.2s ease;
   z-index: 10;
+  color: #333;
 }
 
 .info-button:hover {
@@ -182,6 +190,7 @@
 .info-button-p {
 
   font-weight: bold;
+  color: #333;
 
 }
 

@@ -1,23 +1,16 @@
-<div class="tilesbody">
-    <div class="innertiles">
-        <div class="tilescontainer imagecontainer">
-            <!-- <app-charactercard /> -->
-            <img src="../../../assets/images/characters/1.png" alt="">
-        </div>
-        <div class="tilescontainer textcontainer">
-            <div class="tilestitle">
-                <h2 class="tilesName">Druid</h2>
-            </div>
-            <div class="desc">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-                </div>
-        </div>
-        <div class="tilescontainer deletecontainer">
-            <button>
-                <img src="../../../assets/images/deleteIcon.svg" alt="">
-            </button>
-        </div>
+<div class="tile-container">
+  <div class="character-info">
+    <app-charactercard
+      [character]="character"
+      (characterSelect)="onCharacterSelect($event)"
+    >
+    </app-charactercard>
+    <div class="text-content">
+      <h3>{{ name }}</h3>
+      <p>{{ description }}</p>
     </div>
+  </div>
+  <button class="delete-btn" (click)="onDelete()">
+    <img src="assets/images/delete.svg" alt="Delete" />
+  </button>
 </div>

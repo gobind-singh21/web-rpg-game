@@ -9,7 +9,7 @@ Layout .register-container {
 .register-background {
   position: absolute;
   inset: 0;
-  background: url("../../../assets/images/background.jpg") no-repeat center
+  background: url("../../../assets/images/backgroundImg.svg") no-repeat center
     ;
   background-size: cover;
   z-index: 0;
