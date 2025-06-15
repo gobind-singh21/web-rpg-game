@@ -2,6 +2,7 @@
   {
     "id": 1,
     "name": "Shadow Mage",
+    "description": "A mysterious mage wielding dark powers. His 'Arcane Volley' deals 140% ATK-based damage to all enemies, applying Armor Shred (15% DEF reduction) and Crippling Blow (20% SPD reduction) for 3 turns.",
     "baseHealth": 950,
     "baseAttack": 160,
     "baseDefense": 90,
@@ -9,7 +10,6 @@
     "characterClass": "Ranger",
     "backgroundColor": "#FF6D56",
     "imageUrl": "assets/images/characters/1.png",
-    "description": "A mysterious mage with glowing red eyes, wielding dark powers and keen intellect.",
     "characterCost": 0,
     "ability": {
       "id": 1,
@@ -19,32 +19,15 @@
       "shield": 0,
       "heal": 0,
       "effects": [
-        {
-          "id": 101,
-          "name": "Crippling Blow",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 20,
-          "turns": 2,
-          "isBuff": false
-        },
-        {
-          "id": 102,
-          "name": "Armor Shred",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 15,
-          "speedPercent": 0,
-          "turns": 3,
-          "isBuff": false
-        }
+        { "id": 101, "name": "Crippling Blow", "speedPercent": 20, "turns": 3, "isBuff": false },
+        { "id": 102, "name": "Armor Shred", "defensePercent": 15, "turns": 3, "isBuff": false }
       ]
     }
   },
   {
     "id": 6,
     "name": "Viking Warrior",
+    "description": "A fierce warrior from the northern lands. His 'Wind's Edge' ability deals 130% ATK-based damage to all enemies and applies Gale Force (20% SPD increase) to all allies for 3 turns.",
     "baseHealth": 880,
     "baseAttack": 170,
     "baseDefense": 85,
@@ -52,7 +35,6 @@
     "characterClass": "Ranger",
     "backgroundColor": "#139CF0",
     "imageUrl": "assets/images/characters/6.png",
-    "description": "A fierce warrior from the northern lands, known for brutal strength and a mighty axe.",
     "characterCost": 200,
     "ability": {
       "id": 6,
@@ -62,22 +44,14 @@
       "shield": 0,
       "heal": 0,
       "effects": [
-        {
-          "id": 110,
-          "name": "Gale Force",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 20,
-          "turns": 2,
-          "isBuff": true
-        }
+        { "id": 110, "name": "Gale Force", "speedPercent": 20, "turns": 3, "isBuff": true }
       ]
     }
   },
   {
     "id": 2,
     "name": "Fire Knight",
+    "description": "A valiant knight imbued with the fiery spirit of justice. His 'Holy Bulwark' ability grants a shield of 400 to all allies and applies Divine Fortitude (25% DEF increase) for 3 turns.",
     "baseHealth": 1400,
     "baseAttack": 100,
     "baseDefense": 160,
@@ -85,7 +59,6 @@
     "characterClass": "Crusader",
     "backgroundColor": "#FFA500",
     "imageUrl": "assets/images/characters/2.png",
-    "description": "A valiant knight imbued with the fiery spirit of justice, his armor glows with warmth.",
     "characterCost": 0,
     "ability": {
       "id": 2,
@@ -95,22 +68,14 @@
       "shield": 400,
       "heal": 0,
       "effects": [
-        {
-          "id": 103,
-          "name": "Divine Fortitude",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 25,
-          "speedPercent": 0,
-          "turns": 2,
-          "isBuff": true
-        }
+        { "id": 103, "name": "Divine Fortitude", "defensePercent": 25, "turns": 3, "isBuff": true }
       ]
     }
   },
   {
     "id": 7,
     "name": "Holy Paladin",
+    "description": "A divinely blessed warrior of protection. His 'Shield of Aegis' ability grants a massive shield of 500 to all allies and applies Immovable Stance (10% ATK, 30% DEF, 10% SPD increase) for 3 turns.",
     "baseHealth": 1450,
     "baseAttack": 110,
     "baseDefense": 170,
@@ -118,7 +83,6 @@
     "characterClass": "Crusader",
     "backgroundColor": "#FFD700",
     "imageUrl": "assets/images/characters/7.png",
-    "description": "A divinely blessed warrior, healing allies and smiting evil with his golden staff.",
     "characterCost": 250,
     "ability": {
       "id": 7,
@@ -128,22 +92,14 @@
       "shield": 500,
       "heal": 0,
       "effects": [
-        {
-          "id": 111,
-          "name": "Immovable Stance",
-          "healthPercent": 0,
-          "attackPercent": 10,
-          "defensePercent": 30,
-          "speedPercent": 10,
-          "turns": 3,
-          "isBuff": true
-        }
+        { "id": 111, "name": "Immovable Stance", "attackPercent": 10, "defensePercent": 30, "speedPercent": 10, "turns": 3, "isBuff": true }
       ]
     }
   },
   {
     "id": 3,
     "name": "Ice Sorcerer",
+    "description": "A cunning sorcerer who drains life with chilling magic. Her 'Shadow Drain' deals 110% HP-based damage to enemies, heals allies for 50, applies Life Link (5% Max HP increase) to allies for 3 turns, and Spirit Siphon (7% Max HP decrease) to enemies for 3 turns.",
     "baseHealth": 1150,
     "baseAttack": 120,
     "baseDefense": 105,
@@ -151,7 +107,6 @@
     "characterClass": "Leech",
     "backgroundColor": "#87CEEB",
     "imageUrl": "assets/images/characters/3.png",
-    "description": "A cunning sorcerer who drains life with chilling ice magic and spectral powers.",
     "characterCost": 0,
     "ability": {
       "id": 3,
@@ -161,32 +116,15 @@
       "shield": 0,
       "heal": 50,
       "effects": [
-        {
-          "id": 104,
-          "name": "Spirit Siphon",
-          "healthPercent": 7,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 3,
-          "isBuff": false
-        },
-        {
-          "id": 105,
-          "name": "Life Link",
-          "healthPercent": 5,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 2,
-          "isBuff": true
-        }
+        { "id": 104, "name": "Spirit Siphon", "healthPercent": 7, "turns": 3, "isBuff": false },
+        { "id": 105, "name": "Life Link", "healthPercent": 5, "turns": 3, "isBuff": true }
       ]
     }
   },
   {
     "id": 8,
     "name": "Orc Berserker",
+    "description": "A formidable orc warrior who thrives in chaos. His 'Blood Ritual' deals 100% HP-based damage to all enemies, heals all allies for 75, and applies Sanguine Mark (8% Max HP decrease) to all enemies for 4 turns.",
     "baseHealth": 1100,
     "baseAttack": 130,
     "baseDefense": 95,
@@ -194,7 +132,6 @@
     "characterClass": "Leech",
     "backgroundColor": "#72EFF4",
     "imageUrl": "assets/images/characters/8.png",
-    "description": "A formidable orc warrior, entering a berserker rage to crush foes with his imposing axe.",
     "characterCost": 150,
     "ability": {
       "id": 8,
@@ -204,22 +141,14 @@
       "shield": 0,
       "heal": 75,
       "effects": [
-        {
-          "id": 112,
-          "name": "Sanguine Mark",
-          "healthPercent": 8,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 4,
-          "isBuff": false
-        }
+        { "id": 112, "name": "Sanguine Mark", "healthPercent": 8, "turns": 4, "isBuff": false }
       ]
     }
   },
   {
     "id": 4,
     "name": "Forest Archer",
+    "description": "An agile archer at one with nature. His 'Radiant Blessing' heals all allies for 200, applies Healing Aura (10% Max HP increase) for 3 turns, and immediately cleanses debuffs with Cleansing Light.",
     "baseHealth": 1000,
     "baseAttack": 90,
     "baseDefense": 110,
@@ -227,7 +156,6 @@
     "characterClass": "Priest",
     "backgroundColor": "#90EE90",
     "imageUrl": "assets/images/characters/4.png",
-    "description": "An agile archer, at one with nature, striking foes from afar with mystical arrows.",
     "characterCost": 0,
     "ability": {
       "id": 4,
@@ -237,32 +165,15 @@
       "shield": 0,
       "heal": 200,
       "effects": [
-        {
-          "id": 106,
-          "name": "Healing Aura",
-          "healthPercent": 10,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 3,
-          "isBuff": true
-        },
-        {
-          "id": 107,
-          "name": "Cleansing Light",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 0,
-          "isBuff": true
-        }
+        { "id": 106, "name": "Healing Aura", "healthPercent": 10, "turns": 3, "isBuff": true },
+        { "id": 107, "name": "Cleansing Light", "turns": 0, "isBuff": true }
       ]
     }
   },
   {
     "id": 9,
     "name": "Ninja Assassin",
+    "description": "A silent killer who strikes from the shadows. Her 'Divine Intervention' heals all allies for 250, applies Aura of Protection (15% DEF increase) for 3 turns, and Spirit Bond (12% Max HP increase) for 3 turns.",
     "baseHealth": 980,
     "baseAttack": 85,
     "baseDefense": 115,
@@ -270,7 +181,6 @@
     "characterClass": "Priest",
     "backgroundColor": "#FFDEA5",
     "imageUrl": "assets/images/characters/9.png",
-    "description": "A silent killer, striking from the shadows with deadly precision and stealth.",
     "characterCost": 200,
     "ability": {
       "id": 9,
@@ -280,32 +190,15 @@
       "shield": 0,
       "heal": 250,
       "effects": [
-        {
-          "id": 113,
-          "name": "Aura of Protection",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 15,
-          "speedPercent": 0,
-          "turns": 3,
-          "isBuff": true
-        },
-        {
-          "id": 114,
-          "name": "Spirit Bond",
-          "healthPercent": 12,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 2,
-          "isBuff": true
-        }
+        { "id": 113, "name": "Aura of Protection", "defensePercent": 15, "turns": 3, "isBuff": true },
+        { "id": 114, "name": "Spirit Bond", "healthPercent": 12, "turns": 3, "isBuff": true }
       ]
     }
   },
   {
     "id": 5,
     "name": "Royal Knight",
+    "description": "A stoic knight sworn to protect the realm. His 'Temporal Shroud' deals 100% ATK-based damage to enemies, heals allies for 50, shields allies for 100, applies Haste (15% SPD increase) to allies for 3 turns, and Time Dilation (10% SPD reduction) to enemies for 3 turns.",
     "baseHealth": 1250,
     "baseAttack": 140,
     "baseDefense": 140,
@@ -313,7 +206,6 @@
     "characterClass": "Saint",
     "backgroundColor": "#FCFBFA",
     "imageUrl": "assets/images/characters/5.png",
-    "description": "A stoic knight, sworn to protect the realm with sword and shield, his armor gleaming.",
     "characterCost": 0,
     "ability": {
       "id": 5,
@@ -323,32 +215,15 @@
       "shield": 100,
       "heal": 50,
       "effects": [
-        {
-          "id": 108,
-          "name": "Haste",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 15,
-          "turns": 2,
-          "isBuff": true
-        },
-        {
-          "id": 109,
-          "name": "Time Dilation",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 10,
-          "turns": 2,
-          "isBuff": false
-        }
+        { "id": 108, "name": "Haste", "speedPercent": 15, "turns": 3, "isBuff": true },
+        { "id": 109, "name": "Time Dilation", "speedPercent": 10, "turns": 3, "isBuff": false }
       ]
     }
   },
   {
     "id": 10,
     "name": "Blade Dancer",
+    "description": "A lightning-fast warrior who dances through battle. Her 'Whirlwind Dance' deals 135% ATK-based damage to all enemies, applies Blurred Reflexes (25% SPD increase) to all allies for 3 turns, and Precision Slash (10% ATK reduction) to all enemies for 3 turns.",
     "baseHealth": 1020,
     "baseAttack": 145,
     "baseDefense": 100,
@@ -356,7 +231,6 @@
     "characterClass": "Ranger",
     "backgroundColor": "#FF69B4",
     "imageUrl": "assets/images/characters/10.png",
-    "description": "A lightning-fast warrior who strikes with grace and deadly precision, dancing through the battlefield with whirling blades.",
     "characterCost": 300,
     "ability": {
       "id": 21,
@@ -366,32 +240,15 @@
       "shield": 0,
       "heal": 0,
       "effects": [
-        {
-          "id": 121,
-          "name": "Blurred Reflexes",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 25,
-          "turns": 2,
-          "isBuff": true
-        },
-        {
-          "id": 122,
-          "name": "Precision Slash",
-          "healthPercent": 0,
-          "attackPercent": 10,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 2,
-          "isBuff": false
-        }
+        { "id": 121, "name": "Blurred Reflexes", "speedPercent": 25, "turns": 3, "isBuff": true },
+        { "id": 122, "name": "Precision Slash", "attackPercent": 10, "turns": 3, "isBuff": false }
       ]
     }
   },
   {
     "id": 11,
     "name": "Golden Sentinel",
+    "description": "A formidable warrior clad in golden armor. His 'Starlight Arrow' deals 125% ATK-based damage to all enemies and applies Dazzle (10% DEF reduction) to all enemies for 3 turns.",
     "baseHealth": 920,
     "baseAttack": 155,
     "baseDefense": 95,
@@ -399,7 +256,6 @@
     "characterClass": "Ranger",
     "backgroundColor": "#FFD700",
     "imageUrl": "assets/images/characters/11.png",
-    "description": "A formidable warrior clad in golden armor, dedicated to upholding justice with his mighty spear.",
     "characterCost": 150,
     "ability": {
       "id": 11,
@@ -409,22 +265,14 @@
       "shield": 0,
       "heal": 0,
       "effects": [
-        {
-          "id": 116,
-          "name": "Dazzle",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 10,
-          "speedPercent": 0,
-          "turns": 2,
-          "isBuff": false
-        }
+        { "id": 116, "name": "Dazzle", "defensePercent": 10, "turns": 3, "isBuff": false }
       ]
     }
   },
   {
     "id": 12,
     "name": "Inferno Berserker",
+    "description": "A fiery warrior with a blazing spirit. His 'Fortress Guard' ability grants a shield of 450 to all allies and applies Stone Skin (20% DEF increase, 5% SPD increase) for 3 turns.",
     "baseHealth": 1380,
     "baseAttack": 105,
     "baseDefense": 165,
@@ -432,7 +280,6 @@
     "characterClass": "Crusader",
     "backgroundColor": "#FF4500",
     "imageUrl": "assets/images/characters/12.png",
-    "description": "A fiery warrior with a blazing spirit, charging into battle with his heavy axe.",
     "characterCost": 350,
     "ability": {
       "id": 12,
@@ -442,22 +289,14 @@
       "shield": 450,
       "heal": 0,
       "effects": [
-        {
-          "id": 117,
-          "name": "Stone Skin",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 20,
-          "speedPercent": 5,
-          "turns": 3,
-          "isBuff": true
-        }
+        { "id": 117, "name": "Stone Skin", "defensePercent": 20, "speedPercent": 5, "turns": 3, "isBuff": true }
       ]
     }
   },
   {
     "id": 13,
     "name": "Celestial Cleric",
+    "description": "A serene and devout figure of divine light. Her 'Contagion' ability deals 90% HP-based damage to enemies, heals all allies for 40, and applies Plague Touch (6% Max HP & 5% ATK reduction) to all enemies for 4 turns.",
     "baseHealth": 1080,
     "baseAttack": 125,
     "baseDefense": 100,
@@ -465,7 +304,6 @@
     "characterClass": "Leech",
     "backgroundColor": "#F0F8FF",
     "imageUrl": "assets/images/characters/13.png",
-    "description": "A serene and devout figure, channeling divine light to heal allies and repel darkness.",
     "characterCost": 250,
     "ability": {
       "id": 13,
@@ -475,22 +313,14 @@
       "shield": 0,
       "heal": 40,
       "effects": [
-        {
-          "id": 118,
-          "name": "Plague Touch",
-          "healthPercent": 6,
-          "attackPercent": 5,
-          "defensePercent": 0,
-          "speedPercent": 0,
-          "turns": 4,
-          "isBuff": false
-        }
+        { "id": 118, "name": "Plague Touch", "healthPercent": 6, "attackPercent": 5, "turns": 4, "isBuff": false }
       ]
     }
   },
   {
     "id": 14,
     "name": "Shadow Guard",
+    "description": "A steadfast guardian clad in dark violet armor. Her 'Foreseeing Heal' ability heals all allies for 180 and applies Insight (10% SPD increase) to all allies for 3 turns.",
     "baseHealth": 960,
     "baseAttack": 95,
     "baseDefense": 105,
@@ -498,7 +328,6 @@
     "characterClass": "Priest",
     "backgroundColor": "#DDA0DD",
     "imageUrl": "assets/images/characters/14.png",
-    "description": "A steadfast guardian clad in dark violet armor, defending the weak with unbreakable resolve.",
     "characterCost": 100,
     "ability": {
       "id": 14,
@@ -508,22 +337,14 @@
       "shield": 0,
       "heal": 180,
       "effects": [
-        {
-          "id": 119,
-          "name": "Insight",
-          "healthPercent": 0,
-          "attackPercent": 0,
-          "defensePercent": 0,
-          "speedPercent": 10,
-          "turns": 3,
-          "isBuff": true
-        }
+        { "id": 119, "name": "Insight", "speedPercent": 10, "turns": 3, "isBuff": true }
       ]
     }
   },
   {
     "id": 15,
     "name": "Azure Sage",
+    "description": "A wise and ancient sage of immense power. His 'Judgement Blade' deals a massive 160% ATK-based damage to all enemies and applies Mark of Justice (10% ATK & 10% DEF reduction) to them for 3 turns.",
     "baseHealth": 1200,
     "baseAttack": 135,
     "baseDefense": 135,
@@ -531,7 +352,6 @@
     "characterClass": "Saint",
     "backgroundColor": "#6495ED",
     "imageUrl": "assets/images/characters/15.png",
-    "description": "A wise and ancient sage, harnessing the power of wind and magic through his mystical staff.",
     "characterCost": 400,
     "ability": {
       "id": 15,
@@ -541,16 +361,7 @@
       "shield": 0,
       "heal": 0,
       "effects": [
-        {
-          "id": 120,
-          "name": "Mark of Justice",
-          "healthPercent": 0,
-          "attackPercent": 10,
-          "defensePercent": 10,
-          "speedPercent": 0,
-          "turns": 3,
-          "isBuff": false
-        }
+        { "id": 120, "name": "Mark of Justice", "attackPercent": 10, "defensePercent": 10, "turns": 3, "isBuff": false }
       ]
     }
   }

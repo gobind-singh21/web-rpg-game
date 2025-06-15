@@ -2,43 +2,33 @@ package com.rpg_game.game.data;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rpg_game.game.entity.Ability;
 import com.rpg_game.game.entity.Character;
+import com.rpg_game.game.entity.Ability;
 import com.rpg_game.game.entity.Effect;
-import com.rpg_game.game.repositories.AbilityRepository;
 import com.rpg_game.game.repositories.CharacterRepository;
-import com.rpg_game.game.repositories.EffectRepository;
+import com.rpg_game.game.repositories.AbilityRepository; // Import new repositories
+import com.rpg_game.game.repositories.EffectRepository;   // Import new repositories
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Component
 public class DataLoader implements CommandLineRunner {
-
-    
-
-    private static final Logger logger = LoggerFactory.getLogger(DataLoader.class);
 
     private final CharacterRepository characterRepository;
     private final AbilityRepository abilityRepository;
     private final EffectRepository effectRepository;
     private final ObjectMapper objectMapper;
 
-    public DataLoader(CharacterRepository characterRepository,
-                      AbilityRepository abilityRepository,
-                      EffectRepository effectRepository,
-                      ObjectMapper objectMapper) { // ObjectMapper is provided by Spring Boot
+    // Inject all necessary repositories
+    public DataLoader(CharacterRepository characterRepository, 
+                           AbilityRepository abilityRepository, 
+                           EffectRepository effectRepository, 
+                           ObjectMapper objectMapper) {
         this.characterRepository = characterRepository;
         this.abilityRepository = abilityRepository;
         this.effectRepository = effectRepository;
@@ -46,67 +36,55 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    @Transactional // Ensures all database operations for one run are in a single transaction
+    @Transactional
     public void run(String... args) throws Exception {
-        // Prevent re-loading data if characters already exist
-        System.out.println("Data Loader Invoked ------------------------------------------>>>>>>>>>>");
         if (characterRepository.count() > 0) {
-            logger.info("Database already contains characters. Skipping data loading.");
+            System.out.println("--- Character Data Already Exists, Skipping Seed ---");
             return;
         }
+        
+        System.out.println("--- Seeding Character Data ---");
 
-        logger.info("Loading character data from JSON...");
-
-        try (InputStream inputStream = new ClassPathResource("./player.json").getInputStream()) {
-            System.out.println("Got the data --------------------------------------->>>>>>>>>");
-            List<Character> charactersFromJson = objectMapper.readValue(inputStream, new TypeReference<List<Character>>() {});
+        try (InputStream inputStream = new ClassPathResource("player.json").getInputStream()) {
+            List<Character> charactersFromJson = objectMapper.readValue(inputStream, new TypeReference<>() {});
 
             for (Character character : charactersFromJson) {
-                // 1. Process and save Effects first (due to ManyToMany with Ability)
-                List<Effect> persistentEffects = new ArrayList<>();
-                if (character.getAbility() != null && character.getAbility().getEffects() != null) {
-                    for (Effect effect : character.getAbility().getEffects()) {
-                        // Check if an effect with the same name already exists to prevent duplicates for common effects
-                        Effect existingEffect = effectRepository.findByName(effect.getName());
-                        // Effect existingEffect = effectRepository.findById(effect.getName());
-                        if (existingEffect != null) {
-                            persistentEffects.add(existingEffect);
-                        } else {
-                            // Important: Clear the transient 'id' and 'turns' fields from JSON for persistence
-                            // The database will generate new IDs. 'turns' is @Transient anyway.
-                            effect.setId(null); // Let DB generate ID
-                            effect.setTurns(null); // @Transient field, won't be saved, but good to null out
+                
+                // --- THE FIX: Manually handle the nested objects ---
 
-                            Effect savedEffect = effectRepository.save(effect);
-                            persistentEffects.add(savedEffect);
-                        }
+                Ability ability = character.getAbility();
+                if (ability != null) {
+                    
+                    List<Effect> effects = new ArrayList<>(ability.getEffects()); // Create a mutable copy
+                    ability.setEffects(new ArrayList<>()); // Clear the original list on the ability
+
+                    // 1. Save the Effects first
+                    List<Effect> savedEffects = new ArrayList<>();
+                    for (Effect effect : effects) {
+                        // IMPORTANT: Set ID to null to force an INSERT and let DB generate the ID
+                        effect.setId(null); 
+                        savedEffects.add(effectRepository.save(effect));
                     }
-                    character.getAbility().setEffects(persistentEffects);
+
+                    // 2. Save the Ability
+                    // Set ID to null to force an INSERT
+                    ability.setId(null);
+                    // Add the now-persistent effects back to the ability
+                    ability.setEffects(savedEffects);
+                    abilityRepository.save(ability);
                 }
 
-                // 2. Process and save Ability (OneToOne with Character)
-                if (character.getAbility() != null) {
-                    // Important: Clear the transient 'id' from JSON for persistence
-                    // The database will generate new IDs for abilities.
-                    character.getAbility().setId(null); // Let DB generate ID
-
-                    Ability savedAbility = abilityRepository.save(character.getAbility());
-                    character.setAbility(savedAbility); // Set the managed Ability object back to the Character
-                }
-
-                // 3. Save Character
-                // Important: Clear the transient 'id' from JSON for persistence
-                // The database will generate new IDs for characters.
-                character.setId(null); // Let DB generate ID
-                character.setCurrentHealth(character.getBaseHealth()); // Initialize current health
+                // 3. Finally, save the Character
+                // Set ID to null to force an INSERT
+                character.setId(null); 
+                character.setAbility(ability); // Ensure the managed ability is set
                 characterRepository.save(character);
-                logger.info("Saved character: {}", character.getName());
             }
-            logger.info("Successfully loaded {} characters into the database.", characterRepository.count());
-
-        } catch (IOException e) {
-            logger.error("Failed to load character data from JSON file: {}", e.getMessage(), e);
-            throw e; // Re-throw to indicate a critical failure
+            
+            System.out.println("--- " + charactersFromJson.size() + " Characters Seeded Successfully ---");
+        } catch (Exception e) {
+            System.err.println("Error seeding character data: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
