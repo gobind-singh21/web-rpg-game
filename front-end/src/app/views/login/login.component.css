@@ -1,4 +1,4 @@
-Layout .register-container {
+Layout .login-container {
   position: relative;
   min-height: 110vh;
   overflow: hidden;
@@ -6,7 +6,7 @@ Layout .register-container {
 }
 
 /* Background Image */
-.register-background {
+.login-background {
   position: absolute;
   inset: 0;
   background: url("../../../assets/images/backgroundImg.svg") no-repeat center
@@ -15,7 +15,7 @@ Layout .register-container {
   z-index: 0;
 }
 
-.register-overlay {
+.login-overlay {
   position: absolute;
   inset: 0;
   /* background: linear-gradient(
@@ -28,7 +28,7 @@ Layout .register-container {
 }
 
 /* Form Wrapper */
-.register-form-wrapper {
+.login-form-wrapper {
   position: relative;
   z-index: 2;
   min-height: 100vh;
@@ -39,7 +39,7 @@ Layout .register-container {
 }
 
 /* Card */
-.register-card {
+.login-card {
   width: 100%;
   max-width: 400px;
   background: rgba(0, 0, 0, 0.6);
@@ -51,7 +51,7 @@ Layout .register-container {
 }
 
 /* Title */
-.register-title {
+.login-title {
   font-size: 2rem;
   color: white;
   text-align: center;

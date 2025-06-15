@@ -1,9 +1,9 @@
-<div class="register-container">
-    <div class="register-background"></div>
-    <div class="register-overlay"></div>
-    <div class="register-form-wrapper">
-      <div class="register-card">
-        <h1 class="register-title">Login</h1>
+<div class="login-container">
+    <div class="login-background"></div>
+    <div class="login-overlay"></div>
+    <div class="login-form-wrapper">
+      <div class="login-card">
+        <h1 class="login-title">Login</h1>
         <form [formGroup]="formData" (ngSubmit)="onSubmit()">
           <!-- Email -->
           <app-input
@@ -27,12 +27,12 @@
 
         <!-- register -->
         <div class="secondary-text"  id="leftButton" (click)="NavigateToRegister()">
-            Register Warrior ?
+            Register Warrior
         </div>
   
         <!-- Login Link -->
         <div class="secondary-text" id="rightButton"  (click)="ForgotPassword()">
-          Forgot Password ?
+          Forgot Password
         </div>
       </div>
     </div>
