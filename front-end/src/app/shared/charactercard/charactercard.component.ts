@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Character } from '../types/character';
 import { CharacterClass } from '../types/characterClass';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { CharacterService } from '../../core/services/character.service';
   styleUrl: './charactercard.component.css',
 })
 export class CharactercardComponent implements OnInit {
-  constructor(private characterService: CharacterService) {}
+  constructor() {}
 
   @Input() character!: Character;
   @Output() characterSelect = new EventEmitter<Character>();
@@ -21,12 +21,34 @@ export class CharactercardComponent implements OnInit {
   cardHeight: number = 120;
   private infoTimeout: any;
   @Input() disabled: boolean = false;
+  @Input() isCurrentTurn: boolean = false;
+  @Input() isSelectedTarget: boolean = false;
+  @Input() hasShield: boolean = false;
+  @Input() isDead: boolean = false;
+  @Input() showBattleUI: boolean = false;
+  characterService = inject(CharacterService);
 
   ngOnInit(): void {
     // console.log('Character Card Component Initialized', this.character);
     if (this.character?.base) {
       this.calculateCardDimensions();
     }
+  }
+
+  getHealthPercent(): number {
+    if (!this.character) return 0;
+    const maxHealth = this.characterService.getMaxHealth(this.character.base.baseHealth, this.character.snapshot.effects);
+    if (maxHealth === 0) return 0; // Avoid division by zero
+    const percentage = (this.character.snapshot.currentHealth / maxHealth) * 100;
+    return Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
+  }
+
+  getShieldPercent(): number {
+    if (!this.character || this.character.snapshot.shield <= 0) return 0;
+    const maxHealth = this.characterService.getMaxHealth(this.character.base.baseHealth, this.character.snapshot.effects);
+    if (maxHealth === 0) return 0;
+    const percentage = (this.character.snapshot.shield / maxHealth) * 100;
+    return Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
   }
 
   calculateCardDimensions() {
@@ -52,7 +74,7 @@ export class CharactercardComponent implements OnInit {
   }
 
   onCardClick(event: MouseEvent): void {
-    if (this.disabled) return; 
+    if (this.disabled) return;
     const target = event.target as HTMLElement;
     if (!target.closest('.info-button') && !target.closest('.character-info')) {
       this.characterSelect.emit(this.character);

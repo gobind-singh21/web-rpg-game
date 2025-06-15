@@ -9,11 +9,20 @@ import org.springframework.stereotype.Service;
 
 import com.rpg_game.game.entity.Character;
 import com.rpg_game.game.model.BasicActionServiceResponse;
+import com.rpg_game.game.model.BattleStartResponse;
 import com.rpg_game.game.model.SkillActionServiceResponse;
 import com.rpg_game.game.types.Stat;
 
 @Service
 public class ActionService {
+
+  public BattleStartResponse battleStart(List<Character> characters) {
+    Collections.sort(characters);
+    var sortedIds = characters.stream()
+              .map(character -> character.getId())
+              .collect(Collectors.toCollection(ArrayList::new));
+    return new BattleStartResponse(sortedIds);
+  }
   
   public BasicActionServiceResponse basicAttack(Character currentCharacter, Character target) {
     if(currentCharacter.isDead()) {
@@ -77,10 +86,6 @@ public class ActionService {
     } else {
       Collections.sort(lineup);
     }
-    
-    lineup = lineup.stream()
-                  .filter(character -> !character.isDead())
-                  .collect(Collectors.toCollection(ArrayList::new));
 
     return new SkillActionServiceResponse(true, "Skill used by " + currentCharacter.getName(), lineup);
   }

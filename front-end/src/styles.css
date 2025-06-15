@@ -15,4 +15,11 @@ p{
     font-style: normal;
 }
 
+.battle-over-dialog-panel .mat-mdc-dialog-container .mdc-dialog__surface {
+  /* Remove Material's default background and shadow */
+  background: none !important;
+  box-shadow: none !important;
 
+  /* If you want a fully transparent container, you can use this instead: */
+  /* background-color: transparent !important; */
+}

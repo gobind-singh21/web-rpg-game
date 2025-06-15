@@ -17,7 +17,7 @@ export class TurnOrderService {
 
   nextCharacter(): void {
     this._currentCharacter.update(
-      (current) => current >= this._turnOrder().length ? 0 : current + 1
+      (current) => current >= (this._turnOrder().length - 1) ? 0 : current + 1
     );
   }
 

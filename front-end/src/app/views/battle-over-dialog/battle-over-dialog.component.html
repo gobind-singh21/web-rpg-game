@@ -1,0 +1,21 @@
+<div class="themed-dialog-container">
+
+  <!-- THE FIX: Replace the conditional title with a single, neutral one. -->
+  <h1 mat-dialog-title class="dialog-title">
+    BATTLE OVER
+  </h1>
+
+  <div mat-dialog-content>
+    <!-- This text is now the main focus, clearly stating the winner. -->
+    <p class="winner-text">
+      <span class="winner-name">{{ data.winningTeam.name }}</span> is victorious!
+    </p>
+  </div>
+
+  <div mat-dialog-actions>
+    <button class="exit-battle-btn" (click)="onExit()">
+      Exit Battle
+    </button>
+  </div>
+
+</div>

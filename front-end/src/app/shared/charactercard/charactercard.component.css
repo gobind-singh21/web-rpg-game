@@ -223,3 +223,176 @@
     border-right: none;
   }
 }
+
+.character-card-container {
+  border-radius: 16px;
+  border: 3px solid transparent;
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+}
+
+.character-card-container.current-turn {
+  border-color: #ffc400;
+  box-shadow: 0 0 12px 4px rgba(255, 223, 0, 0.7),
+              0 0 20px 8px rgba(255, 196, 0, 0.4);
+  transform: scale(1.05);
+}
+
+.character-card-container.current-turn .character-card {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(139, 69, 19, 0.6);
+  }
+  100% {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.character-card-container.has-shield {
+  border-color: #00e5ff;
+  box-shadow: 0 0 15px 5px rgba(0, 229, 255, 0.6);
+}
+
+.shield-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.shield-overlay .shield-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #00e5ff;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+}
+
+.shield-overlay .shield-value {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px black;
+  margin-top: -12px;
+}
+
+.character-card-container.current-turn.has-shield {
+  box-shadow: 0 0 15px 5px rgba(0, 229, 255, 0.6),
+              0 0 20px 10px rgba(255, 223, 0, 0.6);
+}
+
+.character-card-container.selected-target {
+  border-color: #e53935;
+  box-shadow: 0 0 15px 7px rgba(229, 57, 53, 0.7);
+}
+
+.character-card-container.current-turn.selected-target {
+  box-shadow: 0 0 15px 7px rgba(229, 57, 53, 0.7),
+              0 0 20px 10px rgba(255, 223, 0, 0.6);
+}
+
+.character-card-container.is-dead {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+  border-color: #444 !important;
+  box-shadow: none !important;
+  transform: scale(1.0);
+}
+
+.status-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 9px;
+  pointer-events: none;
+}
+
+.death-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #c0c0c0;
+  filter: drop-shadow(0 0 5px black);
+}
+
+.battle-ui-container {
+  position: absolute;
+  bottom: 5px;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  z-index: 6;
+}
+
+.health-bar-background {
+  width: 100%;
+  height: 18px;
+  background-color: #333;
+  border: 1px solid #111;
+  border-radius: 9px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5) inset;
+}
+
+.health-bar-foreground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #4CAF50;
+  background-image: linear-gradient(to bottom, #66bb6a, #43a047);
+  border-radius: 9px;
+  transition: width 0.3s ease-in-out;
+}
+
+.shield-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #00bcd4;
+  background-image: linear-gradient(to bottom, #4dd0e1, #00acc1);
+  border: 1px solid #80deea;
+  box-sizing: border-box;
+  border-radius: 9px;
+  transition: width 0.3s ease-in-out;
+}
+
+.health-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 12px;
+  font-weight: 100;
+  text-shadow: 1px 1px 2px black;
+  pointer-events: none;
+}
+
+.effects-container {
+  bottom: 25px;
+}

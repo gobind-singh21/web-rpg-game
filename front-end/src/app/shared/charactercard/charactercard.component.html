@@ -1,13 +1,42 @@
-<div class="character-card-container"(click)="onCardClick($event)" [class.disabled] = "disabled">
+<div
+  class="character-card-container"
+  (click)="onCardClick($event)"
+  [class.disabled] = "disabled"
+  [class.current-turn]="isCurrentTurn"
+  [class.selected-target]="isSelectedTarget"
+  [class.has-shield]="hasShield"
+  [class.is-dead]="isDead"
+>
   <div
     class="character-card"
     [style.background-color]="getBackgroundColor() || '#d3d3d3'"
     [style.width.px]="cardWidth"
     [style.height.px]="cardHeight"
   >
+
+    <div class="status-overlay" *ngIf="isDead">
+      <mat-icon class="death-icon">skull</mat-icon>
+    </div>
+
     <!-- Character Image -->
     <div class="character-image">
       <img [src]="getImageUrl()" [alt]="character.base.name" />
+    </div>
+
+    <div class="battle-ui-container" *ngIf="showBattleUI">
+
+      <!-- Health Bar background -->
+      <div class="health-bar-background">
+        <!-- Actual Health Bar (the green/red part) -->
+        <div class="health-bar-foreground" [style.width.%]="getHealthPercent()"></div>
+
+        <!-- Shield Bar, sits on top of the health bar -->
+        <div class="shield-bar" [style.width.%]="getShieldPercent()"></div>
+
+        <!-- Text to show current health value -->
+        <span class="health-text">{{ character.snapshot.currentHealth }}</span>
+      </div>
+
     </div>
 
     <!-- Info Button -->
@@ -34,28 +63,28 @@
           <span class="stat-icon health-icon">
             <mat-icon>favorite</mat-icon>
           </span>
-          <span class="stat-value">{{ character.base.baseHealth }}</span>
+          <span class="stat-value">{{ character.snapshot.currentHealth }}</span>
         </div>
         <div class="stat-item">
           <!-- <span class="stat-icon attack-icon">⚔️</span> -->
           <span class="stat-icon attack-icon">
             <mat-icon>gavel</mat-icon>
           </span>
-          <span class="stat-value">{{ character.base.baseAttack }}</span>
+          <span class="stat-value">{{ characterService.getMaxAttack(character.base.baseAttack, character.snapshot.effects) }}</span>
         </div>
         <div class="stat-item">
           <!-- <span class="stat-icon defense-icon">🛡️</span> -->
           <span class="stat-icon defense-icon">
             <mat-icon>shield</mat-icon>
           </span>
-          <span class="stat-value">{{ character.base.baseDefense }}</span>
+          <span class="stat-value">{{ characterService.getMaxDefense(character.base.baseDefense, character.snapshot.effects) }}</span>
         </div>
         <div class="stat-item">
           <!-- <span class="stat-icon speed-icon">⚡</span> -->
           <span class="stat-icon speed-icon">
             <mat-icon>bolt</mat-icon>
           </span>
-          <span class="stat-value">{{ character.base.baseSpeed }}</span>
+          <span class="stat-value">{{ characterService.getMaxSpeed(character.base.baseSpeed, character.snapshot.effects) }}</span>
         </div>
       </div>
 

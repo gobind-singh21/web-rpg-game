@@ -1,5 +1,5 @@
 package com.rpg_game.game.model;
 
-import java.util.HashMap;
+import java.util.List;
 
-public record BasicActionRequest(int currentCharacterId, int targetId, HashMap<Integer, CharacterSnapshot> currentLineup) {}
+public record BasicActionRequest(int currentCharacterId, int targetId, List<CharacterSnapshot> currentLineup) {}

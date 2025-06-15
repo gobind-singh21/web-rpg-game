@@ -15,11 +15,7 @@ export class BasicTargetService {
   public readonly basicTarget = this._basicTarget.asReadonly();
 
   selectBasicTarget(characterId: number): void {
-    const currentCharacter: number = this.turnOrderService.turnOrder()[this.turnOrderService.currentCharacter()];
-    const currentCharacterTeam = this.characterSnapService.characterMap().get(currentCharacter)?.team;
-    if(currentCharacterTeam != this.characterSnapService.characterMap().get(this._basicTarget())) {
-      this._basicTarget.update(() => characterId);
-    }
+    this._basicTarget.set(characterId);
   }
 
   constructor() { }
