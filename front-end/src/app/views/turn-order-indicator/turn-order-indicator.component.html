@@ -1,0 +1,19 @@
+<div class="turn-order-container">
+  <div class="turn-order-label">TURN ORDER</div>
+  <div class="portraits-track">
+    <ng-container *ngFor="let characterId of turnOrder; let i = index">
+      <div
+        *ngIf="getCharacterById(characterId) as character"
+        class="portrait-container"
+        [class.active-turn]="i === currentCharacterIndex"
+        [title]="character.base.name"
+      >
+        <img
+          [src]="character.base.imageUrl"
+          [alt]="character.base.name"
+          class="portrait-image"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>

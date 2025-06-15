@@ -1,5 +1,5 @@
 package com.rpg_game.game.model;
 
-import java.util.HashMap;
+import java.util.List;
 
-public record SkillActionRequest(int currentCharacterId, String currentTeam, HashMap<Integer, CharacterSnapshot> currentLineup) {}
+public record SkillActionRequest(int currentCharacterId, String currentTeam, List<CharacterSnapshot> currentLineup) {}

@@ -12,18 +12,15 @@ export class CharacterSnapService {
 
   updateCharacterStat(characterId: number, characeterSnapshot: CharacterSnapshot): void {
     this._characterMap.update((oldCharacterMap) => {
-      oldCharacterMap.set(characterId, characeterSnapshot);
-      return oldCharacterMap;
+      const newMap = new Map(oldCharacterMap);
+      newMap.set(characterId, characeterSnapshot);
+      return newMap;
     });
   }
 
   isCharacterDead(characterId: number): boolean {
     return this._characterMap().get(characterId) != null
     && this._characterMap().get(characterId)?.currentHealth == 0;
-  }
-
-  addCharacter(characterId: number, characterSnapshot: CharacterSnapshot): void {
-    this._characterMap.update((oldCharacterMap) => oldCharacterMap.set(characterId, characterSnapshot));
   }
 
   constructor() { }

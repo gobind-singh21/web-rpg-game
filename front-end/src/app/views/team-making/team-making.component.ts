@@ -6,6 +6,8 @@ import { CharactercardComponent } from '../../shared/charactercard/charactercard
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TeamStateService } from '../../core/services/team-state.service';
+import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
+import { TeamService } from '../../core/services/team.service';
 
 @Component({
   selector: 'team-making',
@@ -15,7 +17,16 @@ import { TeamStateService } from '../../core/services/team-state.service';
 })
 export class TeamMaking implements OnInit {
 
-constructor(private router: Router, private characterService: CharacterService, private teamStateService : TeamStateService) {}
+constructor(
+  private loggedInCheckService: LoggedInCheckService,
+  private router: Router,
+  private characterService: CharacterService,
+  private teamStateService : TeamStateService,
+  private teamService: TeamService
+) {
+  if(!loggedInCheckService.isAlreadyLoggedIn())
+    router.navigate(["/login"]);
+}
 
 
 navigateToBattle() {
@@ -25,8 +36,12 @@ navigateToBattle() {
       return;
     }
     // Store teams in service
-    this.teamStateService.setTeams(this.team1Characters, this.team2Characters);
-    
+    this.teamService.setTeam1([...this.team1Characters]);
+    this.teamService.setTeam2([...this.team2Characters]);
+    this.team1Characters = [];
+    this.team2Characters = [];
+    // this.teamStateService.setTeams(this.team1Characters, this.team2Characters);
+
     // Navigate without query params
     this.router.navigate(['/battlefield']);
 

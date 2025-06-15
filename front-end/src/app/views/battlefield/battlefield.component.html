@@ -1,4 +1,10 @@
 <div class="game-container">
+
+  <app-turn-order-indicator
+    [turnOrder]="turnOrder.turnOrder()"
+    [currentCharacterIndex]="turnOrder.currentCharacter()"
+  ></app-turn-order-indicator>
+
   <!-- Header Section -->
   <div class="header">
     <div class="rune-title-section">
@@ -13,9 +19,15 @@
     <!-- Team 2 Characters (Top) -->
     <div class="team team-2">
       <app-charactercard
-        *ngFor="let character of team2Characters"
+        *ngFor="let character of teamService.team2().characters"
         [character]="character"
         class="character-card-team2"
+        (characterSelect)="targetSelect($event)"
+        [isCurrentTurn]="turnOrder.turnOrder()[turnOrder.currentCharacter()] == character.id"
+        [isSelectedTarget]="basicTargetService.basicTarget() === character.id"
+        [hasShield]="character.snapshot.shield > 0"
+        [isDead]="character.snapshot.currentHealth <= 0"
+        [showBattleUI]="true"
       ></app-charactercard>
     </div>
 
@@ -27,34 +39,58 @@
     <!-- Team 1 Characters (Bottom) -->
     <div class="team team-1">
       <app-charactercard
-        *ngFor="let character of team1Characters"
+        *ngFor="let character of teamService.team1().characters"
         [character]="character"
         class="character-card-team1"
+        (characterSelect)="targetSelect($event)"
+        [isCurrentTurn]="turnOrder.turnOrder()[turnOrder.currentCharacter()] == character.id"
+        [isSelectedTarget]="basicTargetService.basicTarget() === character.id"
+        [hasShield]="character.snapshot.shield > 0"
+        [isDead]="character.snapshot.currentHealth <= 0"
+        [showBattleUI]="true"
       ></app-charactercard>
     </div>
   </div>
 
   <div class="bottom-bar">
-    <button class="leave-btn">Leave</button>
+    <button class="leave-btn" (click)="onLeave()">Leave</button>
+
+    <div class="skill-point-container">
+    <mat-icon class="skill-point-icon">star_rate</mat-icon>
+    <span class="skill-point-label">Skill Points</span>
+    <span class="skill-point-value">
+      <!-- We use a ternary operator to check which team's points to show -->
+      {{
+        currentTeam.currentTeam() === 1
+        ? teamService.team1().skillPoints
+        : teamService.team2().skillPoints
+      }}
+    </span>
+    </div>
 
     <div class="team-toggle">
-      <button class="team-toggle-btn">Team 1</button>
-      <button class="team-toggle-btn active">Team 2</button>
+      <button class="team-toggle-btn" [class.active]="currentTeam.currentTeam() == 1">Team 1</button>
+      <button class="team-toggle-btn" [class.active]="currentTeam.currentTeam() == 2">Team 2</button>
     </div>
 
     <div class="action-buttons">
       <div class="action-wrapper">
-        <div class="action-btn" id="attack-btn">
+        <div class="action-btn" id="attack-btn" (click)="onBasicAttack()">
           <img src="../../assets/images/icons/attack.png" alt="Attack Icon" />
-          <span class="action-count">1</span>
+          <span class="action-count">+1</span>
         </div>
-        <span class="action-label">+ATK</span>
+        <span class="action-label">ATK</span>
       </div>
 
       <div class="action-wrapper">
-        <div class="action-btn" id="skill-btn">
+        <div
+          class="action-btn"
+          id="skill-btn"
+          (click)="onSkillAttack()"
+          [class.disabled]="(currentTeam.currentTeam() === 1 && teamService.team1().skillPoints <= 0) || (currentTeam.currentTeam() === 2 && teamService.team2().skillPoints <= 0)"
+        >
           <img src="front-../../assets/images/icons/skill.png" alt="Skill Icon" />
-          <span class="action-count">1</span>
+          <span class="action-count">-1</span>
         </div>
         <span class="action-label">Skill</span>
       </div>

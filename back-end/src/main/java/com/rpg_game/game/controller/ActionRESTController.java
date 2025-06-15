@@ -1,6 +1,7 @@
 package com.rpg_game.game.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rpg_game.game.entity.Character;
 import com.rpg_game.game.model.BasicActionRequest;
+import com.rpg_game.game.model.BattleStartRequest;
+import com.rpg_game.game.model.BattleStartResponse;
 import com.rpg_game.game.model.CharacterSnapshot;
 import com.rpg_game.game.model.SkillActionRequest;
 import com.rpg_game.game.repositories.CharacterRepository;
@@ -19,7 +22,7 @@ import com.rpg_game.game.model.ActionResponse;
 import com.rpg_game.game.services.ActionService;
 
 @RestController
-@RequestMapping("/api/test/public/action")
+@RequestMapping("/api/action")
 public class ActionRESTController {
   
   @Autowired
@@ -28,41 +31,91 @@ public class ActionRESTController {
   @Autowired
   private CharacterRepository characterRepository;
 
+  private int findIndexOfId(List<CharacterSnapshot> snapshots, int id) {
+    int totalSnapshots = snapshots.size();
+    for(int i = 0; i < totalSnapshots; i++) {
+      if(snapshots.get(i).id() == id)
+        return i;
+    }
+    return -1;
+  }
+
+  private CharacterSnapshot buildSnapshotFromCharacter(Character character) {
+    return new CharacterSnapshot(
+                  character.getId(),
+                  character.getTeam(),
+                  character.getCurrentHealth(),
+                  character.getShield(),
+                  character.getEffects()
+                );
+  }
+
+  private Character buildCharacterFromSnap(CharacterSnapshot snapshot) {
+    if(snapshot == null)
+      return null;
+    var character = characterRepository.findById(snapshot.id());
+    if(!character.isPresent())
+      return null;
+    var foundCharacter = character.get();
+    foundCharacter.setCurrentHealth(snapshot.currentHealth());
+    foundCharacter.setEffects(snapshot.effects());
+    foundCharacter.setShield(snapshot.shield());
+    foundCharacter.setTeam(snapshot.team());
+    return foundCharacter;
+  }
+
+  @PostMapping("/battle-start")
+  public ResponseEntity<BattleStartResponse> battleStart(@RequestBody BattleStartRequest battleStartRequest) {
+    var characters = new ArrayList<Character>();
+    for(var id : battleStartRequest.characterIds()) {
+      var character = characterRepository.findById(id);
+      if(!character.isPresent()) {
+        return new ResponseEntity<BattleStartResponse>(new BattleStartResponse(new ArrayList<Integer>()), HttpStatus.NOT_FOUND);
+      }
+      var foundCharacter = character.get();
+      characters.add(foundCharacter);
+    }
+    return new ResponseEntity<BattleStartResponse>(actionService.battleStart(characters), HttpStatus.OK);
+  }
+
   @PostMapping("/basic")
   public ResponseEntity<ActionResponse> basicAttack(@RequestBody BasicActionRequest basicActionRequest) {
     var currentLineup = basicActionRequest.currentLineup();
 
     var currentCharacterId = basicActionRequest.currentCharacterId();
-    var targetId = basicActionRequest.targetId();
-    var currentCharacter = characterRepository.findById(currentCharacterId);
-    var target = characterRepository.findById(targetId);
-    var currentCharSnap = currentLineup.get(currentCharacterId);
-    var targetSnap = currentLineup.get(targetId);
+    int currentCharacterIndex = findIndexOfId(currentLineup, currentCharacterId);
+    if(currentCharacterIndex == -1) {
+      return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character not found in turn order", currentLineup), HttpStatus.BAD_REQUEST);
+    }
+    var currentCharSnap = currentLineup.get(currentCharacterIndex);
+    if(currentCharSnap == null) {
+      return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character snap is null", currentLineup), HttpStatus.BAD_REQUEST);
+    }
     
-    if(!currentCharacter.isPresent() || currentCharSnap == null || currentCharacterId != currentCharSnap.id()) {
+    var targetId = basicActionRequest.targetId();
+    int targetIndex = findIndexOfId(currentLineup, targetId);
+    if(targetIndex == -1) {
+      return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Target character not found in turn order", currentLineup), HttpStatus.BAD_REQUEST);
+    }
+    var targetSnap = currentLineup.get(targetIndex);
+    var currentCharacter = buildCharacterFromSnap(currentCharSnap);
+    var target = buildCharacterFromSnap(targetSnap);
+
+    if(currentCharacter == null || currentCharacterId != currentCharSnap.id()) {
       return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character not found", currentLineup), HttpStatus.NOT_FOUND);
     }
     
-    if(!target.isPresent() || targetSnap == null || targetSnap.id() != targetId) {
+    if(target == null || targetSnap == null || targetSnap.id() != targetId) {
       return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Target character not found", currentLineup), HttpStatus.NOT_FOUND);
     }
 
-    var currentTeam = currentLineup.get(currentCharacterId).team();
-    var targetTeam = currentLineup.get(targetId).team();
+    var currentTeam = currentLineup.get(currentCharacterIndex).team();
 
     if(currentTeam == null) {
       return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Team of current character or target is null", currentLineup), HttpStatus.BAD_REQUEST);
     }
 
-    currentCharacter.get().setCurrentHealth(currentLineup.get(currentCharacterId).currHealth());
-    currentCharacter.get().setShield(currentLineup.get(currentCharacterId).shield());
-    currentCharacter.get().setEffects(currentLineup.get(currentCharacterId).effects());
-
-    target.get().setCurrentHealth(currentLineup.get(targetId).currHealth());
-    target.get().setShield(currentLineup.get(targetId).shield());
-    target.get().setEffects(currentLineup.get(targetId).effects());
-
-    var basicResponse = actionService.basicAttack(currentCharacter.get(), target.get());
+    var basicResponse = actionService.basicAttack(currentCharacter, target);
     if(!basicResponse.validMove()) {
       if(basicResponse.characterDead()) {
         return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character is already dead", currentLineup), HttpStatus.BAD_REQUEST);
@@ -70,13 +123,10 @@ public class ActionRESTController {
         return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Target is already dead", currentLineup), HttpStatus.BAD_REQUEST);
       }
     }
-
-    currentLineup.put(currentCharacterId, new CharacterSnapshot(currentCharacterId, currentTeam, currentCharacter.get().getCurrentHealth(), currentCharacter.get().getShield(), currentCharacter.get().getEffects()));
-    if(target.get().isDead()) {
-      currentLineup.remove(targetId);
-    } else {
-      currentLineup.put(targetId, new CharacterSnapshot(targetId, targetTeam, target.get().getCurrentHealth(), target.get().getShield(), target.get().getEffects()));
-    }
+    
+    currentCharSnap = buildSnapshotFromCharacter(currentCharacter);
+    targetSnap = buildSnapshotFromCharacter(target);
+    currentLineup.set(targetIndex, targetSnap);
 
     return new ResponseEntity<ActionResponse>(new ActionResponse(true, basicResponse.message(), currentLineup), HttpStatus.OK);
   }
@@ -87,54 +137,42 @@ public class ActionRESTController {
     var currentTeam = skillActionRequest.currentTeam();
 
     var currentCharacterId = skillActionRequest.currentCharacterId();
-    var currentCharacter = characterRepository.findById(currentCharacterId);
-
-    var currentCharSnap = currentLineup.get(currentCharacterId);
-    if(!currentCharacter.isPresent() || currentCharSnap == null || currentCharSnap.id() != currentCharacterId) {
-      return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character not found in database", currentLineup), HttpStatus.NOT_FOUND);
-    }
-
-    int position = 0;
-    int currentCharacterIndex = -1;
-
-    var lineupList = new ArrayList<Character>();
-
-    for(var character : currentLineup.entrySet()) {
-      var foundCharacter = characterRepository.findById(character.getKey());
-      var characterSnap = character.getValue();
-      if(!foundCharacter.isPresent() || characterSnap == null || characterSnap.id() != character.getKey()) {
-        return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Character with id " + character.getKey() + " not found in database", currentLineup), HttpStatus.NOT_FOUND);
-      }
-      if(character.getKey() == currentCharacterId)
-        currentCharacterIndex = position;
-      foundCharacter.get().setCurrentHealth(characterSnap.currHealth());
-      foundCharacter.get().setShield(characterSnap.shield());
-      foundCharacter.get().setEffects(characterSnap.effects());
-      foundCharacter.get().setTeam(characterSnap.team());
-      if(!foundCharacter.get().isDead())
-        lineupList.add(foundCharacter.get());
-      position++;
-    }
-
+    int currentCharacterIndex = findIndexOfId(currentLineup, currentCharacterId);
     if(currentCharacterIndex == -1) {
       return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character not found in the turn order", currentLineup), HttpStatus.BAD_REQUEST);
     }
+    var currentCharSnap = currentLineup.get(currentCharacterIndex);
+    var currentCharacter = buildCharacterFromSnap(currentCharSnap);
 
-    var response = actionService.skill(currentCharacter.get(), currentCharacterIndex, currentTeam, lineupList);
+    if(currentCharSnap == null) {
+      return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character snap is null", currentLineup), HttpStatus.BAD_REQUEST);
+    }
+    if(currentCharacter == null || currentCharSnap.id() != currentCharacterId) {
+      return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Current character not found in database", currentLineup), HttpStatus.NOT_FOUND);
+    }
+
+    var lineupList = new ArrayList<Character>();
+
+    for(var character : currentLineup) {
+      var foundCharacter = buildCharacterFromSnap(character);
+      if(foundCharacter == null || character == null || character.id() != character.id()) {
+        return new ResponseEntity<ActionResponse>(new ActionResponse(false, "Character with id " + character.id() + " not found in database", currentLineup), HttpStatus.NOT_FOUND);
+      }
+      if(!foundCharacter.isDead())
+        lineupList.add(foundCharacter);
+    }
+
+    var response = actionService.skill(currentCharacter, currentCharacterIndex, currentTeam, lineupList);
 
     if(!response.validMove()) {
       return new ResponseEntity<ActionResponse>(new ActionResponse(false, response.message(), currentLineup), HttpStatus.BAD_REQUEST);
     }
 
-    currentLineup.clear();
-    for(var character : response.lineup()) {
-      var characterSnap = new CharacterSnapshot(character.getId(), character.getTeam(), character.getCurrentHealth(), character.getShield(), character.getEffects());
-      currentLineup.put(character.getId(), characterSnap);
+    var newLineup = new ArrayList<CharacterSnapshot>();
+    for(var character : lineupList) {
+      newLineup.add(buildSnapshotFromCharacter(character));
     }
 
-    return new ResponseEntity<ActionResponse>(new ActionResponse(true, response.message(), currentLineup), HttpStatus.OK);
+    return new ResponseEntity<ActionResponse>(new ActionResponse(true, response.message(), newLineup), HttpStatus.OK);
   }
 }
-
-//[3,1,2,4,6]
-
