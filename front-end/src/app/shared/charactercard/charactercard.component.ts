@@ -4,6 +4,7 @@ import { CharacterClass } from '../types/characterClass';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { CharacterService } from '../../core/services/character.service';
+import { Effect } from '../types/effect';
 
 @Component({
   selector: 'app-charactercard',
@@ -49,6 +50,47 @@ export class CharactercardComponent implements OnInit {
     if (maxHealth === 0) return 0;
     const percentage = (this.character.snapshot.shield / maxHealth) * 100;
     return Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
+  }
+
+  public formatEffectDetails(effect: Effect): string {
+    const details: string[] = [];
+    const sign = effect.isBuff ? '+' : '-';
+
+    if (effect.attackPercent > 0) {
+      details.push(`ATK ${sign}${effect.attackPercent}%`);
+    }
+    if (effect.defensePercent > 0) {
+      details.push(`DEF ${sign}${effect.defensePercent}%`);
+    }
+    if (effect.speedPercent > 0) {
+      details.push(`SPD ${sign}${effect.speedPercent}%`);
+    }
+    if (effect.healthPercent > 0) {
+      details.push(`Max HP ${sign}${effect.healthPercent}%`);
+    }
+
+    // If there are no stat changes (e.g., a pure heal/damage over time effect),
+    // we can return an empty string or a default message.
+    if (details.length === 0) {
+      return ''; // No details to show
+    }
+
+    // Join the details with a comma, e.g., "ATK +10%, DEF +15%"
+    return `(${details.join(', ')})`;
+  }
+
+  getBuffs(): Effect[] {
+    if (!this.character?.snapshot?.effects) {
+      return [];
+    }
+    return this.character.snapshot.effects.filter(effect => effect.isBuff);
+  }
+
+  getDebuffs(): Effect[] {
+    if (!this.character?.snapshot?.effects) {
+      return [];
+    }
+    return this.character.snapshot.effects.filter(effect => !effect.isBuff);
   }
 
   calculateCardDimensions() {
