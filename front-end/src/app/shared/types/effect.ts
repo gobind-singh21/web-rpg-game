@@ -6,4 +6,5 @@ export interface Effect {
   speedPercent: number,
   isBuff: boolean,
   turns: number,
+  name: string
 }

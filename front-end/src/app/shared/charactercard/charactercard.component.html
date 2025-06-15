@@ -88,6 +88,30 @@
         </div>
       </div>
 
+      <div class="effects-list-container">
+
+        <!-- Show the Buffs section only if there are any buffs -->
+        <div *ngIf="getBuffs().length > 0" class="effects-section">
+          <h4>BUFFS</h4>
+            <div *ngFor="let effect of getBuffs()" class="effect-item buff">
+              <span class="effect-name">{{ effect.name }}</span>
+              <span class="effect-details">{{ formatEffectDetails(effect) }}</span>
+              <span class="effect-turns">({{ effect.turns }} turns)</span>
+            </div>
+        </div>
+
+        <!-- Show the Debuffs section only if there are any debuffs -->
+        <div *ngIf="getDebuffs().length > 0" class="effects-section">
+          <h4>DEBUFFS</h4>
+            <div *ngFor="let effect of getDebuffs()" class="effect-item debuff">
+              <span class="effect-name">{{ effect.name }} </span>
+              <span class="effect-details"> {{ formatEffectDetails(effect) }} </span>
+              <span class="effect-turns"> ({{ effect.turns }} turns)</span>
+            </div>
+        </div>
+
+      </div>
+
       <!-- <div class="class-icon">☀️</div> -->
       <div class="class-icon">
         <mat-icon>stars</mat-icon>
