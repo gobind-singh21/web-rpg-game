@@ -1,5 +1,7 @@
 package com.rpg_game.game.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -97,10 +99,12 @@ public class Effect {
     this.speedPercent = speedPercent;
   }
 
+  @JsonProperty("isBuff")
   public boolean isBuff() {
     return isBuff;
   }
 
+  @JsonProperty("isBuff")
   public void setBuff(boolean isBuff) {
     this.isBuff = isBuff;
   }

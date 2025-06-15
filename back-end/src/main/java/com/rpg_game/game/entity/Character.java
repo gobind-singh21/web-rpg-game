@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rpg_game.game.types.CharacterClass;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -52,6 +53,7 @@ public class Character implements Comparable<Character> {
 
     private String imageUrl = "";
 
+    @Column(columnDefinition = "TEXT")
     private String description = "";
 
     private String backgroundColor = "#FFFFFF";
