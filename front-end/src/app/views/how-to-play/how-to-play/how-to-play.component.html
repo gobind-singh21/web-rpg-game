@@ -1,53 +1,111 @@
-<div class="how-container">
-    <div class="content-box">
-      <h1>🎮 How to Play RuneWars 🎮</h1>
+<body>
+    <div class="how-container">
+      <div class="content-wrapper">
+        <h1>RuneWars: How to Play</h1>
   
-      <section>
-        <h2>Core Concept</h2>
-        <p>RuneWars brings classic turn-based RPG combat to life with a focus on team strategy and resource management. Players command a roster of unique characters, each with distinct roles and abilities, to outmaneuver their opponents. The shared "skill point" pool adds a layer of depth, forcing teams to make critical decisions on when and how to unleash their most devastating attacks or life-saving heals.</p>
-      </section>
+        <section class="info-card">
+          <div class="card-content">
+            <h2>The Battlefield Awaits!</h2>
+            <p>RuneWars is a strategic turn-based RPG where two teams clash. Characters act in sequence, determined by their speed. Lead your team to victory by outmaneuvering your opponents!</p>
+            <p>Characters will have turn order on basis of their speed stats.</p>
+          </div>
+          <div class="card-image">
+            <img src="../../../../assets/images/howToPlay/BattleOverview.png" alt="Battlefield Overview">
+            <img src="../../../../assets/images/howToPlay/TurnOrder.png" alt="">
+            <p class="image-caption">Witness the Turn Order and Team Setup.</p>
+          </div>
+        </section>
   
-      <section>
-        <h2>Combat System</h2>
-        <ul>
-          <li><strong>Turn-Based System:</strong> 🔄 Characters act in sequence, determined by their <span class="highlight">speed</span> stat.</li>
-          <li><strong>Two Teams:</strong> 🤝 Players are divided into two opposing teams.</li>
-          <li>
-            <h3>Skill Points: 🌟 A Shared Team Resource</h3>
-            <p>Skill points are essential for activating powerful special skills. They are a common resource shared by all characters on a team.</p>
+        <section class="info-card reverse-order">
+          <div class="card-image">
+            <img src="../../../../assets/images/howToPlay/Skill Points.png" alt="Skill Points UI">
+            <p class="image-caption">Manage your Team's Shared Skill Points.</p>
+          </div>
+          <div class="card-content">
+            <h2>Master Your Skills & Skill Points</h2>
             <ul>
-              <li><strong>Basic Attack:</strong> 🗡️ A standard attack dealing damage scaled by character stats. Successfully using a basic attack earns the team <span class="highlight">one skill point</span>.</li>
-              <li><strong>Skill:</strong> ✨ A unique ability specific to each character, with varying effects. Utilizing a skill <span class="highlight">consumes skill points</span> from the team's shared pool.</li>
-              <li><strong>Skill Point Cap:</strong> The team's skill point pool is capped at <span class="highlight">5 points</span>.</li>
-              <li><strong>Resource Management:</strong> 🧠 Teams must strategically manage skill points as they are shared amongst all characters.</li>
-              <li><strong>Important Note:</strong> ⚠️ If characters use skill points and the pool becomes 0, then the next character taking a turn <span class="highlight">cannot use their skill</span>. They will be bound to use a basic attack in order to gain one skill point for the team.</li>
+              <li>
+                <p><strong>Skill Points (SP):</strong> A shared team resource, capped at 5.</p>
+              </li>
+              <li>
+                <p><strong>Basic Attack (ATK):</strong> Deals damage, and earns your team <strong>+1 SP</strong>.</p>
+              </li>
+              <li>
+                <p><strong>Skill:</strong> Unique ability, consumes <strong>-1 SP</strong></p>
+              </li>
+              <li>
+                <p><strong>Note:</strong> If SP is 0, characters must use a basic attack to gain SP before using a skill.</p>
+              </li>
             </ul>
-          </li>
-        </ul>
-      </section>
+          </div>
+        </section>
   
-      <section>
-        <h2>Character System</h2>
-        <p>Each character possesses the following core attributes:</p>
-        <ul>
-          <li><strong>Health:</strong> ❤️ & <strong>Max Health:</strong> 💖 - Your character's current and maximum life points.</li>
-          <li><strong>Attack:</strong> 💥 - Determines the damage dealt by basic attacks and some skills.</li>
-          <li><strong>Speed:</strong> 🏃💨 - Dictates the turn order in combat; higher speed means earlier turns.</li>
-          <li><strong>Defense:</strong> 🛡️ - Reduces incoming damage from enemy attacks.</li>
-          <li><strong>List of Buffs and Debuffs:</strong> ⬆️ ⬇️ - Temporary effects that enhance (buffs) or hinder (debuffs) character stats or abilities.</li>
-        </ul>
-      </section>
+        <section class="info-card">
+          <div class="card-content">
+            <h2>Understanding Character Status</h2>
+            <p>Keep an eye on these visual cues during battle:</p>
+            <ul>
+              <li>
+                <p><span class="highlight-yellow">Yellow Border:</span> This indicates the character currently selected by the player.</p>
+              </li>
+              <li>
+                <p><span class="highlight-red">Red Border:</span> This highlights the enemy character that is targeted for an attack.</p>
+              </li>
+              <li>
+                <p><span class="highlight-blue">Blue Border:</span> Shows the Sheild is active on the characters.</p>
+              </li>
+              <li>
+                <p><span class="highlight-green">Green Bar:</span> Shows the character's current Health Points (HP).</p>
+              </li>
+            </ul>
+          </div>
+          <div class="card-image">
+            <img src="../../../../assets/images/howToPlay/RedBorder.png" alt="Character Selection & Target">
+            <img src="../../../../assets/images/howToPlay/YellowBorder.png" alt="Character Selection & Target">
+            <img src="../../../../assets/images/howToPlay/Blue Border.png" alt="">
+            <p class="image-caption">Visual cues for selected, targeted, and health.</p>
+          </div>
+        </section>
   
-      <section>
-        <h2>Character Classes</h2>
-        <p>Characters are categorized into distinct classes, each with a specialized role:</p>
-        <ul>
-          <li><strong>DPS (Damage Per Second):</strong> 🎯 The main damage dealer, focused on maximizing offensive output.</li>
-          <li><strong>Healer:</strong> ✚ Primarily responsible for restoring allies' health.</li>
-          <li><strong>Shielder:</strong> 🛡️ Provides defensive barriers to allies, absorbing incoming damage.</li>
-          <li><strong>Buffer:</strong> ⬆️ Grants beneficial stat boosts (buffs) to allies.</li>
-          <li><strong>Debuffer:</strong> ⬇️ Inflicts negative stat reductions (debuffs) on enemies.</li>
-        </ul>
-      </section>
+        <section class="info-card reverse-order">
+          <div class="card-image">
+            <img src="../../../../assets/images/howToPlay/infoOfCharacter.png" alt="Character Stats">
+            <p class="image-caption">View detailed stats during character selection.</p>
+          </div>
+          <div class="card-content">
+            <h2>Characters Stats</h2>
+            <p>Each character possesses unique stats (Health, Attack, Speed, Defense) and belongs to specialized classes:</p>
+            <ul>
+                <li>
+                    <p><span class="stat-icon attack-icon" style="color: #ff9800;"><mat-icon>gavel</mat-icon></span> Attack Stat</p>
+                  </li>
+                  <li>
+                    <p><span class="stat-icon health-icon" style="color: #ff5252;"><mat-icon>favorite</mat-icon></span> Health Stat</p>
+                  </li>
+                  <li>
+                    <p><span class="stat-icon defense-icon" style="color: #4fc3f7;"><mat-icon>shield</mat-icon></span> Defecnce Stat</p>
+                  </li>
+                  <li>
+                    <p><span class="stat-icon speed-icon" style="color: #ffd740;"><mat-icon>bolt</mat-icon></span> Speed Stat</p>
+                  </li>
+            </ul>
+          </div>
+        </section>
+  
+        <section class="info-card">
+          <div class="card-content">
+            <h2>Achieve Victory!</h2>
+            <p>The battle concludes when one team is fully defeated. Strategize your moves, manage your resources, and combine your characters' strengths to emerge victorious!</p>
+          </div>
+          <div class="card-image">
+            <img src="../../../../assets/images/howToPlay/Game Over.png" alt="Battle Over">
+            <p class="image-caption">Victory is Yours!</p>
+          </div>
+        </section>
+  
+        <div class="exit-button-container">
+          <button class="exit-button" routerLink="/">Exit How To Play</button>
+        </div>
+      </div>
     </div>
-  </div>
+  </body>

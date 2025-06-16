@@ -1,132 +1,175 @@
-.how-container {
-    min-height: 100vh;
-    background: url("../../../../assets/images/homepageBackground.svg") no-repeat center center;
-    background-size: cover;
-    display: flex; /* Use flexbox to center the content box */
-    justify-content: center;
-    align-items: center;
-    padding: 20px; /* Add some padding around the container */
-    box-sizing: border-box; /* Include padding in the element's total width and height */
+body {
+    background: url("../../../../assets/images/homepageBackground.svg") no-repeat fixed;
+    /* background-size: cover;    */
 }
 
-.content-box {
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for readability */
-    color: #fff; /* White text color */
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 900px; /* Limit content width for better readability */
-    width: 100%; /* Ensure it takes full width up to max-width */
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6); /* A subtle glow effect */
-    border: 1px solid rgba(0, 255, 255, 0.4); /* Light border */
-    overflow-y: auto; /* Enable scrolling if content exceeds height */
-    max-height: calc(100vh - 40px); /* Max height to fit within viewport, accounting for padding */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clear, modern font */
-    line-height: 1.6;
+.how-container {
+    min-height: 100vh;
+    /* background: url("../../../../assets/images/homepageBackground.svg") no-repeat center center;
+    background-size: cover; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top */
+    padding: 40px 20px; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.content-wrapper {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for readability */
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 900px; /* Max width for better readability */
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color: #f0f0f0; /* Light text color */
 }
 
 h1 {
-    color: #00ffcc; /* Bright cyan for the main title */
     text-align: center;
+    color: #ffcc00; /* Gold-like color for title */
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column; /* Default to column for small screens */
+    background-color: rgba(30, 30, 30, 0.8); /* Slightly lighter background for cards */
+    border-radius: 10px;
     margin-bottom: 30px;
-    font-size: 3em;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.9);
-    letter-spacing: 1px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    align-items: center;
+    text-align: center;
 }
 
-h2 {
-    color: #00ffcc; /* Bright cyan for section headers */
+.info-card:nth-of-type(even) { /* Apply different styles for even cards if desired */
+    /* background-color: rgba(40, 40, 40, 0.8); */
+}
+
+.card-content {
+    flex: 1;
+    padding: 15px;
+}
+
+.card-content h2 {
+    color: #aaddff; /* Light blue for card titles */
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.card-content p, .card-content ul {
+    line-height: 1.6;
+    font-size: 1.1em;
     text-align: left;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 2em;
-    padding-bottom: 10px;
-    border-bottom: 2px solid rgba(0, 255, 255, 0.3);
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
 }
 
-h3 {
-    color: #ffe066; /* A warm yellow for sub-headers */
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1.5em;
-}
-
-p {
-    margin-bottom: 15px;
-    text-align: justify;
-}
-
-ul {
-    list-style-type: none; /* Remove default bullet points */
+.card-content ul {
+    list-style: none; /* Remove default bullet points */
     padding-left: 0;
-    margin-bottom: 15px;
 }
 
-ul li {
+.card-content ul li {
     margin-bottom: 8px;
-    padding-left: 30px; /* Indent list items */
+    padding-left: 25px; /* Space for custom bullet */
     position: relative;
 }
 
-ul li::before {
-    content: '✧'; /* Custom bullet point */
-    color: #00ffcc; /* Color for the custom bullet */
-    font-size: 1.4em;
+
+.card-content ul li::before {
+    content: '⭐'; /* Custom bullet point */
     position: absolute;
     left: 0;
-    top: -2px; /* Adjust vertical alignment */
+    color: #ffcc00;
 }
 
-.highlight {
-    color: #ffe066; /* Emphasize key terms with a yellow highlight */
+/* Highlight styles for text matching image borders */
+.highlight-yellow {
+  color: #FFFF00; /* Bright yellow */
+  font-weight: bold;
+}
+
+.highlight-red {
+  color: #FF0000; /* Bright red */
+  font-weight: bold;
+}
+
+.highlight-blue {
+    color: aqua;
     font-weight: bold;
-    text-shadow: 0 0 3px rgba(255, 224, 102, 0.5);
 }
 
-strong {
-    color: #00ffcc; /* Make strong tags stand out slightly */
+.highlight-green {
+  color: #00FF00; /* Bright green */
+  font-weight: bold;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .content-box {
-        padding: 25px;
-        max-height: calc(100vh - 20px); /* Adjust max height for smaller screens */
+.card-image {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.card-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    margin-bottom: 10px;
+}
+
+.image-caption {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 768px) {
+    .info-card {
+        flex-direction: row; /* Row layout for larger screens */
+        text-align: left;
     }
 
-    h1 {
-        font-size: 2.2em;
-        margin-bottom: 20px;
+    .info-card.reverse-order {
+        flex-direction: row-reverse; /* Image on right, text on left */
     }
 
-    h2 {
-        font-size: 1.6em;
-        margin-top: 25px;
+    .card-content {
+        padding: 20px 30px;
     }
 
-    h3 {
-        font-size: 1.3em;
-    }
-
-    ul li {
-        padding-left: 25px;
+    .card-image {
+        padding: 20px 30px;
     }
 }
 
-@media (max-width: 480px) {
-    .content-box {
-        padding: 15px;
-    }
+.exit-button-container {
+  text-align: center;
+  margin-top: 40px;
+}
 
-    h1 {
-        font-size: 1.8em;
-    }
+.exit-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
 
-    h2 {
-        font-size: 1.4em;
-    }
-
-    h3 {
-        font-size: 1.1em;
-    }
+.exit-button:hover {
+  background-color: #45a049;
 }
