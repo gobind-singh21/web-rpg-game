@@ -21,5 +21,9 @@ export class TurnOrderService {
     );
   }
 
+  setCurrentCharacter(newIndex: number): void {
+    this._currentCharacter.set(newIndex);
+  }
+
   constructor() { }
 }
