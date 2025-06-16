@@ -7,6 +7,22 @@
   [class.has-shield]="hasShield"
   [class.is-dead]="isDead"
 >
+
+  <div class="floating-text-container">
+    <!--
+      This loop will render a new span for each animation event.
+      'trackBy' is important for performance so Angular doesn't re-render the whole list.
+    -->
+    <span
+      *ngFor="let text of floatingTexts; trackBy: trackByTextId"
+      class="floating-text"
+      [ngClass]="text.type"
+    >
+      <!-- Add a '+' sign for healing, show '-' for damage (from the negative value) -->
+      {{ text.value > 0 ? '+' + text.value : text.value }}
+    </span>
+  </div>
+
   <div
     class="character-card"
     [style.background-color]="getBackgroundColor() || '#d3d3d3'"
