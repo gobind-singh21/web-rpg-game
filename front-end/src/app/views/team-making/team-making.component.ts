@@ -30,9 +30,7 @@ constructor(
     router.navigate(["/login"]);
 }
 
-howToPlay() {
-  this.router.navigate(["/how-to-play"])
-}
+
 
 
 navigateToBattle() {
