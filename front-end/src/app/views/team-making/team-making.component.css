@@ -9,6 +9,16 @@
   padding: 1rem;
 }
 
+.infoHowToPlay{
+  position: fixed; /* This is the key change */
+  top: 10px;       /* Distance from the top of the viewport */
+  right: 10px;      /* Distance from the right of the viewport */
+  margin: 0;       /* Remove margin if you're using top/right for positioning */
+  width: 35px;
+  height: 35px;
+}
+
+
 .team {
   border-radius: 8px;
   width: 32vw;

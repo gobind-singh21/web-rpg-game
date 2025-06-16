@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
 import { TeamStateService } from '../../core/services/team-state.service';
 import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
 import { TeamService } from '../../core/services/team.service';
+import { setting } from '../setting/setting.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'team-making',
-  imports: [CharactercardComponent, CommonModule, Tiles],
+  imports: [CharactercardComponent, CommonModule, Tiles, setting, MatIcon],
   templateUrl: './team-making.component.html',
   styleUrl: './team-making.component.css',
 })
@@ -26,6 +28,10 @@ constructor(
 ) {
   if(!loggedInCheckService.isAlreadyLoggedIn())
     router.navigate(["/login"]);
+}
+
+howToPlay() {
+  this.router.navigate(["/how-to-play"])
 }
 
 

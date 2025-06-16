@@ -15,6 +15,8 @@ body {
     overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
+
+
 .content-wrapper {
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for readability */
     border-radius: 15px;
