@@ -1,0 +1,43 @@
+.dialog-container {
+  background: #5d3e2c;
+  padding: 2rem;
+  border-radius: 25px;
+  border: 2px solid #ee680b;
+  text-align: center;
+  min-width: 300px;
+}
+
+.dialog-title {
+  font-size: 2rem;
+  color: #ee680b;
+  margin-bottom: 1.5rem;
+  -webkit-text-stroke: 1px #000;
+  font-weight: normal;
+}
+
+.dialog-message {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: normal;
+}
+
+.dialog-button {
+  background: #5d3e2c;
+  color: #ee680b;
+  border: 2px solid #ee680b;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.dialog-button:hover {
+  filter: brightness(1.2);
+}
+
+p{
+  font-weight: semibold;
+  font-size: 1.2rem;
+}

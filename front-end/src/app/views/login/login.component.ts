@@ -10,6 +10,8 @@ import {
 import { Router } from '@angular/router';
 import { LoginService } from '../../core/services/login.service';
 import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../../shared/custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private loggedInCheckService: LoggedInCheckService
+    private loggedInCheckService: LoggedInCheckService,
+    private dialog: MatDialog
   ) {
     this.formData = this.fb.group({
       email: ['', [Validators.required]],
@@ -44,7 +47,15 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.formData.invalid) {
-      console.log('form is invalid');
+      const dialogRef = this.dialog.open(CustomDialogComponent, {
+        disableClose: true,
+        data: {
+          title: 'Error',
+          message: 'Please fill all required fields',
+          buttonText: 'OK'
+        }
+      });
+      return;
     }
 
     const userData = {
@@ -52,32 +63,41 @@ export class LoginComponent {
       password: this.formData.get('password')?.value,
     };
 
-    console.log('Login Data:', userData);
-
     if (this.formData.valid) {
       this.loginService.loginUser(userData).subscribe({
         next: (response: any) => {
           localStorage.setItem('token', response.token);
-          console.log('Login successful:', response);
           this.router.navigate(['/home']);
         },
         error: (error: any) => {
-          console.error('Login failed:', error);
-          const errorMessage = error.error?.error || 'Unknown error';
+          const errorMessage = error.error?.error || 'Invalid email or password';
+          const dialogRef = this.dialog.open(CustomDialogComponent, {
+            disableClose: false,
+            data: {
+              title: 'Login Failed',
+              message: errorMessage,
+              buttonText: 'Try Again'
+            },
+            hasBackdrop: true,
+            backdropClass: 'dialog-backdrop'
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+            this.formData.patchValue({
+              email: '',
+              password: ''
+            });
+          });
         },
       });
-    } else {
-      console.log('Form is invalid');
     }
   }
 
   ForgotPassword(): void {
-    console.log('Navigate to Forgot Password');
     this.router.navigate(['/forgot-password']);
   }
 
   NavigateToRegister(): void {
-    console.log('Navigate to Register');
     this.router.navigate(['/register']);
   }
 }

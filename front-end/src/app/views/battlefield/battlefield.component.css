@@ -1,3 +1,73 @@
+/* Keyframe for subtle floating/breathing effect */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Keyframe for subtle horizontal movement */
+@keyframes swayLeft {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes swayRight {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+/* Keyframe for glow effect */
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+  }
+  100% {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  }
+}
+
+/* Keyframe for fire text effect (if still needed for other text, otherwise remove) */
+@keyframes fireText {
+  0% {
+    text-shadow: 0 0 5px orange, 0 0 10px red;
+  }
+  25% {
+    text-shadow: 0 0 8px orange, 0 0 15px red;
+  }
+  50% {
+    text-shadow: 0 0 10px orange, 0 0 20px red;
+  }
+  75% {
+    text-shadow: 0 0 8px orange, 0 0 15px red;
+  }
+  100% {
+    text-shadow: 0 0 5px orange, 0 0 10px red;
+  }
+}
+
 .game-container {
   height: 100vh;
   width: 100vw;
@@ -12,11 +82,41 @@
   left: 0;
 }
 
-.header {
+/* .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1rem;
+} */
+
+.header {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  position: relative;
+  z-index: 50;
+  height: 12vh;
+  margin-bottom: 1vh;
+}
+.rune-title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+app-turn-order-indicator {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+}
+.settings {
+  position: relative;
+  z-index: 1000;
 }
 
 .rune-title-section {
@@ -27,36 +127,37 @@
   padding: 0;
 }
 
-.rune-text {
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(181.34deg, #1585b8 72.44%, #093b52 98.85%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-stroke: 1px #000;
-  font-size: 4vh;
-  height: 5vh;
-  display: block;
-  padding: 0;
-  margin: 0 !important;
-  line-height: 1;
-}
 
+
+.rune-text,
 .wars-text {
   color: transparent;
   -webkit-text-fill-color: transparent;
-  background: linear-gradient(180deg, #e50404 50.33%, #7f0202 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-stroke: 1px #000;
-  font-size: 3vh;
-  height: 3vh;
   display: block;
   padding: 0;
   margin: 0 !important;
   line-height: 1;
 }
 
+.rune-text {
+  background-color: #1585b8; 
+  font-size: 4vh;
+  height: 5vh;
+}
+
+.wars-text {
+  background-color: #e50404; 
+  font-size: 3vh;
+  height: 3vh;
+}
+
+
+.dialog-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 .characters-container {
   flex: 1;
@@ -68,7 +169,7 @@
 .team {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   padding: 1rem;
   min-height: 150px;
   position: relative;
@@ -82,96 +183,86 @@
 
 .team-2 {
   align-self: flex-end;
-  margin-right: 2rem;
+  margin-right: 6rem;
 }
 
-.character-card-team1, .character-card-team2 {
+/* Merged common character card styles */
+.character-card-team1,
+.character-card-team2 {
   width: 120px;
   height: 150px;
   transition: all 0.3s ease;
   position: relative;
   transform: scale(0.9);
+  z-index: 1;
 }
 
-
-.character-card-team1:hover {
-  transform: scale(1);
-  z-index: 2;
+/* Individual character positioning and scaling for team 1 */
+.character-card-team1:nth-child(1) {
+  transform: scale(0.9) translateX(20px);
 }
-
-.character-card-team2:hover {
-  transform: scale(1);
-  z-index: 2;
-}
-
 .character-card-team1:nth-child(2) {
   transform: scale(0.9) translateY(-40px);
   margin-top: -40px;
   z-index: 3;
 }
-
-
-.character-card-team1:nth-child(1) {
-  transform: scale(0.9) translateX(20px);
-}
-
 .character-card-team1:nth-child(3) {
   transform: scale(0.9) translateX(-20px);
 }
 
 
-.character-card-team2:nth-child(2) {
-  transform: scale(0.9) translateY(-40px);
-  margin-top: -40px;
-  z-index: 3;
-}
-
-
 .character-card-team2:nth-child(1) {
   transform: scale(0.9) translateX(40px);
+  margin-top: 5vh;
 }
-
+.character-card-team2:nth-child(2) {
+  transform: scale(0.9) translateY(-20px);
+  margin-top: 2vh;
+  z-index: 3;
+}
 .character-card-team2:nth-child(3) {
   transform: scale(0.9) translateX(-20px);
+  margin-top: 10vh;
+  margin-right: 120px;
 }
 
-
-.character-card-team2:nth-child(2):hover {
-  transform: scale(1) translateY(-40px);
-  z-index: 4;
+/* Merged common hover styles for all character cards */
+.character-card-team1:hover,
+.character-card-team2:hover {
+  transform: scale(1);
+  z-index: 2; /* General hover z-index */
 }
 
+/* Specific hover overrides for middle character to keep its adjusted position */
 .character-card-team1:nth-child(2):hover {
   transform: scale(1) translateY(-40px);
-  z-index: 4;
+  z-index: 4; 
+}
+.character-card-team2:nth-child(2):hover {
+  transform: scale(1) translateY(-40px);
+  z-index: 4; 
 }
 
 .character-card-team1:nth-child(1):hover {
   transform: scale(1) translateX(20px);
   z-index: 4;
 }
-
 .character-card-team1:nth-child(3):hover {
   transform: scale(1) translateX(-20px);
   z-index: 4;
+  margin-right: 120px;
 }
 
-
-
+/* Hover styles for first and third children of team 2 to maintain their offset */
 .character-card-team2:nth-child(1):hover {
   transform: scale(1) translateX(40px);
   z-index: 4;
 }
-
-.character-card-team:nth-child(1):hover {
-  transform: scale(1) translateX(20px);
-  z-index: 4;
-}
-
 .character-card-team2:nth-child(3):hover {
   transform: scale(1) translateX(-20px);
   z-index: 4;
 }
+
 
 .bottom-bar {
   position: absolute;
@@ -179,8 +270,8 @@
   left: 0;
   width: 100%;
   height: 8vh;
-  background-color: #744A2D;
-  border-top: .4vh solid #AB6E44;
+  background-color: #744a2d;
+  border-top: 0.4vh solid #ab6e44;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -190,7 +281,7 @@
 
 /* Leave Button */
 .leave-btn {
-  background-color: #5D3E2C;
+  background-color: #5d3e2c;
   color: #ee680b;
   font-size: 1rem;
   font-weight: normal;
@@ -206,11 +297,10 @@
   align-items: center;
 }
 
-
 .team-toggle {
   transform: translateY(-50%);
   display: flex;
-  background-color: #5D3E2C;
+  background-color: #5d3e2c;
   border-radius: 10px;
   padding: 5px;
   border: 2px solid #ee680b;
@@ -218,7 +308,7 @@
   height: 7.3vh;
   justify-content: space-around;
   align-items: center;
-  -webkit-text-stroke: .5px #000;
+  -webkit-text-stroke: 0.5px #000;
 }
 
 .team-toggle-btn {
@@ -236,9 +326,8 @@
 }
 
 .team-toggle-btn.active {
-  background-color: #AB6E44;
+  background-color: #ab6e44;
   color: #ee680b;
-
 }
 
 .action-buttons {
@@ -267,8 +356,8 @@
   position: relative;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: .5px solid #000000a1;
-  box-shadow: 0 .4vw .8vw rgba(0, 0, 0, 0.3);
+  border: 0.5px solid #000000a1;
+  box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.3);
   overflow: visible;
 }
 
@@ -306,14 +395,18 @@
   color: #ee680b;
   font-weight: normal;
   text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.5);
-  margin-top: .3vh;
-  -webkit-text-stroke: .5px #000;
+  margin-top: 0.3vh;
+  -webkit-text-stroke: 0.5px #000;
 }
 
 .action-btn:hover {
   background: #a0522d;
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.settings{
+  z-index: 100;
 }
 
 .skill-point-container {
@@ -325,7 +418,7 @@
   border-radius: 20px;
   border: 1px solid #7a7a7a;
   color: white;
-  font-family: 'Arial', sans-serif; /* Or your game's font */
+  font-family: "Arial", sans-serif; /* Or your game's font */
 }
 
 .skill-point-icon {

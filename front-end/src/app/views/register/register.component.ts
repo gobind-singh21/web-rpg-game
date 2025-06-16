@@ -4,6 +4,9 @@ import { InputComponent } from "../../shared/input/input.component";
 import { Router } from '@angular/router';
 import { RegisterService } from '../../core/services/register.service';
 import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BattleOverDialogComponent } from '../battle-over-dialog/battle-over-dialog.component';
+import { CustomDialogComponent } from '../../shared/custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +17,7 @@ import { LoggedInCheckService } from '../../core/services/logged-in-check.servic
 export class RegisterComponent {
   formData: FormGroup;
 
-  constructor(private fb: FormBuilder, private  router: Router, private registerService: RegisterService, private loggedInCheckService: LoggedInCheckService) {
+  constructor(private fb: FormBuilder, private  router: Router, private registerService: RegisterService, private loggedInCheckService: LoggedInCheckService, private dialog: MatDialog) {
     this.formData = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
@@ -31,7 +34,6 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.formData.invalid) {
-      console.log('Form is invalid');
       return;
     }
 
@@ -43,20 +45,38 @@ export class RegisterComponent {
 
     this.registerService.registerUser(userData).subscribe({
       next: (response: any) => {
-        console.log('Registration successful:', response);
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/home']);
+        localStorage.setItem('token', `Bearer ${response.token}`);
+        const dialogRef = this.dialog.open(CustomDialogComponent, {
+          disableClose: false,
+          data: {
+            title: 'Successful',
+            message: 'User registered successfully!',
+            buttonText: 'OK'
+          },
+          hasBackdrop: true,
+          backdropClass: 'dialogue-backdrop'
+        });
+
+        dialogRef.afterClosed().subscribe(() => {
+          this.router.navigate(['/login']);
+        });
       },
       error: (error: any) => {
-        console.error('Registration failed:', error);
         const errorMessage = error.error?.error || 'Unknown error';
-        alert(`Registration failed: ${errorMessage}`);
+        const dialogRef = this.dialog.open(CustomDialogComponent, {
+          disableClose: false,
+          data: {
+            title: 'Registration Failed',
+            message: errorMessage,
+            buttonText: 'Try Again'
+          },
+          hasBackdrop: true
+        });
       }
     });
   }
 
   navigateToLogin(): void {
-    console.log('Navigate to login');
     this.router.navigate(['/login']);
   }
 }

@@ -1,9 +1,8 @@
-/* ======================================= */
-/* ==   THEMED BATTLE OVER DIALOG CSS   == */
-/* ======================================= */
+
 
 .themed-dialog-container {
   background-color: #5d3e2c;
+  border-radius: 25px;
   border: 4px solid #ab6e44;
   padding: 30px 40px;
   display: flex;
@@ -11,23 +10,23 @@
   align-items: center;
 }
 
-/* THE FIX: A new, neutral style for the "BATTLE OVER" title */
+
 .dialog-title {
-  font-size: 2.4rem;
-  margin: 0;
-  margin-bottom: 15px;
-  font-weight: bold;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  -webkit-text-stroke: 2px #000;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  background-image: linear-gradient(180deg, #e0e0e0, #c0c0c0, #a0a0a0); /* Silver/Stone Gradient */
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  -webkit-text-stroke: 1px #000;
+  font-weight: normal;
+  letter-spacing: 1px;
+  /* Remove gradient and transparent color */
+  background-image: none;
+  background-clip: unset;
+  -webkit-background-clip: unset;
 }
 
 .winner-text {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 500;
   text-align: center;
   margin-bottom: 30px;
@@ -38,19 +37,19 @@
 /* THE FIX: Add a style to make the winner's name pop */
 .winner-name {
   font-weight: bold;
-  color: #ffc400; /* A victorious golden color */
+  color: #ffc400;
 }
 
 .exit-battle-btn {
   min-width: 250px;
   height: 60px;
   background: #57db2a;
-  border: 5px double #000;
+  border: 4px solid #2c6c31;
   border-radius: 12px;
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  -webkit-text-stroke: 1px #000;
+  font-size: 1.2rem;
+  font-weight: normal;
+  -webkit-text-stroke: .5px #000;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }

@@ -108,6 +108,10 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.5);
 }
 
+.dialog-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 /* Submit Button */
 .register-button {
   width: 70%;

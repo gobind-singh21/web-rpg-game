@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatIconModule, CommonModule, HttpClientModule],
+  imports: [RouterOutlet, MatIconModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

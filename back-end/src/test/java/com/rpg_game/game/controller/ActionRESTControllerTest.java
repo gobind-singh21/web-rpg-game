@@ -395,7 +395,7 @@ public class ActionRESTControllerTest {
                 .body("lineup." + pCrusader.getId() + ".effects", hasItem(allOf(hasEntry("name", "Shield Aura"))))
                 .extract().as(ActionResponse.class);
         assertTrue(response.validMove());
-        currentLineupMapHolder[0] = response.lineup();
+        currentLineupMapHolder[0] = (HashMap<Integer, CharacterSnapshot>) response.lineup();
         
         assertEquals(crusaderShieldWall.getShield(), currentLineupMapHolder[0].get(pCrusader.getId()).shield());
         System.out.println("T3 Done. Valerius Shield: " + currentLineupMapHolder[0].get(pCrusader.getId()).shield());

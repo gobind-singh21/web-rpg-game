@@ -283,7 +283,7 @@
 .shield-overlay .shield-value {
   color: white;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
   text-shadow: 1px 1px 3px black;
   margin-top: -12px;
 }
@@ -311,6 +311,11 @@
   border-color: #444 !important;
   box-shadow: none !important;
   transform: scale(1.0);
+}
+
+h4{
+  font-size: 1.125rem;
+  font-weight: normal;
 }
 
 .status-overlay {
@@ -416,23 +421,28 @@
   margin: 0 0 5px 0;
   font-size: 0.8rem;
   font-weight: 100;
-  color: #999;
+  color: #ebd825;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .effect-item {
-  font-size: 0.9rem;
+  font-family: 'poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.7rem;
   padding-left: 10px;
   margin-bottom: 2px;
 }
 
-/* Style buffs with a positive color */
+
 .effect-item.buff {
-  color: #4dd0e1; /* A light, positive cyan */
+  color: #4dd0e1;
+  font-size: .7rem; 
+  letter-spacing: 1px;
 }
 
-/* Style debuffs with a negative color */
 .effect-item.debuff {
-  color: #ff7043; /* An orange-red for negative effects */
+  color: #ff7043; 
+  font-size: .7rem; 
+  letter-spacing: 1px;
 }

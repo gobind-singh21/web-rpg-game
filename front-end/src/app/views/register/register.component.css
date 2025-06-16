@@ -132,6 +132,10 @@ input:focus {
   background: #57DB2A;
 }
 
+.dialog-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 /* Login Link */
 .secondary-text {
   color: #EE680B;

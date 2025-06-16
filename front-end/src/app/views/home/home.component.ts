@@ -16,8 +16,6 @@ export class HomeComponent {
     }
   }
   startPlay(){
-    // alert("Play Started")
-    console.log("Play Begin");
     this.router.navigate(['/team-making']);
   }
 }

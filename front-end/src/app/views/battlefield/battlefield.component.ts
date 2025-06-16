@@ -16,6 +16,7 @@ import { BattleOverDialogComponent } from '../battle-over-dialog/battle-over-dia
 import { MatDialog } from '@angular/material/dialog';
 import { BattleOverDialogData } from '../../shared/types/battleOverDialogData';
 import { Team } from '../../shared/types/team';
+import { CustomDialogComponent } from '../../shared/custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'app-battlefield',
@@ -25,6 +26,8 @@ import { Team } from '../../shared/types/team';
 })
 export class BattlefieldComponent implements OnInit, OnDestroy {
 
+  private basicAttackAttempts = 0;
+  private MAX_ATTEMPTS = 3;
   private dialog = inject(MatDialog);
   currentTeam = inject(CurrentTeamService);
   teamService = inject(TeamService);
@@ -91,14 +94,37 @@ export class BattlefieldComponent implements OnInit, OnDestroy {
   }
 
   onBasicAttack() {
+    this.basicAttackAttempts++;
+    
+    if (this.basicAttackAttempts >= this.MAX_ATTEMPTS && !this.combatService.hasSelectedTarget()) {
+      const dialogRef = this.dialog.open(CustomDialogComponent, {
+        disableClose: false,
+        data: {
+          title: 'No Target Selected',
+          message: 'Please select a target before using basic attack!',
+          buttonText: 'OK'
+        },
+        hasBackdrop: true,
+        backdropClass: 'dialog-backdrop'
+      });
+
+      dialogRef.afterClosed().subscribe(() => {
+        this.basicAttackAttempts = 0;
+      });
+      
+      return;
+    }
+
     this.combatService.basicAttack();
-    console.log(this.turnOrder.turnOrder()[this.turnOrder.currentCharacter()]);
+    if (this.combatService.hasSelectedTarget()) {
+      this.basicAttackAttempts = 0; 
+    }
   }
 
   onSkillAttack() {
     this.combatService.skill();
-    console.log("turn order : " + this.turnOrder.turnOrder());
-    console.log("current character index" + this.turnOrder.currentCharacter());
+    // console.log("turn order : " + this.turnOrder.turnOrder());
+    // console.log("current character index" + this.turnOrder.currentCharacter());
   }
 
   ngOnDestroy() {

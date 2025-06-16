@@ -14,7 +14,8 @@ import { BasicTargetService } from './basic-target.service';
   providedIn: 'root'
 })
 export class CombatService {
-
+  
+  private selectedTarget: any; 
   private turnOrder = inject(TurnOrderService);
   private teams = inject(TeamService);
   private combatApiService = inject(CombatApiService);
@@ -126,4 +127,10 @@ export class CombatService {
     });
     this.isBattleOver();
   }
+
+  hasSelectedTarget(): boolean {
+    return this.selectedTarget !== null && this.selectedTarget !== undefined;
+  }
+
+  
 }
