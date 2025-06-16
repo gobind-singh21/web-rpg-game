@@ -44,7 +44,7 @@ export class RegisterComponent {
     this.registerService.registerUser(userData).subscribe({
       next: (response: any) => {
         console.log('Registration successful:', response);
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('token', response.jwtToken);
         this.router.navigate(['/home']);
       },
       error: (error: any) => {
