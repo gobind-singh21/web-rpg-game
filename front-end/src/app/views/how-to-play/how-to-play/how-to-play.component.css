@@ -1,0 +1,132 @@
+.how-container {
+    min-height: 100vh;
+    background: url("../../../../assets/images/homepageBackground.svg") no-repeat center center;
+    background-size: cover;
+    display: flex; /* Use flexbox to center the content box */
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Add some padding around the container */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+.content-box {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for readability */
+    color: #fff; /* White text color */
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 900px; /* Limit content width for better readability */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6); /* A subtle glow effect */
+    border: 1px solid rgba(0, 255, 255, 0.4); /* Light border */
+    overflow-y: auto; /* Enable scrolling if content exceeds height */
+    max-height: calc(100vh - 40px); /* Max height to fit within viewport, accounting for padding */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clear, modern font */
+    line-height: 1.6;
+}
+
+h1 {
+    color: #00ffcc; /* Bright cyan for the main title */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 3em;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.9);
+    letter-spacing: 1px;
+}
+
+h2 {
+    color: #00ffcc; /* Bright cyan for section headers */
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 2em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+}
+
+h3 {
+    color: #ffe066; /* A warm yellow for sub-headers */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+ul li {
+    margin-bottom: 8px;
+    padding-left: 30px; /* Indent list items */
+    position: relative;
+}
+
+ul li::before {
+    content: '✧'; /* Custom bullet point */
+    color: #00ffcc; /* Color for the custom bullet */
+    font-size: 1.4em;
+    position: absolute;
+    left: 0;
+    top: -2px; /* Adjust vertical alignment */
+}
+
+.highlight {
+    color: #ffe066; /* Emphasize key terms with a yellow highlight */
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(255, 224, 102, 0.5);
+}
+
+strong {
+    color: #00ffcc; /* Make strong tags stand out slightly */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .content-box {
+        padding: 25px;
+        max-height: calc(100vh - 20px); /* Adjust max height for smaller screens */
+    }
+
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.6em;
+        margin-top: 25px;
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+
+    ul li {
+        padding-left: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-box {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    h3 {
+        font-size: 1.1em;
+    }
+}

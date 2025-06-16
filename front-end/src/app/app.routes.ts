@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { HomeComponent } from './views/home/home.component';
 import { TeamMaking } from './views/team-making/team-making.component';
 import { BattlefieldComponent } from './views/battlefield/battlefield.component';
+import { HowToPlayComponent } from './views/how-to-play/how-to-play/how-to-play.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,7 +17,8 @@ export const routes: Routes = [
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'home', component: HomeComponent},
   {path: 'team-making', component: TeamMaking},
-  {path: 'battlefield', component: BattlefieldComponent}
+  {path: 'battlefield', component: BattlefieldComponent},
+  {path: 'how-to-play', component: HowToPlayComponent}
 ];
 
 @NgModule({
