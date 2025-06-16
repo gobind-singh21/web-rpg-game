@@ -46,15 +46,10 @@ export class CharactercardComponent implements OnInit {
     if (this.character?.base) {
       this.calculateCardDimensions();
     }
-
-    // THE FIX: Subscribe to the global animation events stream
     this.animationService.animationEvents$.pipe(
-      // Only react to events for THIS character card
       filter(event => event.characterId === this.character.id),
-      // Automatically unsubscribe when the component is destroyed
       takeUntil(this.destroy$)
     ).subscribe(event => {
-      // We received an event, trigger the floating text
       if (event.damage > 0) {
         this.addFloatingText(-event.damage, 'damage');
       }
@@ -69,7 +64,7 @@ export class CharactercardComponent implements OnInit {
     this.floatingTexts.push(newText);
     setTimeout(() => {
       this.floatingTexts = this.floatingTexts.filter(t => t.id !== newText.id);
-    }, 2000);
+    }, 1000);
   }
 
   public trackByTextId(index: number, item: FloatingText): number { return item.id; }
@@ -77,9 +72,9 @@ export class CharactercardComponent implements OnInit {
   getHealthPercent(): number {
     if (!this.character) return 0;
     const maxHealth = this.characterService.getMaxHealth(this.character.base.baseHealth, this.character.snapshot.effects);
-    if (maxHealth === 0) return 0; // Avoid division by zero
+    if (maxHealth === 0) return 0;
     const percentage = (this.character.snapshot.currentHealth / maxHealth) * 100;
-    return Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
+    return Math.max(0, Math.min(100, percentage));
   }
 
   getShieldPercent(): number {
@@ -87,9 +82,10 @@ export class CharactercardComponent implements OnInit {
     const maxHealth = this.characterService.getMaxHealth(this.character.base.baseHealth, this.character.snapshot.effects);
     if (maxHealth === 0) return 0;
     const percentage = (this.character.snapshot.shield / maxHealth) * 100;
-    return Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
+    return Math.max(0, Math.min(100, percentage));
   }
 
+  // Formatting of buff and debuff
   public formatEffectDetails(effect: Effect): string {
     const details: string[] = [];
     const sign = effect.isBuff ? '+' : '-';
@@ -106,14 +102,9 @@ export class CharactercardComponent implements OnInit {
     if (effect.healthPercent > 0) {
       details.push(`Max HP ${sign}${effect.healthPercent}%`);
     }
-
-    // If there are no stat changes (e.g., a pure heal/damage over time effect),
-    // we can return an empty string or a default message.
     if (details.length === 0) {
-      return ''; // No details to show
+      return '';
     }
-
-    // Join the details with a comma, e.g., "ATK +10%, DEF +15%"
     return `(${details.join(', ')})`;
   }
 

@@ -8,8 +8,7 @@ import { baseUrl, signupEndPoint } from '../../shared/urls/urls';
 })
 export class RegisterService {
 
-  private apiURl  = baseUrl+signupEndPoint;
-  //  "http://localhost:8080/api/auth/signup"
+  private apiURl  = baseUrl + signupEndPoint;
 
   constructor(private http : HttpClient) { }
 

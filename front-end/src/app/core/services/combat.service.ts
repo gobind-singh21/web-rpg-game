@@ -15,8 +15,7 @@ import { CombatAnimationService } from './combat-animation.service';
   providedIn: 'root'
 })
 export class CombatService {
-  
-  private selectedTarget: any; 
+
   private turnOrder = inject(TurnOrderService);
   private teams = inject(TeamService);
   private combatApiService = inject(CombatApiService);
@@ -33,6 +32,10 @@ export class CombatService {
 
   private isBattleOver(): void {
     this._winningTeam.update(() => this.teams.defeatedTeam() == this.teams.team1() ? this.teams.team2() : this.teams.defeatedTeam() == this.teams.team2() ? this.teams.team1() : undefined);
+  }
+
+  resetWinningTeam() {
+    this._winningTeam.set(undefined);
   }
 
   battleStart(): void {
@@ -55,7 +58,6 @@ export class CombatService {
     this.combatApiService.basicAttackApi().subscribe({
       next: (response: ActionResponse) => {
         if(!response.validMove) {
-          // TODO : give indication of invalid move in UI
           console.warn("Invalid move");
           return;
         }
@@ -97,7 +99,6 @@ export class CombatService {
     this.combatApiService.skillApi().subscribe({
       next: (response: ActionResponse) => {
         if(!response.validMove) {
-          // TODO : give indication of invalid move in UI
           console.warn("Invalid move");
           return;
         }
@@ -118,11 +119,7 @@ export class CombatService {
 
   private async processActionResponse(oldSnapshots: Map<number, CharacterSnapshot>, response: ActionResponse): Promise<void> {
     const newSnapshots: CharacterSnapshot[] = response.lineup;
-
-    // STEP 1: Tell the animation service to play animations and WAIT for it to finish.
     await this.animationService.playActionAnimations(oldSnapshots, newSnapshots);
-
-    // STEP 2: The animations are done. NOW, update the game's actual state.
     var newTurnOrder: number[] = newSnapshots.map(snapshot => snapshot.id as number);
 
     newSnapshots.forEach((snapshot) => {
@@ -143,10 +140,8 @@ export class CombatService {
     this.turnOrder.updateTurnOrder(newTurnOrder);
     this.basicTarget.selectBasicTarget(-1);
 
-    // STEP 3: Advance to the next turn.
     this.turnOrder.nextCharacter();
 
-    // STEP 4: Update other UI elements.
     this.currentTeam.currentTeam.update(() => {
       const currentCharacterId = this.turnOrder.turnOrder()[this.turnOrder.currentCharacter()];
       if (currentCharacterId === undefined) return 1;
@@ -155,10 +150,4 @@ export class CombatService {
 
     this.isBattleOver();
   }
-
-  hasSelectedTarget(): boolean {
-    return this.selectedTarget !== null && this.selectedTarget !== undefined;
-  }
-
-  
 }

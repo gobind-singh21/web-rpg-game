@@ -26,8 +26,6 @@ import { CustomDialogComponent } from '../../shared/custom-dialog/custom-dialog.
 })
 export class BattlefieldComponent implements OnInit, OnDestroy {
 
-  private basicAttackAttempts = 0;
-  private MAX_ATTEMPTS = 3;
   private dialog = inject(MatDialog);
   currentTeam = inject(CurrentTeamService);
   teamService = inject(TeamService);
@@ -45,7 +43,6 @@ export class BattlefieldComponent implements OnInit, OnDestroy {
     effect(() => {
       const winningTeam = this.combatService.winningTeam();
       if (winningTeam) {
-        // If a winning team is set, open the dialog
         this.openBattleOverDialog(winningTeam);
       }
     });
@@ -72,11 +69,15 @@ export class BattlefieldComponent implements OnInit, OnDestroy {
     }
     this.combatService.battleStart();
     this.turnOrder.setCurrentCharacter(0);
+    this.basicTargetService.selectBasicTarget(-1);
+    this.combatService.resetWinningTeam();
   }
 
   onLeave() {
     this.teamService.clearTeams();
     this.turnOrder.setCurrentCharacter(0);
+    this.basicTargetService.selectBasicTarget(-1);
+    this.combatService.resetWinningTeam();
     this.location.back();
   }
 
@@ -92,13 +93,12 @@ export class BattlefieldComponent implements OnInit, OnDestroy {
     if(character.snapshot.currentHealth <= 0) {
       return;
     }
+    console.log(this.basicTargetService.basicTarget());
     this.basicTargetService.selectBasicTarget(character.id == undefined ? -1 : character.id);
   }
 
   onBasicAttack() {
-    this.basicAttackAttempts++;
-    
-    if (this.basicAttackAttempts >= this.MAX_ATTEMPTS && !this.combatService.hasSelectedTarget()) {
+    if (this.basicTargetService.basicTarget() === -1) {
       const dialogRef = this.dialog.open(CustomDialogComponent, {
         disableClose: false,
         data: {
@@ -110,27 +110,22 @@ export class BattlefieldComponent implements OnInit, OnDestroy {
         backdropClass: 'dialog-backdrop'
       });
 
-      dialogRef.afterClosed().subscribe(() => {
-        this.basicAttackAttempts = 0;
-      });
-      
+      dialogRef.afterClosed().subscribe(() => {});
+
       return;
     }
 
     this.combatService.basicAttack();
-    if (this.combatService.hasSelectedTarget()) {
-      this.basicAttackAttempts = 0; 
-    }
   }
 
   onSkillAttack() {
     this.combatService.skill();
-    // console.log("turn order : " + this.turnOrder.turnOrder());
-    // console.log("current character index" + this.turnOrder.currentCharacter());
   }
 
   ngOnDestroy() {
     this.teamService.clearTeams();
     this.turnOrder.setCurrentCharacter(0);
+    this.basicTargetService.selectBasicTarget(-1);
+    this.combatService.resetWinningTeam();
   }
 }

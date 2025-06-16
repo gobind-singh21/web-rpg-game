@@ -67,7 +67,10 @@ public class ActionService {
         character.receivehealing(ability.getHeal());
         character.setShield(ability.getShield());
         for(var effect : effects) {
-          if(effect.isBuff())
+          if(effect.getName().equals("Cleansing Light")) {
+            character.getEffects().removeIf(existingEffect -> !existingEffect.isBuff());
+          }
+          else if(effect.isBuff())
             character.addEffect(effect);
         }
       } else {
