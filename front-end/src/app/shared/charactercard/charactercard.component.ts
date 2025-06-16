@@ -5,6 +5,12 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { CharacterService } from '../../core/services/character.service';
 import { Effect } from '../types/effect';
+import { CombatAnimationService } from '../../core/services/combat-animation.service';
+import { filter, Subject, takeUntil } from 'rxjs';
+
+interface FloatingText {
+  id: number; value: number; type: 'damage' | 'healing';
+}
 
 @Component({
   selector: 'app-charactercard',
@@ -14,6 +20,13 @@ import { Effect } from '../types/effect';
 })
 export class CharactercardComponent implements OnInit {
   constructor() {}
+
+  private animationService = inject(CombatAnimationService);
+
+  public floatingTexts: FloatingText[] = [];
+  private textIdCounter = 0;
+
+  private destroy$ = new Subject<void>()
 
   @Input() character!: Character;
   @Output() characterSelect = new EventEmitter<Character>();
@@ -30,11 +43,36 @@ export class CharactercardComponent implements OnInit {
   characterService = inject(CharacterService);
 
   ngOnInit(): void {
-    // console.log('Character Card Component Initialized', this.character);
     if (this.character?.base) {
       this.calculateCardDimensions();
     }
+
+    // THE FIX: Subscribe to the global animation events stream
+    this.animationService.animationEvents$.pipe(
+      // Only react to events for THIS character card
+      filter(event => event.characterId === this.character.id),
+      // Automatically unsubscribe when the component is destroyed
+      takeUntil(this.destroy$)
+    ).subscribe(event => {
+      // We received an event, trigger the floating text
+      if (event.damage > 0) {
+        this.addFloatingText(-event.damage, 'damage');
+      }
+      if (event.healing > 0) {
+        this.addFloatingText(event.healing, 'healing');
+      }
+    });
   }
+
+  private addFloatingText(value: number, type: 'damage' | 'healing'): void {
+    const newText: FloatingText = { id: this.textIdCounter++, value, type };
+    this.floatingTexts.push(newText);
+    setTimeout(() => {
+      this.floatingTexts = this.floatingTexts.filter(t => t.id !== newText.id);
+    }, 2000);
+  }
+
+  public trackByTextId(index: number, item: FloatingText): number { return item.id; }
 
   getHealthPercent(): number {
     if (!this.character) return 0;
@@ -140,7 +178,7 @@ export class CharactercardComponent implements OnInit {
     if (this.showInfo) {
       this.infoTimeout = setTimeout(() => {
         this.showInfo = false;
-      }, 3000); // 10 seconds
+      }, 1000); // 10 seconds
     }
   }
 
@@ -172,6 +210,10 @@ export class CharactercardComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    // This is crucial for preventing memory leaks
+    this.destroy$.next();
+    this.destroy$.complete();
+
     if (this.infoTimeout) {
       clearTimeout(this.infoTimeout);
     }

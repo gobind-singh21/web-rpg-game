@@ -71,10 +71,12 @@ export class BattlefieldComponent implements OnInit, OnDestroy {
       return;
     }
     this.combatService.battleStart();
+    this.turnOrder.setCurrentCharacter(0);
   }
 
   onLeave() {
     this.teamService.clearTeams();
+    this.turnOrder.setCurrentCharacter(0);
     this.location.back();
   }
 
@@ -129,5 +131,6 @@ export class BattlefieldComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.teamService.clearTeams();
+    this.turnOrder.setCurrentCharacter(0);
   }
 }
