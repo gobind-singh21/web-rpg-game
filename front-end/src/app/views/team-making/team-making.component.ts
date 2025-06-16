@@ -5,7 +5,6 @@ import { CharacterService } from '../../core/services/character.service';
 import { CharactercardComponent } from '../../shared/charactercard/charactercard.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { TeamStateService } from '../../core/services/team-state.service';
 import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
 import { TeamService } from '../../core/services/team.service';
 
@@ -21,7 +20,6 @@ constructor(
   private loggedInCheckService: LoggedInCheckService,
   private router: Router,
   private characterService: CharacterService,
-  private teamStateService : TeamStateService,
   private teamService: TeamService
 ) {
   if(!loggedInCheckService.isAlreadyLoggedIn())
