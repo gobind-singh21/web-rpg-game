@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { setting } from '../setting/setting.component';
 import { Router } from '@angular/router';
 import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'home',
-  imports: [setting],
+  imports: [setting, MatIcon],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,5 +18,8 @@ export class HomeComponent {
   }
   startPlay(){
     this.router.navigate(['/team-making']);
+  }
+  howToPlay() {
+    this.router.navigate(["/how-to-play"])
   }
 }

@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoggedInCheckService } from '../../core/services/logged-in-check.service';
 import { TeamService } from '../../core/services/team.service';
+import { setting } from '../setting/setting.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'team-making',
-  imports: [CharactercardComponent, CommonModule, Tiles],
+  imports: [CharactercardComponent, CommonModule, Tiles, setting, MatIcon],
   templateUrl: './team-making.component.html',
   styleUrl: './team-making.component.css',
 })
@@ -25,6 +27,8 @@ constructor(
   if(!loggedInCheckService.isAlreadyLoggedIn())
     router.navigate(["/login"]);
 }
+
+
 
 
 navigateToBattle() {
